@@ -1,16 +1,20 @@
 # Lecture Topics
 
-The course syllabus (and setup instructions) can be found [here](http://rudeboybert.github.io/pages/teaching/courses/MATH311/2016-02.html).
+The course syllabus can be found [here](http://rudeboybert.github.io/pages/teaching/courses/MATH311/2016-02.html).
+
+
+### Week 1: 2/15 - 2/19
 
 * **Lec02: ECDF and Permutation Tests**
-    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec02" target="_blank">Slides</a>: Example of empirical CDF
-    + <a href="https://www.youtube.com/watch?v=2pHhjx9hyM4" target="_blank">Video</a>: "Using Randomization to Analyze a Gender Discrimination Study" (Example of two-sample permutation test)
+    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec02" target="_blank">Slides</a>
+    + <a href="https://www.youtube.com/watch?v=2pHhjx9hyM4" target="_blank">Video</a>: Example of two-sample permutation test "Using Randomization to Analyze a Gender Discrimination Study"
     + Files:
-        * `Lec02.R` Exercise. To download:
-            1. Go to the above directory "Lec02 Loading Data"
-            1. Click on `Lec02.R` -> Raw
-            1. From your browser's menu bar -> File -> Save Page As... Be sure to save as `Lec02.R` and not `Lec02.R.txt`
-        * `UCBAdmissions.xlsx` Excel spreadsheet. To download repeat steps a. and b. above.
+        * Example of two-sample permutation test: `permutation_test.zip`. Instructions:
+            1. Go to the above directory "Lec02 ECDF and Permutation Test"
+            1. Click on `permutation_test.zip` -> Click on "Raw" button next to the "History" button. Unzip the resulting file.
+            1. In RStudio -> *Files* Panel (in one of the 4 quandrants of RStudio) -> Navigate to the directory with the two files -> Click *More* -> *Set As Working Directory*
+            1. Double-click `permutation_test.Rmd` to open it.
+            1. Click on "Knit HTML" and say yes to any prompts to install packages.
 * **Lec01: Populations and Samples and Exploratory Data Analysis**
     + <a href="http://rpubs.com/rudeboybert/MATH311_Lec01" target="_blank">Slides</a>
     
