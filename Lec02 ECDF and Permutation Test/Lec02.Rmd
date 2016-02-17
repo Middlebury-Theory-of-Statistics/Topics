@@ -1,0 +1,86 @@
+---
+title: "Lecture 02"
+author: "Albert Y. Kim"
+date: "February 17, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(mosaic)
+```
+
+
+
+## Cummulative Distribution Functions
+
+Let $Z$ be a Normal$(0,1)$ RV with pdf $f(z)$.
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2))
+curve(dnorm(x), from=-3.5, to=3.5, xlab="z", ylab="f(z)", main="PDF f(z)")
+```
+
+
+
+## Cummulative Distribution Functions
+
+Recall the Cummulative Distribution Function $F(z)$.
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2))
+curve(dnorm(x), from=-3.5, to=3.5, xlab="z", ylab="f(z)", main="PDF f(z)")
+curve(pnorm(x), from=-3.5, to=3.5, xlab="z", ylab="F(z)", main="CDF F(z)")
+```
+
+
+
+## Empirical CDF
+
+
+```{r, echo=FALSE}
+total <- c(4.5,8,8.5,10,10,11,11.5,12,12.5,12.5,13,13,13.5,14,14,14,14,14,14.5,15.5,18,18,18,19.5,20,20)
+n <- length(total)
+```
+
+Consider the histogram of 26 midterm scores:
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow=c(1,2))
+hist(total, xlab="Score (out of 20)", main="Midterm Scores")
+```
+
+
+## Empirical CDF
+
+Now consider the empirical (i.e. based on data) CDF
+
+```{r, fig.width=8, fig.height=4, echo=FALSE}
+par(mfrow=c(1,2))
+hist(total, xlab="Score (out of 20)", main="Midterm Scores")
+
+# Plot without default axes
+plot(ecdf(total), xlab="Score (out of 20)", ylab=expression(hat(F)), 
+     main="Empirical CDF", axes=FALSE)
+
+# Custom axes labels
+box()
+axis(1)
+# axis(1, at=c(floor(min(total)):ceiling(max(total))))
+axis(2, at=c(0:10)/10, las=2)
+axis(4, at=c(0:10)/10, las=2)
+
+# Draw jump lines, where jumps are of size 1/n
+abline(h=seq(from=0, to=1, by=1/n), col="grey", lty=2, lwd=0.25)
+abline(v=seq(from=0, to=25, by=5), col="grey", lty=2, lwd=0.25)
+
+# Denote median
+# abline(h=c(0.5), col="red", lwd=0.5)
+# abline(v=median(total), col="red", lwd=0.5)
+
+# Replot ecdf via add=TRUE so that points are on top of lines
+plot(ecdf(total), add=TRUE)
+```

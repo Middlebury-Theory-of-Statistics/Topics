@@ -1,0 +1,156 @@
+---
+title: "Two-Sample Permutation Test"
+author: "Albert Y. Kim"
+date: "February 16, 2016"
+output: html_document
+---
+
+```{r, echo=FALSE}
+# Set random number generator seed value explicitly so we can replicate our 
+# simulations
+set.seed(76)
+```
+
+
+
+
+## Running This Document
+
+* Make sure the comma-separated values file `grades.csv` is in the same directory as this file.
+* Click on "Knit HTML" and say yes to any prompts to install packages.
+* Read over the resulting HTML document.
+
+
+
+
+## Data: Final Exam Scores
+
+We consider midterm scores for 30 students in a past iteration of my intro stats
+class. We have 3 variables:
+
+* `final`: final exam grade
+* `even`: whether the student's last name had an even or odd # of letters
+* `major`: Economics or Other
+
+```{r}
+grades <- read.csv("grades.csv", header=TRUE)
+# Look at first 6 rows: 
+head(grades)
+```
+
+
+
+
+## Even vs Odd Number of Letters
+
+Did students who have an odd number of letters do better on the final that those with an even number of letters?  What a silly question; how could there be a relationship between the variables `final` and `even`? We investigate anyways. First the sample sizes and means:
+
+```{r}
+table(grades$even)
+tapply(grades$final, grades$even, mean)
+```
+
+
+#### Hypothesis Testing Framework
+
+We lay out the hypothesis testing framework:
+
+* **Population parameter**: $\mu_E - \mu_O$. The true population difference in means.
+* **Hypothesis Test**: $H_0: \mu_E - \mu_O = 0$ vs. $H_0: \mu_E - \mu_O \neq 0$. There is no difference vs. there is.
+* **Null value**: 0. The value of $\mu_E - \mu_O$ under $H_0$ (assuming $H_0$ is true).
+* **Test Statistic**: $T(\vec{X}_E, \vec{X}_O) = \overline{X}_E - \overline{X}_O$. The (random) difference before we observe the data.
+* **Observed test statistic**: $T(\vec{x}_E, \vec{x}_O) = \overline{x}_E - \overline{x}_O = 0.732 - 0.660 = 0.0729 = 7.29\%$. The observed difference.
+
+
+#### Null Distribution
+
+What about the **null distribution** AKA the distribution of the test statistic under $H_0$ AKA the reference distribution used to compute p-values? We note that:
+
+* Under $H_0$, $\mu_E = \mu_O$ i.e. there is no difference.
+* Hence the variable `even` is just a meaningless label.
+* Hence under $H_0$ we can permute/shuffle the even/odd labels and this won't matter.
+
+
+#### Random Permutations
+
+We now proceed to simulate one instance of the test statistic from the null distribution. Note that we observed the following students of the 30 to truly have an even number of letters:
+
+```{r}
+which(grades$even == "even")
+```
+
+Now let's randomly permute/shuffle which of the 30 students will be the evens:
+
+```{r}
+evens_index <- sample(x=30, size=19, replace = FALSE)
+evens_index
+```
+
+We now compute the simulated difference in means *assuming $H_0$ is true*:
+
+```{r}
+# Pull out final scores:
+scores <- grades$final
+
+# Simulated difference of means of evens minus odds
+mean(scores[evens_index]) - mean(scores[-evens_index])
+```
+
+A difference of 5.39%. We now repeat this many times to build the null distribution.
+
+
+
+#### Permutation Test
+
+The code here is similar to the example on page 41, with a few tweaks.
+
+```{r, fig.width=6, fig.height=4}
+# The observed difference in sample means
+sample_means <- tapply(grades$final, grades$even, mean)
+observed <- sample_means[1] - sample_means[2]
+
+# Pull out final scores
+scores <- grades$final
+
+N <- 10^5 -1                # number of times to repeat this process
+result <- rep(0, times=N)   # save the simulated (under H_0) differences here
+for(i in 1:N){
+  # This step is the random permuting/shuffling of the labels
+  evens_index <- sample(30, size=19, replace = FALSE)
+  result[i] <- mean(scores[evens_index]) - mean(scores[-evens_index])
+}
+
+# Histogram of null distribution and where the observed test statistic lies
+hist(result, xlab="xbar_E - xbar_O", 
+     main = "Permutation Dist'n for Final Scores",
+     breaks = 50)
+abline(v=observed, col="red")
+```
+
+The null distribution is both centered at roughly 0 and it is roughly the most likely
+value. This makes sense, as under $H_0$ there is no true difference. Differences
+of -10% and 10% are somewhat likely.  Our **observed** difference of 0.0729
+is rather plausible.  Let's quantify this extremeness using the p-value by computing the
+number of simulated values of the test statistic are larger than our observed test statistic:
+
+```{r}
+p_value <- 2 * sum(result >= observed)/(N+1)
+p_value
+```
+
+Note we multiply the proportion of values greater than the observed difference by two because we have a two-sided alternative hypothesis (see page 48).  The p-value is 0.2576, which is not small. In other words, we are fairly likely to observe a difference in final exam scores of 7.29% between students with an even number of letters in their name and students with an odd number. We see no reason to reject $H_0$. **Caution**: we are not saying $H_0$ is true, but rather
+
+* we don't have any evidence to reject $H_0$
+* we see no evidence supporting $H_A$
+
+This seems like we're splitting hairs, but it is an [important distinction](http://blog.minitab.com/blog/understanding-statistics/things-statisticians-say-failure-to-reject-the-null-hypothesis). More on this later.
+
+
+
+
+## Econ Majors
+
+Did economics majors do better than non-econ majors?
+
+
+

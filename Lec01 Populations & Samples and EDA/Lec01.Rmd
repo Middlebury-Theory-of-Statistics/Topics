@@ -1,0 +1,162 @@
+---
+title: "Lecture 01"
+author: "Albert Y. Kim"
+date: "February 15, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(mosaic)
+```
+
+
+
+## Population and Samples
+
+When it is not feasible to collect data for every case in the population, we often
+use **sampling**:
+
+![alt text](target-population.jpg)
+
+If the sample is **representative** of the population, then the results of the sample are **generalizable**. 
+
+
+## Population and Samples
+
+How do we take a representative (AKA unbiased) sample? 
+
+By sampling **randomly**, i.e. each individual has equal probability of being sampled.
+
+
+
+## Sample vs Population Values
+
+Value | Population Parameter  | Sample Value
+------------- | ------------- | -------------
+Mean  | $\mu$  | $\overline{x}$
+Variance  | $\sigma^2$  | $s^2$
+Standard Deviation  | $\sigma$  | $s$
+Proportion | $p$ | $\widehat{p}$
+
+
+
+## Histogram
+
+Consider the `FlightDelays` dataset (LGA). We consider the flight `Delays` of the 1123 United 
+Airlines flights:
+
+```{r, echo=FALSE}
+data <- "http://rudeboybert.github.io/pages/teaching/courses/MATH311/datasets/FlightDelays.csv"
+UA <- read_csv(data) %>%
+  filter(Carrier == "UA") %>% 
+  mutate(interval = cut_width(Delay, width=50, boundary=-50))
+distribution <- UA %>% 
+  group_by(interval) %>% 
+  tally() %>% 
+  rename(time_interval = interval, num_flights = n)
+distribution
+```
+
+
+
+## (Frequency) Histogram
+
+In this case the height of the bars reflect the count/frequency.
+
+```{r, echo=FALSE}
+# Plot using mosaic package
+histogram(~Delay, data=UA, type="count", xlab="Time (min)", ylab="Frequency",
+          breaks=seq(from=-50, to=400, by=50))
+```
+
+
+
+## (Density) Histogram
+
+In this case the height of the bars reflect the density so that the sum of the areas of the
+boxes is 1.
+
+```{r, echo=FALSE}
+# Plot using mosaic package
+histogram(~Delay, data=UA, type="density", xlab="Time (min)", ylab="Density",
+          breaks=seq(from=-50, to=400, by=50))
+```
+
+
+
+## Histogram as a Visual Approximation
+
+Say you take a sample of $n=1000$ values from a Normal$(0,1)$ random variable
+with pdf $f(z) = \frac{1}{\sqrt{2\pi}}\exp\left(-\frac{1}{2}z^2\right)$
+
+```{r, echo=FALSE, fig.width=8, fig.height=4}
+set.seed(76)
+curve(dnorm, from=-3, to=3, xlab="z", ylab="f(z)", main="Population PDF")
+```
+
+
+
+## Histogram as a Visual Approximation
+
+The histogram is visual approximation of the pdf $f(z)$.
+
+```{r, echo=FALSE, fig.width=8, fig.height=4}
+z <- rnorm(n=1000, mean=0, sd=1)
+histogram(~z, main="Histogram of Sample", type="density")
+```
+
+
+
+## Mean vs Median
+
+Say at company $X$, there 5 employees with the following weekly income:
+
+Salary | CEO | Grunt 1 | Grunt 2 | Grunt 3 | Grunt 4
+--|--|--|--|--|--
+$ | 1000 | 20 | 21 | 30 | 40
+
+Then:
+
+* Mean $`r c(1000, 20, 21, 30, 40) %>% mean() %>% round(2)`
+* Median $`r c(1000, 20, 21, 30, 40) %>% median() %>% round(2)`
+
+
+
+## Boxplots
+
+United Flight Delays from LGA
+
+```{r, echo=FALSE, fig.width=8, fig.height=4}
+day_of_week_levels <- c("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat")
+UA <- UA %>% 
+  mutate(day_of_week = factor(Day, levels = day_of_week_levels))
+boxplot(Delay ~ day_of_week, data=UA, ylab="Delay (in minutes)")
+```
+
+
+
+## Boxplots
+
+United Flight Delays from LGA
+
+```{r, echo=FALSE, fig.width=8, fig.height=4}
+boxplot(Delay ~ day_of_week, data=UA, ylab="Delay (in minutes)", ylim=c(-20, 50))
+```
+
+
+
+## Boxplots without the Whiskers
+
+What is [middle class](https://www.washingtonpost.com/news/wonk/wp/2015/03/23/middle-class-varies-from-30000-in-detroit-to-100000-in-san-francisco/) in various cities?
+
+
+
+## Percentiles
+
+[Growth Charts](http://www.chartsgraphsdiagrams.com/HealthCharts/growth-2-20-girls.html)
+
+
