@@ -3,6 +3,12 @@
 The course syllabus can be found [here](http://rudeboybert.github.io/pages/teaching/courses/MATH311/2016-02.html).
 
 
+### Week 2: 2/22 - 2/26
+
+* **Lec03**
+    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec03" target="_blank">Slides</a>
+
+
 ### Week 1: 2/15 - 2/19
 
 * **Lec02: ECDF and Permutation Tests**
