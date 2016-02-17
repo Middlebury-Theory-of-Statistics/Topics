@@ -15,6 +15,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
             1. In RStudio -> *Files* Panel (in one of the 4 quandrants of RStudio) -> Navigate to the directory with the two files -> Click *More* -> *Set As Working Directory*
             1. Double-click `permutation_test.Rmd` to open it.
             1. Click on "Knit HTML" and say yes to any prompts to install packages.
+            1. Please go over by Monday.
 * **Lec01: Populations and Samples and Exploratory Data Analysis**
     + <a href="http://rpubs.com/rudeboybert/MATH311_Lec01" target="_blank">Slides</a>
     
