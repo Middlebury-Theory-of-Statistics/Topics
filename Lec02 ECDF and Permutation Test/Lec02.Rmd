@@ -15,7 +15,7 @@ library(mosaic)
 
 
 
-## Cummulative Distribution Functions
+## Cumulative Distribution Functions
 
 Let $Z$ be a Normal$(0,1)$ RV with pdf $f(z)$.
 
@@ -26,9 +26,9 @@ curve(dnorm(x), from=-3.5, to=3.5, xlab="z", ylab="f(z)", main="PDF f(z)")
 
 
 
-## Cummulative Distribution Functions
+## Cumulative Distribution Functions
 
-Recall the Cummulative Distribution Function $F(z)$.
+Recall the Cumulative Distribution Function $F(z)$.
 
 ```{r, echo=FALSE}
 par(mfrow=c(1,2))

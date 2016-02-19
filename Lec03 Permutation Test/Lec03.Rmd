@@ -1,0 +1,190 @@
+---
+title: "Lecture 03"
+author: "Albert Y. Kim"
+date: "February 22, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(mosaic)
+library(knitr)
+
+# Set random number generator seed value explicitly so we can replicate our 
+# simulations
+set.seed(76)
+```
+
+```{r, echo=FALSE}
+# Revisit grades datasest from Lec02
+grades <- read_csv("../Lec02 ECDF and Permutation Test/grades.csv")
+```
+
+
+
+
+## Intro Stats Final Exam
+
+Using the `grades.csv` dataset from `Lec02`, we study the
+difference in mean final scores for
+
+* those with an even # of letters in their last name vs.
+* those with an odd #
+
+i.e. the **parameter** of interest is $\mu_E - \mu_O$
+
+
+
+## Intro Stats Final Exam
+
+**Beware**: the solid line is the median, not the mean.
+
+```{r, echo=FALSE}
+ggplot(data=grades, aes(x=even, y=final)) + 
+  geom_boxplot() +
+  xlab("Even vs Odd") +
+  ylab("Final Exam Score")
+```
+
+
+
+## Permutation Test
+
+To describe the permutation test, we now consider
+
+* only the first 6 rows
+* and for illustrative purposes a new variable `row_index`
+
+```{r, echo=FALSE}
+# Only first 6 rows
+grades_subset <- grades %>% 
+  slice(1:6) %>% 
+  select(-major) %>% 
+  rename(even_vs_odd = even) %>% 
+  mutate(
+    row_index = 1:6,
+    final = round(final, 3)
+    ) 
+```
+
+
+
+## Intro Stats Final Exam
+
+```{r, echo=FALSE}
+grades_subset %>% kable()
+```
+
+
+
+## Observed Test Statistic
+
+Rows `c(2, 3, 4, 6)` are the students with an even # of letters in their last
+name.
+
+To compute the **observed test statisitic** i.e. the observed difference in
+sample means $\overline{x}_E - \overline{x}_O$ we run
+
+```
+index <- c(2, 3, 4, 6)
+
+# mean of evens - mean of odds:
+mean(final[index]) - mean(final[-index])
+```
+
+
+
+## The Crux
+
+Under $H_0: \mu_E - \mu_O$, the two groups have equal mean. 
+
+So under $H_0$ `even_vs_odd` is a meaningless label, hence even we can
+**permute/shuffle** it to no consequence.
+
+
+
+## Observed Data
+
+Originally, the evens are `c(2, 3, 4, 6)`
+
+```{r, echo=FALSE}
+grades_subset %>% 
+  kable()
+```
+
+
+
+## Permuted Data
+
+In this simulation, the evens are `c(1, 2, 3, 5)`
+
+```{r, echo=FALSE}
+grades_subset %>% 
+  mutate(
+    even_vs_odd = sample(even_vs_odd)
+  ) %>% 
+  kable()
+```
+
+
+
+## Permuted Data
+
+In this simulation, the evens are `c(1, 2, 3, 5)`
+
+```{r, echo=FALSE}
+grades_subset %>% 
+  mutate(
+    even_vs_odd = sample(even_vs_odd)
+  ) %>% 
+  kable()
+```
+
+
+
+## Permuted Data
+
+In this simulation, the evens are `c(1, 3, 4, 6)`
+
+```{r, echo=FALSE}
+grades_subset %>% 
+  mutate(
+    even_vs_odd = sample(even_vs_odd)
+  ) %>% 
+  kable()
+```
+
+
+
+## Permuted Data
+
+In this simulation, the evens are `c(1, 3, 4, 5)`
+
+```{r, echo=FALSE}
+grades_subset %>% 
+  mutate(
+    even_vs_odd = sample(even_vs_odd)
+  ) %>% 
+  kable()
+```
+
+
+
+## Coding the Permutation
+
+The permuting/shuffling of the `even_vs_odd` label is done by
+randomly **resampling** which 4 of the 6 rows will be the evens:
+
+```
+index <- sample(6, size=4, replace = FALSE)
+
+# Or equivalently:
+row_indices <- 1:6
+index <- sample(row_indices, size=4, replace = FALSE)
+```
+
+We sample **without replacement** b/c we don't want to resample any row more than once.
+
