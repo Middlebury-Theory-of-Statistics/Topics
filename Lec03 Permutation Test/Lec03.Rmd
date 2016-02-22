@@ -99,9 +99,9 @@ mean(final[index]) - mean(final[-index])
 
 ## The Crux
 
-Under $H_0: \mu_E - \mu_O$, the two groups have equal mean. 
+Under $H_0: \mu_E - \mu_O=0$, the two groups have equal mean. 
 
-So under $H_0$ `even_vs_odd` is a meaningless label, hence even we can
+So under $H_0$ `even_vs_odd` is a meaningless label, hence we can
 **permute/shuffle** it to no consequence.
 
 

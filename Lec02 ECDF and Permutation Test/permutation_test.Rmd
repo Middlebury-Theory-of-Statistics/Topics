@@ -5,6 +5,8 @@ date: "February 16, 2016"
 output: html_document
 ---
 
+
+
 ```{r, echo=FALSE}
 # Set random number generator seed value explicitly so we can replicate our 
 # simulations
