@@ -1,0 +1,31 @@
+---
+title: "Lecture 04"
+author: "Albert Y. Kim"
+date: "February 24, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(readr)
+library(ggplot2)
+library(mosaic)
+library(knitr)
+
+# Set random number generator seed value explicitly so we can replicate our 
+# simulations
+set.seed(76)
+```
+
+```{r, echo=FALSE}
+# Revisit grades datasest from Lec02
+grades <- read_csv("../Lec02 ECDF and Permutation Test/grades.csv")
+```
+
+
+
+
+## Intro Stats Final Exam
+
+
