@@ -8,24 +8,240 @@ output: ioslides_presentation
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Install these packages first
 library(dplyr)
-library(readr)
 library(ggplot2)
-library(mosaic)
+library(tidyr)
 library(knitr)
-
-# Set random number generator seed value explicitly so we can replicate our 
-# simulations
-set.seed(76)
 ```
+
+```{r, echo=FALSE, cache=TRUE}
+# Load GSS2002 Data
+GSS2002 <- source("https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Non-Public/master/Datasets/GSS2002.R?token=AEXL-xTzrmcdfXdPzpSaJMasd1XUMMb1ks5W1j6ZwA%3D%3D")
+
+GSS2002 <- GSS2002$value %>% 
+  tbl_df() %>% 
+  select(Education, DeathPenalty) %>% 
+  filter(
+    !is.na(Education),
+    !is.na(DeathPenalty)
+  )
+```
+
+
+
+## Chi-Square Test Statistics
+
+We switch to tests involving Chi-Square Test Statistics.
+
+**Motivating example:** Jurors are selected from the population of registered voters. How can we test if there is racial bias in juror selection?
+
+
+
+## Jury Selection
+
+Say you have a population of registered voters who break down as follows:
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+
+
+
+## Jury Selection
+
+Say you select $n=100$ jurors **at random** i.e. with no racial bias, we **expect** the following
+jury representation
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+| Jury Representation    | 72    | 7     | 12       | 9     | 100   |
+
+
+
+## Jury Selection
+
+Say you **observe** the following jury representation. Is there racial bias?
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+| Jury Representation    | 76    | 7     | 9       | 8     | 100   |
+
+
+
+## Jury Selection
+
+Say you **observe** the following jury representation. Is there racial bias?
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+| Jury Representation    | 0    | 100     | 0       | 0     | 100   |
+
+
+
+## Today's Data
+
+The General Social Survey is a major survey tracking American demographics, characteristics, and views on
+social and cultural issues since the 1970's. 
+
+Of the 2765 respondents in 2002, 1307 of them have values for both
+
+* `Education`: Left HS, HS, Jr Col, Bachelors, or Graduate
+* `DeathPenalty`: Favor, Oppose
+
+
+
+## Today's Question
+
+Are the two (categorical) variables `Education` and `DeathPenalty` **independent**?
+
+If they are **dependent**, then the level of one variable will affect the level of the other.
+
+i.e. People's support of the `DeathPenalty` will **depend** on your level of `Education`.
+
+
+
+## Raw Data
+
+Each of the 1307 rows represents one individual. Here are 6 randomly chosen rows:
 
 ```{r, echo=FALSE}
-# Revisit grades datasest from Lec02
-grades <- read_csv("../Lec02 ECDF and Permutation Test/grades.csv")
+# Set random number generator seed value explicitly so we can replicate our 
+# simulations
+set.seed(2)
+GSS2002_subset <- GSS2002 %>% 
+  sample_n(6) %>% 
+  kable()
+GSS2002_subset
+```
+
+
+
+## Observed Contigency Table
+
+The **observed** contingency table of `Education` and `DeathPenalty`:
+
+```{r, echo=FALSE}
+GSS2002 %>% 
+  group_by(Education, DeathPenalty) %>% 
+  tally() %>% 
+  spread(DeathPenalty, n) %>% 
+  ungroup() %>% 
+  kable()
+```
+
+
+
+## Overall Proportion of Support
+
+Column totals are below. So overall 898/1307 = 68.7% favor the death penalty.
+
+
+```{r, echo=FALSE, warning=FALSE}
+GSS2002 %>% 
+  group_by(Education, DeathPenalty) %>% 
+  tally() %>% 
+  spread(DeathPenalty, n) %>% 
+  ungroup() %>% 
+  mutate(Total=Favor+Oppose) %>% 
+  summarise(
+    Favor=sum(Favor),
+    Oppose=sum(Oppose),
+    Total=sum(Total)
+    ) %>% 
+  mutate(Education = as.factor("Total")) %>% 
+  select(Education, Favor, Oppose, Total) %>% 
+  kable()
 ```
 
 
 
 
-## Intro Stats Final Exam
+## Row Totals
 
+We look at the row totals for each education level:
+
+```{r, echo=FALSE}
+GSS2002 %>% 
+  group_by(Education, DeathPenalty) %>% 
+  tally() %>% 
+  spread(DeathPenalty, n) %>% 
+  ungroup() %>% 
+  mutate(Total=Favor+Oppose) %>% 
+  kable()
+```
+
+
+
+## Back to Contingency Table
+
+What would the contigency table look like if `Education` and `DeathPenalty` were
+**independent**?
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   ? |     ?|   189|
+|HS        |   ?|    ?|   711|
+|Jr Col    |    ?|     ?|    87|
+|Bachelors |   ?|     ?|   206|
+|Graduate  |    ?|     ?|   114|
+
+
+
+## Back to Contingency Table
+
+What would the contigency table look like if `Education` and `DeathPenalty` were
+**independent**?
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   189 x 0.687 = 129.8 |     ?|   189|
+|HS        |   ?|    ?|   711|
+|Jr Col    |    ?|     ?|    87|
+|Bachelors |   ?|     ?|   206|
+|Graduate  |    ?|     ?|   114|
+
+
+
+## Back to Contingency Table
+
+What would the contigency table look like if `Education` and `DeathPenalty` were
+**independent**?
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   189 x 0.687 = 129.8 |     ?|   189|
+|HS        |   711 x 0.687 = 488.5|    ?|   711|
+|Jr Col    |    87 x 0.687 = 59.8|     ?|    87|
+|Bachelors |   206 x 0.687 = 141.5|     ?|   206|
+|Graduate  |    114 x 0.687 = 78.3|     ?|   114|
+
+
+
+## Back to Contingency Table
+
+And hence we can fill out the remaining column. This is the **expected** contigency table:
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   129.8 |     59.1|   189|
+|HS        |   488.5|    222.5|   711|
+|Jr Col    |   59.8|     27.2|    87|
+|Bachelors |   141.5|     64.5|   206|
+|Graduate  |   78.3|     35.7|   114|
+
+
+
+## Chi-Square Statistic Based Tests
+
+This an be done either using:
+
+1. Computer: Permutation test for independence
+1. Math: $\chi^2$ test for independence
+
+We will also study the $\chi^2$ test for goodness-of-fit where
+
+1. All parameters are known
+1. Some parameters are estimated
 

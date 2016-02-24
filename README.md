@@ -7,6 +7,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec03**
     + <a href="http://rpubs.com/rudeboybert/MATH311_Lec03" target="_blank">Slides</a>
+* **Lec03**
+    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec03" target="_blank">Slides</a>
 
 
 ### Week 1: 2/15 - 2/19

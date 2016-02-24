@@ -93,7 +93,468 @@
           </hgroup>
   </slide>
 
-<slide class=''><hgroup><h2>Intro Stats Final Exam</h2></hgroup><article  id="intro-stats-final-exam"></article></slide>
+<slide class=''><hgroup><h2>Chi-Square Test Statistics</h2></hgroup><article  id="chi-square-test-statistics">
+
+<p>We switch to tests involving Chi-Square Test Statistics.</p>
+
+<p><strong>Motivating example:</strong> Jurors are selected from the population of registered voters. How can we test if there is racial bias in juror selection?</p>
+
+</article></slide><slide class=''><hgroup><h2>Jury Selection</h2></hgroup><article  id="jury-selection">
+
+<p>Say you have a population of registered voters who break down as follows:</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">White</th>
+<th align="left">Black</th>
+<th align="left">Hispanic</th>
+<th align="left">Other</th>
+<th align="left">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Registered Voters</td>
+<td align="left">72%</td>
+<td align="left">7%</td>
+<td align="left">12%</td>
+<td align="left">9%</td>
+<td align="left">100%</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Jury Selection</h2></hgroup><article  id="jury-selection-1">
+
+<p>Say you select \(n=100\) jurors <strong>at random</strong> i.e. with no racial bias, we <strong>expect</strong> the following jury representation</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">White</th>
+<th align="left">Black</th>
+<th align="left">Hispanic</th>
+<th align="left">Other</th>
+<th align="left">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Registered Voters</td>
+<td align="left">72%</td>
+<td align="left">7%</td>
+<td align="left">12%</td>
+<td align="left">9%</td>
+<td align="left">100%</td>
+</tr>
+<tr class="even">
+<td align="left">Jury Representation</td>
+<td align="left">72</td>
+<td align="left">7</td>
+<td align="left">12</td>
+<td align="left">9</td>
+<td align="left">100</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Jury Selection</h2></hgroup><article  id="jury-selection-2">
+
+<p>Say you <strong>observe</strong> the following jury representation. Is there racial bias?</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">White</th>
+<th align="left">Black</th>
+<th align="left">Hispanic</th>
+<th align="left">Other</th>
+<th align="left">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Registered Voters</td>
+<td align="left">72%</td>
+<td align="left">7%</td>
+<td align="left">12%</td>
+<td align="left">9%</td>
+<td align="left">100%</td>
+</tr>
+<tr class="even">
+<td align="left">Jury Representation</td>
+<td align="left">76</td>
+<td align="left">7</td>
+<td align="left">9</td>
+<td align="left">8</td>
+<td align="left">100</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Jury Selection</h2></hgroup><article  id="jury-selection-3">
+
+<p>Say you <strong>observe</strong> the following jury representation. Is there racial bias?</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Race</th>
+<th align="left">White</th>
+<th align="left">Black</th>
+<th align="left">Hispanic</th>
+<th align="left">Other</th>
+<th align="left">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Registered Voters</td>
+<td align="left">72%</td>
+<td align="left">7%</td>
+<td align="left">12%</td>
+<td align="left">9%</td>
+<td align="left">100%</td>
+</tr>
+<tr class="even">
+<td align="left">Jury Representation</td>
+<td align="left">0</td>
+<td align="left">100</td>
+<td align="left">0</td>
+<td align="left">0</td>
+<td align="left">100</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Today&#39;s Data</h2></hgroup><article  id="todays-data">
+
+<p>The General Social Survey is a major survey tracking American demographics, characteristics, and views on social and cultural issues since the 1970&#39;s.</p>
+
+<p>Of the 2765 respondents in 2002, 1307 of them have values for both</p>
+
+<ul>
+<li><code>Education</code>: Left HS, HS, Jr Col, Bachelors, or Graduate</li>
+<li><code>DeathPenalty</code>: Favor, Oppose</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Today&#39;s Question</h2></hgroup><article  id="todays-question">
+
+<p>Are the two (categorical) variables <code>Education</code> and <code>DeathPenalty</code> <strong>independent</strong>?</p>
+
+<p>If they are <strong>dependent</strong>, then the level of one variable will affect the level of the other.</p>
+
+<p>i.e. People&#39;s support of the <code>DeathPenalty</code> will <strong>depend</strong> on your level of <code>Education</code>.</p>
+
+</article></slide><slide class=''><hgroup><h2>Raw Data</h2></hgroup><article  id="raw-data">
+
+<p>Each of the 1307 rows represents one individual. Here are 6 randomly chosen rows:</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="left">DeathPenalty</th>
+</tr>
+<tr class="odd">
+<td align="left">HS</td>
+<td align="left">Oppose</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="left">Favor</td>
+</tr>
+<tr class="odd">
+<td align="left">HS</td>
+<td align="left">Favor</td>
+</tr>
+<tr class="even">
+<td align="left">Graduate</td>
+<td align="left">Oppose</td>
+</tr>
+<tr class="odd">
+<td align="left">HS</td>
+<td align="left">Favor</td>
+</tr>
+<tr class="even">
+<td align="left">Jr Col</td>
+<td align="left">Favor</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Observed Contigency Table</h2></hgroup><article  id="observed-contigency-table">
+
+<p>The <strong>observed</strong> contingency table of <code>Education</code> and <code>DeathPenalty</code>:</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">117</td>
+<td align="right">72</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">511</td>
+<td align="right">200</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">71</td>
+<td align="right">16</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">135</td>
+<td align="right">71</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">64</td>
+<td align="right">50</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Overall Proportion of Support</h2></hgroup><article  id="overall-proportion-of-support">
+
+<p>Column totals are below. So overall 898/1307 = 68.7% favor the death penalty.</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Total</td>
+<td align="right">898</td>
+<td align="right">409</td>
+<td align="right">1307</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Row Totals</h2></hgroup><article  id="row-totals">
+
+<p>We look at the row totals for each education level:</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">117</td>
+<td align="right">72</td>
+<td align="right">189</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">511</td>
+<td align="right">200</td>
+<td align="right">711</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">71</td>
+<td align="right">16</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">135</td>
+<td align="right">71</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">64</td>
+<td align="right">50</td>
+<td align="right">114</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Back to Contingency Table</h2></hgroup><article  id="back-to-contingency-table">
+
+<p>What would the contigency table look like if <code>Education</code> and <code>DeathPenalty</code> were <strong>independent</strong>?</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">189</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">711</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">114</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Back to Contingency Table</h2></hgroup><article  id="back-to-contingency-table-1">
+
+<p>What would the contigency table look like if <code>Education</code> and <code>DeathPenalty</code> were <strong>independent</strong>?</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">189 x 0.687 = 129.8</td>
+<td align="right">?</td>
+<td align="right">189</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">711</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">?</td>
+<td align="right">?</td>
+<td align="right">114</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Back to Contingency Table</h2></hgroup><article  id="back-to-contingency-table-2">
+
+<p>What would the contigency table look like if <code>Education</code> and <code>DeathPenalty</code> were <strong>independent</strong>?</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">189 x 0.687 = 129.8</td>
+<td align="right">?</td>
+<td align="right">189</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">711 x 0.687 = 488.5</td>
+<td align="right">?</td>
+<td align="right">711</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">87 x 0.687 = 59.8</td>
+<td align="right">?</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">206 x 0.687 = 141.5</td>
+<td align="right">?</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">114 x 0.687 = 78.3</td>
+<td align="right">?</td>
+<td align="right">114</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Back to Contingency Table</h2></hgroup><article  id="back-to-contingency-table-3">
+
+<p>And hence we can fill out the remaining column. This is the <strong>expected</strong> contigency table:</p>
+
+<table class = 'rmdtable'>
+<tr class="header">
+<th align="left">Education</th>
+<th align="right">Favor</th>
+<th align="right">Oppose</th>
+<th align="right">Total</th>
+</tr>
+<tr class="odd">
+<td align="left">Left HS</td>
+<td align="right">129.8</td>
+<td align="right">59.1</td>
+<td align="right">189</td>
+</tr>
+<tr class="even">
+<td align="left">HS</td>
+<td align="right">488.5</td>
+<td align="right">222.5</td>
+<td align="right">711</td>
+</tr>
+<tr class="odd">
+<td align="left">Jr Col</td>
+<td align="right">59.8</td>
+<td align="right">27.2</td>
+<td align="right">87</td>
+</tr>
+<tr class="even">
+<td align="left">Bachelors</td>
+<td align="right">141.5</td>
+<td align="right">64.5</td>
+<td align="right">206</td>
+</tr>
+<tr class="odd">
+<td align="left">Graduate</td>
+<td align="right">78.3</td>
+<td align="right">35.7</td>
+<td align="right">114</td>
+</tr>
+</table>
+
+</article></slide><slide class=''><hgroup><h2>Chi-Square Statistic Based Tests</h2></hgroup><article  id="chi-square-statistic-based-tests">
+
+<p>This an be done either using:</p>
+
+<ol>
+<li>Computer: Permutation test for independence</li>
+<li>Math: \(\chi^2\) test for independence</li>
+</ol>
+
+<p>We will also study the \(\chi^2\) test for goodness-of-fit where</p>
+
+<ol>
+<li>All parameters are known</li>
+<li>Some parameters are estimated</li>
+</ol></article></slide>
 
 
   <slide class="backdrop"></slide>
