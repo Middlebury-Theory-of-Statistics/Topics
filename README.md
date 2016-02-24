@@ -9,9 +9,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 ### Week 3: 2/29 - 3/4
 
 * **Lec05: Chi-Square Test Statistic Based Tests**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec04%20Contingency%20Tables/Lec04.html#1" target="_blank">Slides</a>
-    + Files:
-        * Code for Example 3.3 on page 44 of a non-symmetric null distribution: `Ex_3-3.R`
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec05%20Chi-Square%20Test%20Statistic%20Based%20Tests/Lec05.html#1" target="_blank">Slides</a>
 
 
 
