@@ -7,6 +7,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec04: Chi-Square Test Statistic and Contingency Tables**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec04%20Contingency%20Tables/Lec04.html#1" target="_blank">Slides</a>
+    + Files:
+        * Code for Example 3.3 on page 44 of a non-symmetric null distribution: `Ex_3-3.R`
 * **Lec03: Permutation Tests**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec03%20Permutation%20Test/Lec03.html" target="_blank">Slides</a>
 
