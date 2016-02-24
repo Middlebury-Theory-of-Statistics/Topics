@@ -5,9 +5,9 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 ### Week 2: 2/22 - 2/26
 
-* **Lec03**
-    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec03" target="_blank">Slides</a>
-* **Lec03**
+* **Lec04: Chi-Square Test Statistic and Contingency Tables**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec04%20Contingency%20Tables/Lec04.html#1" target="_blank">Slides</a>
+* **Lec03: Permutation Tests**
     + <a href="http://rpubs.com/rudeboybert/MATH311_Lec03" target="_blank">Slides</a>
 
 
