@@ -89,7 +89,7 @@ GSS2002_subset %>%
 
 
 
-## Permutation Tests
+## Permutation Test
 
 ```{r, echo=FALSE, cache=TRUE}
 #Use function created above to calcluate chi-square test statistic
@@ -112,7 +112,7 @@ hist(result, xlab=xlab, main=title, breaks=20)
 
 
 
-## Permutation Tests
+## Permutation Test Null Distribution
 
 (Count) histogram and observed $\chi^2$ test statistic:
 
@@ -124,7 +124,7 @@ abline(v=observed, col="red", lwd=2)
 
 
 
-## Permutation Tests
+## $\chi^2$ Test Null Distribution
 
 (Density) histogram:
 
@@ -135,8 +135,7 @@ abline(v=observed, col="red", lwd=2)
 
 
 
-## Permutation Tests
-
+## $\chi^2$ Test Null Distribution
 With $\chi^2$ distribution with $df=4$:
 
 ```{r, echo=FALSE}
@@ -159,7 +158,7 @@ curve(dchisq(x, df=4), from=0, to=25, col="blue", add=T, lwd=2)
 #   kable()
 ```
 
-We have $df = (I-1)\times(J-1) = 4 \times 1 = 4$. Recall the original data:
+$df = (I-1)\times(J-1) = 4 \times 1 = 4$. Recall the original data:
 
 |Education | Favor| Oppose|
 |:---------|-----:|------:|
@@ -173,7 +172,7 @@ We have $df = (I-1)\times(J-1) = 4 \times 1 = 4$. Recall the original data:
 
 ## Why degrees of freedom?
 
-Add row and column totals:
+Consider row and column totals:
 
 |Education | Favor| Oppose| Total|
 |:---------|-----:|------:|-----:|
@@ -188,7 +187,7 @@ Add row and column totals:
 
 ## Why degrees of freedom?
 
-Keep row and column totals:
+Keep only row and column totals:
 
 |Education | Favor| Oppose| Total|
 |:---------|-----:|------:|-----:|
@@ -198,4 +197,78 @@ Keep row and column totals:
 |Bachelors |   |     |   206|
 |Graduate  |    |     |   114|
 |Total     |   898|    409|  1307|
+
+
+
+## Goodness of Fit
+
+Recall the jury selection example from Lec04. Is there racial bias?
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+| Jury Representation    | 76    | 7     | 9       | 8     | 100   |
+
+
+
+## $\chi^2$ Test Statistic
+
+```{r, warning=FALSE}
+expected <- c(72, 7, 12, 9)
+observed <- c(76, 7, 9, 8)
+
+sum( (observed-expected)^2/expected )
+```
+
+
+
+## Null Distribution and p-Value
+
+p-value is `r pchisq(sum( (observed-expected)^2/expected ), df=3, lower.tail=FALSE)`
+
+```{r, warning=FALSE, echo=FALSE}
+curve(dchisq(x, df=3), from=0, to=10, n=1000, xlab=xlab, ylab="f(x)", main=title)
+abline(v=sum( (observed-expected)^2/expected ), col="red", lwd=2)
+```
+
+
+
+## Goodness of Fit
+
+Say we observe this instead. Is there racial bias?
+
+| Race              | White | Black | Hispanic | Other | Total |
+|-------------------|-------|-------|----------|-------|-------|
+| Registered Voters | 72%   | 7%    | 12%      | 9%    | 100%  |
+| Jury Representation    | 5    | 85     | 5       | 5     | 100   |
+
+
+
+## $\chi^2$ Test Statistic
+
+```{r, warning=FALSE}
+expected <- c(72, 7, 12, 9)
+observed <- c(5, 85, 5, 5)
+
+sum( (observed-expected)^2/expected )
+```
+
+
+
+## Null Distribution and p-Value
+
+```{r, warning=FALSE, echo=FALSE}
+curve(dchisq(x, df=3), from=0, to=10, n=1000, xlab=xlab, ylab="f(x)", main=title)
+abline(v=sum( (observed-expected)^2/expected ), col="red", lwd=2)
+```
+
+
+## Null Distribution and p-Value
+
+p-value is `r pchisq(sum( (observed-expected)^2/expected ), df=3, lower.tail=FALSE)`
+
+```{r, warning=FALSE, echo=FALSE}
+curve(dchisq(x, df=3), from=0, to=1000, n=100000, xlab=xlab, ylab="f(x)", main=title)
+abline(v=sum( (observed-expected)^2/expected ), col="red", lwd=2)
+```
 
