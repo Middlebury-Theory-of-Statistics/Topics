@@ -114,6 +114,8 @@ hist(result, xlab=xlab, main=title, breaks=20)
 
 ## Permutation Tests
 
+(Count) histogram and observed $\chi^2$ test statistic:
+
 ```{r, echo=FALSE}
 #Create a histogram
 hist(result, xlab=xlab, main=title, breaks=20)
@@ -124,8 +126,9 @@ abline(v=observed, col="red", lwd=2)
 
 ## Permutation Tests
 
+(Density) histogram:
+
 ```{r, echo=FALSE}
-#Create a histogram
 hist(result, xlab=xlab, main=title, prob=TRUE, breaks=20)
 abline(v=observed, col="red", lwd=2)   
 ```
@@ -133,6 +136,8 @@ abline(v=observed, col="red", lwd=2)
 
 
 ## Permutation Tests
+
+With $\chi^2$ distribution with $df=4$:
 
 ```{r, echo=FALSE}
 hist(result, xlab=xlab, main=title, prob=TRUE, breaks=20)
@@ -142,13 +147,55 @@ curve(dchisq(x, df=4), from=0, to=25, col="blue", add=T, lwd=2)
 
 
 
-## Permutation Tests
+## Why degrees of freedom?
 
-p-value
+```{r, echo=FALSE}
+# GSS2002 %>%
+#   group_by(Education, DeathPenalty) %>%
+#   tally() %>%
+#   spread(DeathPenalty, n) %>%
+#   ungroup() %>%
+#   mutate(Total=Favor+Oppose) %>%
+#   kable()
+```
 
-`r (sum(result >= observed)+1)/(B + 1)`
+We have $df = (I-1)\times(J-1) = 4 \times 1 = 4$. Recall the original data:
+
+|Education | Favor| Oppose|
+|:---------|-----:|------:|
+|Left HS   |   117|     72|
+|HS        |   511|    200|
+|Jr Col    |    71|     16|
+|Bachelors |   135|     71|
+|Graduate  |    64|     50|
 
 
 
+## Why degrees of freedom?
 
+Add row and column totals:
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   117|     72|   189|
+|HS        |   511|    200|   711|
+|Jr Col    |    71|     16|    87|
+|Bachelors |   135|     71|   206|
+|Graduate  |    64|     50|   114|
+|Total     |   898|    409|  1307|
+
+
+
+## Why degrees of freedom?
+
+Keep row and column totals:
+
+|Education | Favor| Oppose| Total|
+|:---------|-----:|------:|-----:|
+|Left HS   |   |     |   189|
+|HS        |   |    |   711|
+|Jr Col    |    |     |    87|
+|Bachelors |   |     |   206|
+|Graduate  |    |     |   114|
+|Total     |   898|    409|  1307|
 
