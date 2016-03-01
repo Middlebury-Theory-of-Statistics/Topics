@@ -1,0 +1,32 @@
+---
+title: "Lecture 06"
+author: "Albert Y. Kim"
+date: "March 2, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+```
+
+```{r, echo=FALSE}
+# Load GSS2002 Data
+GSS2002 <- read.csv("http://rudeboybert.github.io/pages/teaching/courses/MATH311/GSS2002.csv", header=TRUE)
+```
+
+
+
+## Raw Data
+
+Recall the original data:
+
+```{r, echo=FALSE}
+# Set random number generator seed value explicitly so we can replicate our 
+# simulations
+
+```
+
