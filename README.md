@@ -10,7 +10,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec05: Chi-Square Test Statistic Based Tests**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec05%20Chi-Square%20Test%20Statistic%20Based%20Tests/Lec05.html#1" target="_blank">Slides</a>
-
+* **Lec06: Sampling Distributions**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec06%20Sampling%20Distributions/Lec06.html" target="_blank">Slides</a>
 
 
 
