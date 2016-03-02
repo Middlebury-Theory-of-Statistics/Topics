@@ -6,6 +6,13 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 4: 3/7 - 3/11
+
+* **Lec08: Boostrap**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec06%20Sampling%20Distributions/Lec06.html" target="_blank">Slides</a>
+
+
+
 ### Week 3: 2/29 - 3/4
 
 * **Lec05: Chi-Square Test Statistic Based Tests**

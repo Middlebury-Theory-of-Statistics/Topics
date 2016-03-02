@@ -1,0 +1,24 @@
+---
+title: "Lecture 08"
+author: "Albert Y. Kim"
+date: "March 7, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+
+
+## Bootstrap
+
