@@ -1,0 +1,201 @@
+---
+title: "MATH 391 Homework 11 R Component"
+author: "WRITE YOUR NAME HERE"
+date: "Due December 3, 2014"
+output:
+  html_document: default
+  pdf_document:
+    number_sections: yes
+---
+
+
+## Terminology/Concept Refresher:
+
+* A _population distribution_ i.e. PDF $f(x)$ characterizes the random behavior of _individual_ observations $X_i$.  In other words, it is the distribution from which individual observed $x_i$ originate.
+* A _(random) sample of size $n$_ is a set of $n$ IID random variables $X_1, \ldots, X_n$ from the population distribution.
+* A _statistic_ is a function from $\mathbb{R}^n$ to $\mathbb{R}$ of the sample to a scalar quantity, such as the sample mean $\overline{X}$, the sample variance $S^2$, the minimum/maximum, etc.  In our case, we'll be considering the sample mean.
+* A _sampling distribution_ is the probability distribution characterizing the random behavior of statistic.  In our case, it is the distribution from which observed $\overline{x}$ originate.
+* The _standard error_ is the standard deviation specifically associated with a sampling distribution.
+* The Central Limit Theorem states that the asymptotic (sampling) distribution of the sample mean $\overline{X}$ is Normal with mean $\mu$ and standard error $SE=\sqrt{\frac{\sigma^2}{n}} = \frac{\sigma}{\sqrt{n}}$, _regardless_ of the population distribution $f(x)$.  Or stated different, the distribution is _approximately_ normal.  
+
+
+
+
+
+
+
+## Central Limit Theorem Example
+We demonstrate the Central Limit Theorem using a $\chi^2$ distribution with $df=3$ degrees of freedom as our population distribution $f(x)$.  
+
+```{r, fig.width=10, fig.height=5, echo=FALSE}
+n.plot.pts <- 10000
+domain <- seq(from=0, to=20, length=n.plot.pts)
+pdf.values <- dchisq(domain, df = 3)
+plot(domain, pdf.values, type='l', xlab="x", ylab="density", 
+     main="Population Distribution f(x)")
+```
+
+We will demonstrate the effect on the sampling distribution of the sample mean as $n \longrightarrow \infty$.  We will sample `n.sim=10000` observations $\overline{x}_n$ from the sampling distribution, where each $\overline{x}_n$ is based on a sample of size $n$ from the population distribution $f(x)$.  Note:  10000 was an arbitrarily chosen large number.  
+
+```{r, fig.width=10, fig.height=5}
+n <- 1
+df <- 3
+n.sim <- 10000
+x.bar.vector <- rep(0, n.sim)
+for(i in 1:n.sim){
+  sample <- rchisq(n, df=df)
+  x.bar.vector[i] <- mean(sample)
+}
+
+title <- paste("Sampling Distribution for n =", n)
+hist(x.bar.vector, breaks=50, xlab=expression(bar(x)), prob=TRUE, main=title)
+#curve(dnorm(x, mean=df, sd=sqrt(2*df/n)), from=df-6*sqrt(2*df/n), to=df+6*sqrt(2*df/n), n=1000, add=TRUE, col="red", lwd=2)
+```
+
+
+### Questions
+No need to include the code for your responses.
+
+1.  When $n=1$, what can we say about the sampling distribution?
+2.  When the population distribution is a $\chi^2$ with $df=3$, about what sample size $n$ do you need before the Central Limit Theorem "kicks in"?
+3.  Compare the sampling distributions of $\overline{X}_n$ based on $n=3$ observations from a $\chi^2$ with $df=3$ versus $df=300$.  What do you observe?
+4.  Based on your above response, guess which attribute of the population distribution $f(x)$ determines the "efficiency" of the Central Limit Theorem?
+5.  For samples of size $n=27$ from a population that is $\chi^2$ with $df=3$, what is the approximate mean and standard error of the sampling distribution?  Give the analytic value and not a value based on our simulations above.   
+6.  For the scenario in 5, analytically compute the approximate proportion of observed sample means that will fall between 2.224 and 3.775.  Sanity check your responses with a histogram of simulated values.  
+7.  BONUS:  Uncomment the line with the `curve()` function above and replace `MEAN`,`SD`,`FROM` and `TO` with the appropriate values so that the superimposed curve matches the histogram for large values of $n$.
+
+### Answers
+1. It matches the population distribution.
+2. Although this is subjective, multiple simulations with $n=25$ seem to indicate that the normal approximation is good enough.
+3. For the same $n=3$, the sampling distribution looks much more normal when $df=30$
+4. If the population distribution is skewed, it takes a larger $n$ for the sampling distribution to be normal.
+5. The mean and variance $\sigma^2$ of a $\chi^2$ with $df$ degrees of freedom are $df$ and $2df$ respectively.  Thus with $df=27$ the mean and standard error are $3$ and $\sqrt{\frac{\sigma^2}{n}} = \sqrt{\frac{2df}{n}} = \sqrt{\frac{6}{27}} = \frac{\sqrt{2}}{3} = 0.471$.
+6. The $z$-scores are computed using the mean and standard deviation of $\overline{X}$ and not $X$:
+$$
+\begin{eqnarray*}
+z &=& \frac{\overline{x} - \mu_{\overline{X}}}{\sigma_{\overline{X}}}\\
+\frac{2.224 - 3}{0.471} =  -1.648 &\mbox{and}& \frac{3.775- 3}{0.471} = 1.645
+\end{eqnarray*}
+$$
+This correponds to the area under the Normal$(0,1)$ between $(-1.648, 1.645)$:
+```{r}
+pnorm(1.645) - pnorm(-1.647)
+```
+
+
+
+
+
+## Your Turn
+
+### Wacky PDF Revisited
+
+Let's consider the same PDF $f(x)$ from Written HW 4 Question 3 and R HW 5 but with a gap of size 7 between the two modes.  Let's call this the "gap" distribution with PDF:
+$$
+f(x) = \left\{
+  \begin{array}{ll}
+    \exp(x)/2 & \mbox{for } x < 0 \\
+    0 & \mbox{for } 0 \leq x < 7 \\ 
+    \exp(7-x)/2 & \mbox{for } x \geq 7 \\
+  \end{array}
+\right.
+$$
+
+```{r, fig.width=10, fig.height=5, echo=FALSE}
+n.plot.pts <- 10000
+domain <- seq(from=-6, to=12, length=n.plot.pts)
+pdf.values <- rep(0, length=n.plot.pts)
+
+f <- function(x) {
+  if (x < 0) {
+    y <- exp(x)/2
+  }
+  if (0 <= x & x < 7) {
+    y <- 0
+  }
+  if (7 <= x) {
+    y <- exp(7-x)/2
+  }
+  return(y)
+}
+
+# Plot PDF
+for(i in 1:length(domain)) {
+  pdf.values[i] <- f(domain[i])
+}
+plot(domain, pdf.values, type='l', xlab="x", ylab="density", 
+     main="Gap Dist'n PDF f(x)")
+```
+
+
+
+### Simulating these Random Variables
+The inverse CDF function $F^{-1}(y)$ for $y \in (0,1)$ is
+```{r, fig.width=5, fig.height=5}
+F.inv <- function(y) {
+  if (y < 0.5) {
+    x <- log(2*y)
+  }
+  if (y > 0.5) {
+    x <- 7 - log(2*(1-y))
+  }
+  return(x)
+}
+```
+
+Modifying code from the solutions to R HW 5, write a function `rgap(n)` that has
+
+* Input: the number `n` of values we want to simulate
+* Output: a vector of length `n` of simulated values from the gap distribution.
+
+Test your code out with the (commented) histogram code.  
+
+```{r, fig.width=5, fig.height=5, cache=TRUE}
+rgap <- function(n){
+  y <- runif(n, min=0, max=1)
+  output <- rep(0, n)
+  for(i in 1:length(output)) {
+    output[i] <- F.inv(y[i])
+  }
+  return(output)
+}
+
+# Histogram of simulated values
+hist(rgap(10000), xlab="x", main="Simulated Values", prob=TRUE, breaks=50)
+lines(domain, pdf.values, col="hotpink", lwd=3)
+```
+
+
+
+### Comparison of Different Sample Sizes
+Now we will compare the sampling distributions for $n=1, 2, 4, 6, 10$ and a sixth value of your choice where you think the Central Limit Theorem has "kicked in".  Again, each histogram will be based on 10000 draws from the sampling distribution, i.e. 10000 values of $\overline{x}$.  We split the plot panel into 3 rows and 2 columns and make use of a nested for loop indexed by `j` to achieve this.  Use the code from earlier to demonstrate the Central Limit Theorem for the different values of $n$.  
+
+```{r, fig.width=8, fig.height=12, cache=TRUE}
+n.sim <- 10000
+# n <- c(1, 2, 4, 6, 10, INSERT_YOUR_VALUE)
+n <- c(1, 2, 4, 6, 10, 25)
+
+par(mfrow=c(3,2))
+for(j in 1:length(n)) {
+  
+  x.bar.vector <- rep(0, n.sim)
+  for(i in 1:n.sim){
+    sample <- rgap(n[j])
+    x.bar.vector[i] <- mean(sample)
+  }
+  title <- paste("Sampling Distribution for n =", n[j])
+  hist(x.bar.vector, breaks=50, xlab=expression(bar(x)), prob=TRUE,
+       main=title)
+  
+}
+```
+
+We see that for small values of $n$, the distribution of sample means exhibits very odd behavior, but as $n$ approaches 25, things look sufficiently normal.  
+
+
+
+
+
+
+
+
