@@ -11,6 +11,9 @@ library(dplyr)
 library(ggplot2)
 library(tidyr)
 library(knitr)
+
+# Set seed for random number generator
+set.seed(76)
 ```
 
 
@@ -32,15 +35,82 @@ sample(students, 3)
 
 
 
-## What are we doing here?
+## Sampling Distribution by Simulation
 
-* The **sampling distribution** describes the distribution of these sample means.
-* The **standard error** describes the variability of these sample means.
+Let $T(\vec{X}) = T(X_1, \ldots, X_n) = \max(\vec{X})$.
+
+What is the sampling distribution of $T(\vec{X})$ when $n=12$? i.e. How does it behave?
+
+We construct the sampling distribution **by simulation**:
+
+* Let $X_i$ be Uniform$(0,1)$ RV for $i=1, \ldots, n$.
+* Simulation 1000 values of $T(\vec{x})$ and histogram it.
 
 
 
 
 
+## Sampling Distribution by Simulation
+
+```{r, eval=FALSE}
+sample_mins <- rep(0, 1000)
+for(i in 1:1000){
+  x_vec <- runif(n=12, min=0, max=1)
+  sample_mins[i] <- max(x_vec)
+}
+hist(sample_mins)
+```
 
 
 
+
+
+## Sampling Distribution by Simulation
+
+Count histogram based on 1000 simulations:
+
+```{r, echo=FALSE}
+sample_mins <- rep(0, 1000)
+for(i in 1:1000){
+  x_vec <- runif(n=12, min=0, max=1)
+  sample_mins[i] <- max(x_vec)
+}
+hist(sample_mins, xlab="min", main="Sampling Distribution of max for n=12", breaks=seq(0.5, 1, by=0.025), xlim=c(0.6,1))
+```
+
+
+
+
+
+## Sampling Distribution by Simulation
+
+Density histogram based on 1000 simulations:
+
+```{r, echo=FALSE}
+hist(sample_mins, xlab="min", main="Sampling Distribution of max for n=12", breaks=seq(0.5, 1, by=0.025), xlim=c(0.6,1), prob=TRUE)
+```
+
+
+
+
+
+## Sampling Distribution by Simulation
+
+What do you think happens if we consider $T(\vec{X}) = \max(\vec{X})$ when $n=50$?
+
+
+
+
+
+## Sampling Distribution by Simulation
+
+Density histogram based on 1000 simulations:
+
+```{r, echo=FALSE}
+sample_mins <- rep(0, 1000)
+for(i in 1:1000){
+  x_vec <- runif(n=50)
+  sample_mins[i] <- max(x_vec)
+}
+hist(sample_mins, xlab="min", main="Sampling Distribution of max for n=50", breaks=seq(0.5, 1, by=0.025), xlim=c(0.6,1), prob=TRUE)
+```
