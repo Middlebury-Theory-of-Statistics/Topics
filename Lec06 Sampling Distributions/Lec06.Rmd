@@ -13,20 +13,34 @@ library(tidyr)
 library(knitr)
 ```
 
-```{r, echo=FALSE}
-# Load GSS2002 Data
-GSS2002 <- read.csv("http://rudeboybert.github.io/pages/teaching/courses/MATH311/GSS2002.csv", header=TRUE)
+
+
+
+
+## What are we doing here?
+
+```{r, eval=FALSE}
+students <- 
+  c("Jigar", "James", "Davin", "Timothy", "Theodore", "Gurlyn", 
+    "William", "Helena", "Kelsey", "Sarah", "Brenda", "Alvaro", 
+    "Shrif", "Jules", "Henry", "Nimrod", "Graham", "Trisha", 
+    "Vaasu", "Patrick", "Leo", "Yuchen")
+sample(students, 3)
 ```
 
 
 
-## Raw Data
 
-Recall the original data:
 
-```{r, echo=FALSE}
-# Set random number generator seed value explicitly so we can replicate our 
-# simulations
+## What are we doing here?
 
-```
+* The **sampling distribution** describes the distribution of these sample means.
+* The **standard error** describes the variability of these sample means.
+
+
+
+
+
+
+
 
