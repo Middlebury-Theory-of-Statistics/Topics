@@ -13,8 +13,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec06: Sampling Distributions**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec06%20Sampling%20Distributions/Lec06.html" target="_blank">Slides</a>
 * **Lec07: Central Limit Theorem**
+    + <a href="http://rpubs.com/rudeboybert/MATH311_Lec07" target="_blank">Slides</a>
     + <a href="http://www.nytimes.com/2013/09/24/science/as-normal-as-rabbits-weights-and-dragons-wings.html" target="_blank">Video</a>: As ‘Normal’ as Rabbits’ Weights and Dragons’ Wings
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec07%20Central%20Limit%20Theorem/Lec07.html#1" target="_blank">Slides</a>
 
 
 

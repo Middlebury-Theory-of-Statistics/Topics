@@ -234,7 +234,14 @@ n <- c(1, 2, 4, 6, 10, 25)
 ## Wacky Example
 
 Now let's **simulate** the sampling distribution of $\overline{X}$ (using 10000
-simulations) for different values of $n$: 1, 2, 4, 6, 10, and 25.
+simulations) for different values of $n$:
+
+* 1
+* 2
+* 4
+* 6
+* 10
+* 25
 
 
 
