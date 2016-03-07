@@ -103,7 +103,16 @@ legend("topright", legend="Pop Dist'n f(x)", col="red", lwd=2, bty="n")
 
 
 
-## Bootstrap
+## Bootstrap Motivation
+
+We want to make statements about the **sampling distribution** of some statistic
+based on samples of size $n$ from some population distribution.
+
+
+
+
+
+## Bootstrap Motivation
 
 ```{r, echo=FALSE}
 n <- 100000
@@ -129,12 +138,12 @@ lines(dens.sim, col="red", lwd=2)
 
 
 
-## Bootstrap
+## Bootstrap Motivation
 
 ... but we'll have a sample from it:
 
 ```{r, echo=FALSE}
-hist(sim, prob=TRUE, main="Histogram", 
+hist(sim, prob=TRUE, main="Empirical Distribution", 
      ylim=c(0, 0.03), 
      xlab="x")
 ```
@@ -143,10 +152,10 @@ hist(sim, prob=TRUE, main="Histogram",
 
 
 
-## Bootstrap
+## Bootstrap Motivation
 
-Then sampling **with replacement** from the empirical
-distribution is like sampling from the true population distribution.
+Then **resampling with replacement** from the empirical
+distribution (left) approximates sampling from the true population distribution (right).
 
 
 ```{r, echo=FALSE}
@@ -165,13 +174,14 @@ lines(dens.sim, col="red", lwd=2)
 
 
 
-## Bootstrap
+## Example 1: We know result
 
-Example where we already know the result: Normal
+Ex. where we know the result. Let the population distribution be 
+Normal$(\mu=23, SD=7)$...
 
 ```{r, echo=FALSE}
 curve(dnorm(x, mean=23, sd=7), from=0, to=45, ylab="Density", n=100,
-      main="Population")
+      main="Population Distribution")
 abline(v=23, lty=2)
 ```
 
@@ -179,25 +189,30 @@ abline(v=23, lty=2)
 
 
 
-## Bootstrap
-
-```{r}
-x <- rnorm(50, mean=23, sd=7)
-```
+## Example 1: We know result
 
 ```{r, echo=FALSE}
-x <- rnorm(50, mean=23, sd=7)
-hist(x, xlim=c(0, 45), main="Sample", prob=TRUE)
+set.seed(79)
+n <- 50
+x <- rnorm(n, mean=23, sd=7)
+```
+
+from which you draw a sample of size $n=50$. We have $\overline{x}$ = `r mean(x) %>% round(3)` and:
+
+```{r, echo=FALSE}
+hist(x, xlim=c(0, 45), main="Empirical Distribution", prob=TRUE)
 ```
 
 
 
 
-## Bootstrap
+## Example 1: We know result
+
+We **know** the sampling distribution of $\overline{X}$ is Normal$(\mu=23, SD=7/\sqrt{50}=0.99)$:
 
 ```{r, echo=FALSE}
-curve(dnorm(x, mean=23, sd=7/sqrt(50)), from=15, to=30, ylab="Density", n=100,
-      main="Sampling Distribution")
+curve(dnorm(x, mean=23, sd=7/sqrt(n)), from=18, to=27, ylab="Density", n=1000,
+      main="Sampling Distribution", xlab="xbar", col="red")
 abline(v=23, lty=2)
 ```
 
@@ -205,13 +220,16 @@ abline(v=23, lty=2)
 
 
 
-## Bootstrap
+## Example 1: We know result
+
+Run the algorithm:
 
 ```{r}
-bootstrap <- rep(0, 10000)
+boot_sample_means <- rep(0, 10000)
+
 for(i in 1:10000){
-  bootstrap_resample <- sample(x, replace = TRUE)
-  bootstrap[i] <- mean(bootstrap_resample)
+  boot_resample <- sample(x, replace = TRUE)
+  boot_sample_means[i] <- mean(boot_resample)
 }
 ```
 
@@ -219,10 +237,114 @@ for(i in 1:10000){
 
 
 
-## Bootstrap
+## Example 1: We know result
+
+The bootstrap distribution of $\overline{X}$...
 
 ```{r, echo=FALSE}
-hist(bootstrap, xlim=c(15, 30), main="Bootstrap Distribution")
+hist(boot_sample_means, xlim=c(18, 27), main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
 ```
+
+
+
+
+
+## Example 1: We know result
+
+... is similar in shape and spread as the true sampling distribution but ...
+
+```{r, echo=FALSE}
+hist(boot_sample_means, xlim=c(18, 27), main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+curve(dnorm(x, mean=23, sd=7/sqrt(n)), from=18, to=27, n=1000, add=TRUE, col="red")
+legend("topright", legend="Sampling Dist'n", col="red", lty=1, bty="n")
+```
+
+
+
+
+
+## Example 1: We know result
+
+... it is not centered at $\mu=23$, rather at $\overline{x}$ = `r mean(x) %>% round(3)`.
+
+```{r, echo=FALSE}
+hist(boot_sample_means, xlim=c(18, 27), main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+curve(dnorm(x, mean=23, sd=7/sqrt(n)), from=18, to=27, n=1000, add=TRUE, col="red")
+legend("topright", legend="Sampling Dist'n", col="red", lty=1, bty="n")
+```
+
+
+
+
+
+
+## Example 2: We don't know result
+
+Now say we want to know the sampling distribution of a wacky statistic:
+
+* $T(\vec{X})  = \frac{\max(\vec{X}) - \min(\vec{X})}{\text{median}(\vec{X})}$
+* with $X_i \sim$ Normal$(\mu=27, \sigma=7)$ IID RV
+* and $n=5000$
+
+
+
+
+
+
+## Example 2: We don't know result
+
+There is **no** result for what the sampling distribution of $T(\overline{X})$
+is, or at least, it's hard to derive. So we create the bootstrap distribution:
+
+
+
+## Example 2: We don't know result
+
+```{r, echo=FALSE}
+n <- 5000
+x <- rnorm(n, mean=23, sd=7)
+```
+
+```{r}
+boot_sample_WTF <- rep(0, 10000)
+
+for(i in 1:10000){
+  boot_resample <- sample(x, replace = TRUE)
+  
+  boot_sample_WTF[i] <- 
+    (max(boot_resample) - min(boot_resample)) /
+    median(boot_resample)
+}
+```
+
+
+
+
+
+## Example 2: We don't know result
+
+The the shape and spread of bootstrap distribution of $\overline{X}$ will be
+similar to the shape and spread of the sampling distribution.
+
+```{r, echo=FALSE}
+hist(boot_sample_WTF, main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+```
+
+
+
+
+
+## Example 2: We don't know result
+
+* it is "centered" at $T(\vec{x})$ = `r round((max(x) - min(x))/median(x), 3)`
+* it has SD = `r round(sd(boot_sample_WTF), 3)`. i.e. the estimate of SE$[T(\vec{X})]$ is `r round(sd(boot_sample_WTF), 3)`.
+
+```{r, echo=FALSE}
+hist(boot_sample_WTF, main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+abline(v=(max(x) - min(x))/median(x), col="red", lwd=2)
+```
+
+
+
 
 
