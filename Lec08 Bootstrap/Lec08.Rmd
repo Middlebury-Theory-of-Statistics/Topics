@@ -13,7 +13,7 @@ library(tidyr)
 library(knitr)
 
 # Set seed for random number generator
-set.seed(76)
+set.seed(89)
 ```
 
 
@@ -21,4 +21,208 @@ set.seed(76)
 
 
 ## Bootstrap
+
+Recall in HW01, Exercise 2.14, you simulated
+
+* $n$ observations from a Normal$(0,1)$ random variable
+* used a qqplot and a histogram to evaluate how normal the observations looked
+
+
+
+
+
+## $n=15$
+
+```{r, echo=FALSE}
+x <- rnorm(15)
+par(mfrow=c(1, 2))
+qqnorm(x)
+qqline(x)
+hist(x, prob=TRUE)
+# curve(dnorm(x, 0, 1), from=-4, to=4, n=100, add=TRUE)
+```
+
+
+
+
+
+## $n=100$
+
+```{r, echo=FALSE}
+x <- rnorm(100)
+par(mfrow=c(1, 2))
+qqnorm(x)
+qqline(x)
+hist(x, prob=TRUE)
+# curve(dnorm(x, 0, 1), from=-4, to=4, n=100, add=TRUE)
+```
+
+
+
+
+
+## $n=1000$
+
+```{r, echo=FALSE}
+x <- rnorm(1000)
+par(mfrow=c(1, 2))
+qqnorm(x)
+qqline(x)
+hist(x, prob=TRUE)
+# curve(dnorm(x, 0, 1), from=-4, to=4, n=100, add=TRUE)
+```
+
+
+
+
+
+## Moral of the Story
+
+If the sample size $n$ is big, then the empirical distribution
+
+```{r, echo=FALSE}
+hist(x, prob=TRUE)
+# curve(dnorm(x, 0, 1), from=-4, to=4, n=100, add=TRUE)
+```
+
+
+
+
+
+## Moral of the Story
+
+well approximates the true population distribution.
+
+```{r, echo=FALSE}
+hist(x, prob=TRUE)
+curve(dnorm(x, 0, 1), from=-4, to=4, n=100, add=TRUE, col="red", lwd=2)
+legend("topright", legend="Pop Dist'n f(x)", col="red", lwd=2, bty="n")
+```
+
+
+
+
+
+## Bootstrap
+
+```{r, echo=FALSE}
+n <- 100000
+sim <- c(
+  rnorm(n, mean=-15, sd=3),
+  rnorm(n, mean=10, sd=5),
+  rnorm(n, mean=20, sd=10),
+  rnorm(n, mean=-35, sd=10)  
+)
+dens.sim <- density(sim)
+```
+
+Typically we won't know the true population distribution...
+
+```{r, echo=FALSE}
+hist(sim, prob=TRUE, main="True Distribution", 
+     ylim=c(0, 0.03), 
+     xlab="x", ylab="f(x)", border="white")
+lines(dens.sim, col="red", lwd=2)
+```
+
+
+
+
+
+## Bootstrap
+
+... but we'll have a sample from it:
+
+```{r, echo=FALSE}
+hist(sim, prob=TRUE, main="Histogram", 
+     ylim=c(0, 0.03), 
+     xlab="x")
+```
+
+
+
+
+
+## Bootstrap
+
+Then sampling **with replacement** from the empirical
+distribution is like sampling from the true population distribution.
+
+
+```{r, echo=FALSE}
+par(mfrow=c(1,2))
+hist(sim, prob=TRUE, main="Empirical Dist'n", 
+     ylim=c(0, 0.03), 
+     xlab="x", ylab="f(x)")
+hist(sim, prob=TRUE, main="Population Dist'n", 
+     ylim=c(0, 0.03), 
+     xlab="x", ylab="f(x)", border = "white")
+lines(dens.sim, col="red", lwd=2)
+#legend("topright", legend="Pop Dist'n f(x)", col="red", lwd=2, bty="n")
+```
+
+
+
+
+
+## Bootstrap
+
+Example where we already know the result: Normal
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=23, sd=7), from=0, to=45, ylab="Density", n=100,
+      main="Population")
+abline(v=23, lty=2)
+```
+
+
+
+
+
+## Bootstrap
+
+```{r}
+x <- rnorm(50, mean=23, sd=7)
+```
+
+```{r, echo=FALSE}
+x <- rnorm(50, mean=23, sd=7)
+hist(x, xlim=c(0, 45), main="Sample", prob=TRUE)
+```
+
+
+
+
+## Bootstrap
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=23, sd=7/sqrt(50)), from=15, to=30, ylab="Density", n=100,
+      main="Sampling Distribution")
+abline(v=23, lty=2)
+```
+
+
+
+
+
+## Bootstrap
+
+```{r}
+bootstrap <- rep(0, 10000)
+for(i in 1:10000){
+  bootstrap_resample <- sample(x, replace = TRUE)
+  bootstrap[i] <- mean(bootstrap_resample)
+}
+```
+
+
+
+
+
+## Bootstrap
+
+```{r, echo=FALSE}
+hist(bootstrap, xlim=c(15, 30), main="Bootstrap Distribution")
+```
+
 
