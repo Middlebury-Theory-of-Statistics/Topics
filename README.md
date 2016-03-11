@@ -10,7 +10,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec08: Bootstrap**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec08%20Bootstrap/Lec08.html" target="_blank">Slides</a>
-
+* **Lec09: Bootstrap Standard Error**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec08%20Bootstrap/Lec08.html" target="_blank">Slides</a>
 
 
 ### Week 3: 2/29 - 3/4

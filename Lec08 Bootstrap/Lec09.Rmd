@@ -1,0 +1,173 @@
+---
+title: "Lecture 09"
+author: "Albert Y. Kim"
+date: "March 11, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+
+# Set seed for random number generator
+set.seed(89)
+```
+
+
+
+
+
+## Example 1: We know result
+
+Let the population distribution be Normal$(\mu=23, SD=7)$...
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=23, sd=7), from=0, to=45, ylab="Density", n=100,
+      main="Population Distribution")
+abline(v=23, lty=2)
+```
+
+
+
+
+
+## Example 1: We know result
+
+```{r, echo=FALSE}
+set.seed(79)
+n <- 50
+x <- rnorm(n, mean=23, sd=7)
+```
+
+from which you draw a sample of size $n=50$. We have $\overline{x}$ = `r mean(x) %>% round(3)` and:
+
+```{r, echo=FALSE}
+hist(x, xlim=c(0, 45), main="Empirical Distribution", prob=TRUE)
+```
+
+
+
+
+
+## Example 1: We know result
+
+We **know** the sampling distribution of $\overline{X}$ is Normal$(\mu=23, SD=7/\sqrt{50}=0.99)$:
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=23, sd=7/sqrt(n)), from=18, to=27, ylab="Density", n=1000,
+      main="Sampling Distribution", xlab="xbar", col="red")
+abline(v=23, lty=2)
+```
+
+
+
+
+
+## Example 1: We know result
+
+```{r, echo=FALSE}
+boot_sample_means <- rep(0, 10000)
+
+for(i in 1:10000){
+  boot_resample <- sample(x, replace = TRUE)
+  boot_sample_means[i] <- mean(boot_resample)
+}
+```
+
+The bootstrap distribution of $\overline{X}$ is similar in shape and spread as the true sampling distribution, but it is not centered at $\mu=23$, rather at $\overline{x}$ = `r mean(x) %>% round(3)`.
+
+```{r, echo=FALSE}
+hist(boot_sample_means, xlim=c(18, 27), main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+curve(dnorm(x, mean=23, sd=7/sqrt(n)), from=18, to=27, n=1000, add=TRUE, col="red")
+legend("topright", legend="Sampling Dist'n", col="red", lty=1, bty="n")
+```
+
+
+
+
+
+## Standard Error
+
+The **bootstrap standard error** (i.e. approximation) is:
+```{r}
+sd(boot_sample_means)
+```
+
+The **true standard error** is:
+$$
+\text{SE} = \frac{\sigma}{\sqrt{n}} = \frac{7}{\sqrt{50}} =0.99
+$$
+
+
+
+
+
+## Example 2: We don't know result
+
+Now say we want to know the sampling distribution of a wacky statistic:
+
+* $T(\vec{X})  = \frac{\max(\vec{X}) - \min(\vec{X})}{\text{median}(\vec{X})}$
+* with $X_i \sim$ Normal$(\mu=27, \sigma=7)$ IID RV
+* and $n=5000$
+
+
+
+
+
+
+## Example 2: We don't know result
+
+There is **no** result for what the sampling distribution of $T(\overline{X})$
+is, or at least, it's hard to derive. So we create the bootstrap distribution:
+
+
+
+## Example 2: We don't know result
+
+```{r}
+n <- 5000
+x <- rnorm(n, mean=23, sd=7)
+
+boot_sample_WTF <- rep(0, 10000)
+
+for(i in 1:10000){
+  boot_resample <- sample(x, replace = TRUE)
+  
+  boot_sample_WTF[i] <- 
+    (max(boot_resample) - min(boot_resample)) / median(boot_resample)
+}
+```
+
+
+
+
+
+## Example 2: We don't know result
+
+The the shape and spread of bootstrap distribution of $\overline{X}$ will be
+similar to that of the sampling distribution.
+
+```{r, echo=FALSE}
+hist(boot_sample_WTF, main="Bootstrap Distribution", xlab="xbar", prob=TRUE, breaks=50)
+```
+
+
+
+
+
+## Standard Error
+
+The **bootstrap standard error** (i.e. approximation) is:
+```{r}
+sd(boot_sample_WTF)
+```
+
+The **true standard error** is: **?**
+
+
+
+
+
