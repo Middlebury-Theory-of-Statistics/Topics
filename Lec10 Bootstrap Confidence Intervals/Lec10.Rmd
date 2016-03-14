@@ -1,0 +1,75 @@
+---
+title: "Lecture 10"
+author: "Albert Y. Kim"
+date: "March 14, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(openintro)
+library(gtools)
+
+# Set seed for random number generator
+set.seed(89)
+data("run10")
+```
+
+
+
+
+
+## Conclusion
+
+```{r, echo=FALSE, message=FALSE}
+run10 <- run10 %>% 
+  tbl_df() %>% 
+  select(gender, time)
+ggplot(data=run10, aes(x=time)) + 
+  geom_histogram(aes(y=..density..)) + 
+  facet_wrap(~gender, nrow=2) + 
+  xlab("Time (minutes)") + 
+  ggtitle("Cherry Blossom 10K Run Times")
+```
+
+
+
+
+
+## Conclusion
+
+```{r, echo=FALSE}
+run10 %>% 
+  group_by(gender) %>% 
+  summarise(mean=round(mean(time),3)) %>% 
+  kable()
+```
+
+```{r, echo=FALSE}
+women <- run10 %>% 
+  filter(gender=="F") %>% 
+  top_n(-2)
+men <- run10 %>% 
+  filter(gender=="M") %>% 
+  top_n(3)
+sample <- bind_rows(women, men)
+times <- sample$time
+
+
+index <- c(1,2)
+observed <- mean(times[index]) - mean(times[-index])
+
+
+indices <- combinations(5,2)
+null_dist <- rep(0, nrow(indices))
+for(i in 1:nrow(indices)){
+  null_dist[i] <- mean(times[indices[i,]]) - mean(times[-indices[i,]])
+}
+
+sum(null_dist <= observed)/10
+```
+
