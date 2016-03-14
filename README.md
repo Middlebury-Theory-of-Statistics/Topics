@@ -9,7 +9,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 ### Week 5: 3/14 - 3/18
 
 * **Lec10: Bootstrap Confidence Intervals**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec08%20Bootstrap/Lec08.html" target="_blank">Slides</a>
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec10%20Bootstrap%20Confidence%20Intervals/Lec10.html" target="_blank">Slides</a>
 
 
 ### Week 4: 3/7 - 3/11
