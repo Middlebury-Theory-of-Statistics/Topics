@@ -1,0 +1,271 @@
+---
+title: "Lecture 11"
+author: "Albert Y. Kim"
+date: "March 16, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+
+
+## Today's Population
+
+```{r, echo=FALSE}
+# Note we are deleting 3 cases where there was no height recorded
+profiles <- read_csv("profiles.csv") %>% 
+  na.omit()
+```
+
+We consider 59K users who were
+
+* members of OkCupid on 2012/06/26
+* within 25 miles of SF
+* online in the last year
+* have at least one photo
+
+Their public profiles were pulled on 2012/06/30
+
+
+
+
+
+
+## Data
+
+5 randomly chosen people:
+
+```{r, echo=FALSE}
+profiles %>% 
+  sample_n(5) %>% 
+  kable()
+```
+
+
+
+
+
+## Histogram
+
+```{r, echo=FALSE, warning=FALSE}
+ggplot(data=profiles, aes(x=height)) +
+  geom_bar() +
+  xlim(58, 80) +
+  xlab("Height in inches") +
+  ylab("Count") +
+  theme_bw() +
+  ggtitle("Heights of SF OkCupid Users") + 
+  facet_wrap(~sex, nrow=2)
+```
+
+
+
+
+
+## Parameter of Interest
+
+By what factor are men on average taller than women? i.e.
+
+$$
+\frac{\mu_M}{\mu_F}
+$$
+
+```{r, echo=FALSE}
+# Note there are some missing values we are deleting
+pop_means <- profiles %>% 
+  group_by(sex) %>% 
+  summarise(mean=mean(height))
+pop_ratio <- pop_means$mean[2]/pop_means$mean[1]
+```
+
+Technically, we know the entire population, so we can compute this value exactly i.e. we don't need
+statistics. 
+
+Let's pretend however, that we only have a random sample of 10% of these users.
+
+```{r, echo=FALSE}
+# Note there are some missing values we are deleting
+sample <- profiles %>% 
+  sample_frac(.1) %>% 
+  as.data.frame()
+```
+
+
+
+
+
+## Bootstrap Algorithm
+
+```{r}
+males <- subset(sample, select = height, subset = sex=="m", drop = T)
+females <- subset(sample, select = height, subset = sex=="f", drop = T)
+
+N <- 10^4
+boot_ratio <- rep(0, N)
+
+for(i in 1:N){
+  boot_males <- sample(males, length(males), replace=TRUE)
+  boot_females <- sample(females, length(females), replace=TRUE)
+  
+  boot_ratio[i] <- mean(boot_males)/mean(boot_females)
+}
+```
+
+
+
+
+
+## Bootstrap Distribution
+
+The point estimate is `r pop_ratio %>% round(3)`. The bootstrap distribution is:
+
+```{r, echo=FALSE}
+hist(boot_ratio, xlab="ratio", main="Ratio of Mean Male over Mean Female Height", probability = TRUE)
+```
+
+
+
+
+
+## Bootstrap Percentile Interval
+
+We compute the percentile interval using the `quantile()` function
+
+```{r}
+quantile(boot_ratio, probs = c(0.025, 0.975))
+```
+
+The 95% bootstrap percentile-based CI is
+
+$$
+[1.079, 1.084]
+$$
+
+
+
+
+
+## Bootstrap Percentile Interval
+
+We plot the CI with dashed lines:
+
+```{r, echo=FALSE}
+hist(boot_ratio, xlab="ratio", main="Ratio of Mean Male over Mean Female Height", probability = TRUE)
+abline(v=quantile(boot_ratio, probs = c(0.025, 0.975)), lty=2, lwd=2)
+```
+
+
+
+
+
+## Bootstrap Percentile Interval
+
+The true population ratio is `r round(pop_ratio,3)`. In this case, the CI captured it.
+
+```{r, echo=FALSE}
+hist(boot_ratio, xlab="ratio", main="Ratio of Mean Male over Mean Female Height", probability = TRUE)
+abline(v=quantile(boot_ratio, probs = c(0.025, 0.975)), lty=2, lwd=2)
+abline(v=pop_ratio, lwd=3, col="red")
+```
+
+
+
+
+
+## Interpretation of Confidence Intervals
+
+If we were to repeat this whole procedure, say, 100 times:
+
+1. Take a sample of 10% of the population
+2. Compute the bootstrap CI
+
+Then we expect 95 of the resulting CI's to capture the true value.
+
+
+
+
+
+## Interpretation of Confidence Intervals
+
+```{r, echo=FALSE, cache=TRUE}
+N2 <- 100
+CI <- data.frame(sim=1:N2, left=rep(0,N2), right=rep(0,N2), col=rep("black", N2))
+
+for(j in 1:N2){
+  sample <- profiles %>% sample_frac(.1) %>% as.data.frame()
+  
+  # Do bootstrap
+  males <- subset(sample, select = height, subset = sex=="m", drop = T)
+  females <- subset(sample, select = height, subset = sex=="f", drop = T)
+  
+  N <- 10^3
+  boot_ratio <- rep(0, N)
+  
+  for(i in 1:N){
+    boot_males <- sample(males, length(males), replace=TRUE)
+    boot_females <- sample(females, length(females), replace=TRUE)
+    
+    boot_ratio[i] <- mean(boot_males)/mean(boot_females)
+  }
+  CI[j, 2:3] <- quantile(boot_ratio, probs = c(0.025, 0.975))
+}
+
+CI <- CI %>% 
+  mutate(
+    col = ifelse(pop_ratio > left & pop_ratio < right, "red", "black")
+  ) %>% 
+  gather("point", "value", 2:3)
+```
+
+The true ratio $\mu_M/\mu_F = 1.082$ is the dashed black line.
+
+```{r, echo=FALSE}
+ggplot(data=CI, aes(x=value, y=sim, group=sim, col=col)) + geom_line() +
+  geom_vline(xintercept = pop_ratio, linetype = "longdash") +
+  guides(colour=FALSE) +
+  theme_bw() +
+  xlab("Confidence Interval") + ylab("Simulation #") +
+  ggtitle("100 Confidence Intervals Based on 100 Samples")
+```
+
+
+
+
+
+## In Practice
+
+Wait! Why are we:
+
+* Constructing more than one CI?
+* Doing this if we already know the true population ratio $\mu_M/\mu_F = 1.082$ (dashed black line)
+
+Much like our sampling distribution examples, this was a **theoretical/rhetorical**
+exercise to demonstrate how CI's behave.
+
+
+
+
+
+
+## In Practice
+
+In practice, simply compute one CI based on one sample. This is our best
+guess: **We are 95% "confident" the value lies in the CI.**
+
+
+
+
+
+
