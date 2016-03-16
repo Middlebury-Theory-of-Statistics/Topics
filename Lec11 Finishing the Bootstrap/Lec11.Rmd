@@ -21,6 +21,45 @@ set.seed(76)
 
 
 
+## DataFest
+
+[go/datafest](http://rudeboybert.github.io/pages/teaching/datafest/datafest.html)
+
+
+
+
+
+## Notecard Question 1
+
+What do you think is the ratio of mean heights of men and mean heights of women in
+the San Francisco?
+
+
+
+
+## Paired Data
+
+Say we have the price of about 70 textbooks at the UCLA bookstore vs Amazon.
+There is an obvious pairing between observations in the two samples.
+
+![alt text](diff.pdf)
+
+
+
+
+
+## Paired Data
+
+Instead of focusing on $\mu_{\text{amazon}} - \mu_{\text{UCLA}}$, focus on $\mu_{\text{diff}}$. 
+
+i.e. not the **difference in means**, but the **mean difference**:
+
+![alt text](diff2.pdf)
+
+
+
+
+
 ## Today's Population
 
 ```{r, echo=FALSE}
@@ -36,7 +75,9 @@ We consider 59K users who were
 * online in the last year
 * have at least one photo
 
-Their public profiles were pulled on 2012/06/30
+Their public profiles were scraped on 2012/06/30.
+
+Thank you to OkCupid CEO Christian Rudder for giving permission to use this data.
 
 
 
@@ -50,6 +91,7 @@ Their public profiles were pulled on 2012/06/30
 ```{r, echo=FALSE}
 profiles %>% 
   sample_n(5) %>% 
+  select(sex, height) %>% 
   kable()
 ```
 
@@ -265,6 +307,45 @@ In practice, simply compute one CI based on one sample. This is our best
 guess: **We are 95% "confident" the value lies in the CI.**
 
 
+
+
+
+
+## Monte Carlo Methods
+
+One way to approximate $\int f(x) dx$ is to multiply
+
+* the proportion of random points that fall below $f(x)$ by
+* the area of the box
+
+![alt text](mc_integral.gif)
+
+
+
+
+
+
+## Likelihood Function for $\widehat{p}=0.3$
+
+```{r, echo=FALSE, fig.height=2.5}
+lkhd <- function(p, x, n){p^x*(1-p)^{n-x}}
+
+df <- data.frame(p=seq(0,1,length=10000))
+plot <- ggplot(df, aes(p)) +
+  theme(
+      axis.text.y=element_blank(),
+      axis.ticks=element_blank(),
+      axis.title.y=element_blank(),
+      plot.background=element_blank()) +
+  geom_vline(xintercept=0.3, size=0.5, linetype=2)
+  
+plot + 
+  stat_function(fun = lkhd, n=1000, args=list(x=3, n=10), colour = "red") +
+  ggtitle("n=10")
+plot + 
+  stat_function(fun = lkhd, n=1000, args=list(x=300, n=1000), colour = "blue") + 
+  ggtitle("n=1000")
+```
 
 
 
