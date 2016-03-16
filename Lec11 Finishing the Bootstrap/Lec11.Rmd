@@ -12,6 +12,7 @@ library(ggplot2)
 library(tidyr)
 library(knitr)
 library(readr)
+library(openintro)
 
 # Set seed for random number generator
 set.seed(76)
@@ -21,18 +22,11 @@ set.seed(76)
 
 
 
-## DataFest
-
-[go/datafest](http://rudeboybert.github.io/pages/teaching/datafest/datafest.html)
-
-
-
-
-
 ## Notecard Question 1
 
-What do you think is the ratio of mean heights of men and mean heights of women in
-the San Francisco?
+What do you think is the ratio of mean heights of men and mean heights of women
+in the San Francisco?
+
 
 
 
@@ -42,7 +36,24 @@ the San Francisco?
 Say we have the price of about 70 textbooks at the UCLA bookstore vs Amazon.
 There is an obvious pairing between observations in the two samples.
 
-![alt text](diff.pdf)
+```{r, echo=FALSE, fig.height=4, fig.width=8.5}
+data("textbooks")
+textbooks <- textbooks %>% 
+  tbl_df() %>% 
+  select(uclaNew, amazNew)
+  
+textbooks_long <- textbooks %>% 
+  mutate(ID=1:nrow(textbooks)) %>% 
+  gather("source", "price", -3) %>% 
+  mutate(source=ifelse(source=="uclaNew", "UCLA", "Amazon"))
+
+ggplot(data=textbooks_long, aes(x=ID, y=price, col=source)) +
+  geom_point() +
+  geom_hline(yintercept = 0) + 
+  xlab("Textbook ID") + 
+  ggtitle("Amazon vs UCLA Textbook Price for Each Textbook")
+```
+
 
 
 
@@ -54,7 +65,20 @@ Instead of focusing on $\mu_{\text{amazon}} - \mu_{\text{UCLA}}$, focus on $\mu_
 
 i.e. not the **difference in means**, but the **mean difference**:
 
-![alt text](diff2.pdf)
+```{r, echo=FALSE, fig.height=4, fig.width=8.5}
+textbooks <- textbooks %>% 
+  mutate(
+    Diff = uclaNew - amazNew,
+    ID = 1:nrow(textbooks)
+    )
+
+ggplot(data=textbooks, aes(x=ID, y=Diff)) +
+  geom_point() +
+  geom_hline(yintercept = 0) + 
+  xlab("Textbook ID") + 
+  ylab("Difference in Price") +
+  ggtitle("UCLA Price − Amazon Price")
+```
 
 
 
@@ -288,23 +312,15 @@ ggplot(data=CI, aes(x=value, y=sim, group=sim, col=col)) + geom_line() +
 
 ## In Practice
 
-Wait! Why are we:
-
-* Constructing more than one CI?
-* Doing this if we already know the true population ratio $\mu_M/\mu_F = 1.082$ (dashed black line)
-
 Much like our sampling distribution examples, this was a **theoretical/rhetorical**
-exercise to demonstrate how CI's behave.
+exercise. In practice
 
-
-
-
-
-
-## In Practice
-
-In practice, simply compute one CI based on one sample. This is our best
-guess: **We are 95% "confident" the value lies in the CI.**
+* We don't
+    + Construct more than one CI
+    + Do this if we already know the true population parameter
+* We do
+    + Compute one CI based on one sample. This is our best guess: **We are 95%
+    "confident" the value lies in the CI.**
 
 
 
