@@ -13,7 +13,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec11: Finishing the Bootstrap**
     + <a href="http://htmlpreview.github.io/?
 https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec11%20Finishing%20the%20Bootstrap/Lec11.html" target="_blank">Slides</a>
-
+* **Lec12: Maximum Likelihood Estimation**
+    + Normal parameters <a href="http://rpubs.com/rudeboybert/MATH311_Lec12" target="_blank">example</a>: <a href="https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec12%20Maximum%20Likelihood/Lec12.Rmd" target="_blank">source code</a>.
 
 
 ### Week 4: 3/7 - 3/11
