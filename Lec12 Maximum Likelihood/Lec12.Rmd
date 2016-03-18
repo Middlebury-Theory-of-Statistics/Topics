@@ -1,0 +1,53 @@
+---
+title: "Lecture 12"
+author: "Albert Y. Kim"
+date: "March 18, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+library(openintro)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+
+
+## Notecard Question 1
+
+What do you think is the ratio of mean heights of men and mean heights of women
+in the San Francisco?
+
+
+
+
+
+## Paired Data
+
+Say we have the price of about 70 textbooks at the UCLA bookstore vs Amazon.
+There is an obvious pairing between observations in the two samples.
+
+```{r, echo=FALSE, fig.height=4, fig.width=8.5}
+x <- rnorm(1000, mean=5, sd=3)
+
+f <- function(x, mu, sigma){
+  n <- length(x)
+  (1/(sqrt(2*pi)*sigma))^n*exp(-0.5*sum( ((x-mu)/sigma)^2 ))
+}
+
+
+```
+
+
+
+
+
