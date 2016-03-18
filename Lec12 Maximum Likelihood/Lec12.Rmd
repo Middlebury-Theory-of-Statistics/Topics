@@ -1,53 +1,82 @@
 ---
-title: "Lecture 12"
+title: "MLE for Normal Parameters"
 author: "Albert Y. Kim"
 date: "March 18, 2016"
-output: ioslides_presentation
+output: html_document
 ---
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-# Install these packages first
-library(dplyr)
-library(ggplot2)
-library(tidyr)
-library(knitr)
-library(readr)
-library(openintro)
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
 
-# Set seed for random number generator
-set.seed(76)
+## plotly Package
+
+We install the [plotly](https://plot.ly/r/) R package
+
+```{r, eval=FALSE}
+devtools::install_github("ropensci/plotly")
+```
+
+and load it
+
+```{r, message=FALSE, warning=FALSE}
+library(plotly)
+```
+
+
+## Simulate Normal Data
+
+We simulate a random sample of 1000 Normal$(\mu=0, \sigma=5)$ IID random variables.
+
+```{r}
+n <- 1000
+x <- rnorm(n, mean=0, sd=5)
 ```
 
 
 
+## MLE
+
+We compute the MLE's $(\widehat{\mu}_{\text{MLE}}, \widehat{\sigma}_{\text{MLE}})$ for $(\mu, \sigma)$:
+
+```{r}
+xbar <- sum(x)/n
+sigma_hat <- sqrt((1/n)*sum((x-xbar)^2))
+c(xbar, sigma_hat)
+```
 
 
-## Notecard Question 1
 
-What do you think is the ratio of mean heights of men and mean heights of women
-in the San Francisco?
+## Log-Likelihood Function
 
+The log-likelihood function can be computed, as described in the Lec12 notes, with the following function:
 
-
-
-
-## Paired Data
-
-Say we have the price of about 70 textbooks at the UCLA bookstore vs Amazon.
-There is an obvious pairing between observations in the two samples.
-
-```{r, echo=FALSE, fig.height=4, fig.width=8.5}
-x <- rnorm(1000, mean=5, sd=3)
-
+```{r}
 f <- function(x, mu, sigma){
-  n <- length(x)
-  (1/(sqrt(2*pi)*sigma))^n*exp(-0.5*sum( ((x-mu)/sigma)^2 ))
+  sum(dnorm(x, mean=mu, sd=sigma, log = TRUE))
 }
+```
 
+We plot the log-likelihood function for $(\mu, \sigma)$ given $\vec{x}$, saving the values in `log_lkhd` (code hidden).
 
+```{r, echo=FALSE, cache=TRUE}
+# Define 2D domain
+mu <- seq(-1.5, 1.5, length=500)
+sigma <- seq(4.3, 5.5, length=500)
+
+# Compute log-likelihood
+log_lkhd <- matrix(0, nrow=length(mu), ncol=length(sigma))
+for(i in 1:nrow(log_lkhd))
+  for(j in 1:ncol(log_lkhd))
+    log_lkhd[i,j] <- f(x, mu=mu[i], sigma=sigma[j])
+```
+
+```{r}
+plot_ly(z = log_lkhd, type = "surface", x=sigma, y=mu)
 ```
 
 
 
+## Interpretation
 
-
+The MLE $(\widehat{\mu}_{\text{MLE}}, \widehat{\sigma}_{\text{MLE}})$ are the parameter values that best explain/fit the observed data `x`.
