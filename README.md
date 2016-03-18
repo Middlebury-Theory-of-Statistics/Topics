@@ -6,6 +6,14 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 6: 3/21 - 3/25
+
+* **Lec13: Method of Moments**
+
+
+
+
+
 ### Week 5: 3/14 - 3/18
 
 * **Lec10: Bootstrap Confidence Intervals**
@@ -17,12 +25,17 @@ https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/
     + Normal parameters <a href="http://rpubs.com/rudeboybert/MATH311_Lec12" target="_blank">example</a> (<a href="https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec12%20Maximum%20Likelihood/Lec12.Rmd" target="_blank">source code</a>).
 
 
+
+
+
 ### Week 4: 3/7 - 3/11
 
 * **Lec08: Bootstrap Algorithm**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec08%20Bootstrap/Lec08.html" target="_blank">Slides</a>
 * **Lec09: Bootstrap Standard Error**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec09%20Bootstrap%20SE/Lec09.html" target="_blank">Slides</a>
+
+
 
 
 
@@ -35,6 +48,8 @@ https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/
 * **Lec07: Central Limit Theorem**
     + <a href="http://rpubs.com/rudeboybert/MATH311_Lec07" target="_blank">Slides</a>
     + <a href="http://www.nytimes.com/2013/09/24/science/as-normal-as-rabbits-weights-and-dragons-wings.html" target="_blank">Video</a>: As ‘Normal’ as Rabbits’ Weights and Dragons’ Wings
+
+
 
 
 
@@ -66,6 +81,3 @@ https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/
             1. Please go over by Monday.
 * **Lec01: Populations and Samples and Exploratory Data Analysis**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec01%20Populations%20%26%20Samples%20and%20EDA/Lec01.html" target="_blank">Slides</a>
-    
-    
-    
