@@ -12,7 +12,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + Lecture only
 * **Lec14: Properties of Estimators**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
-* **Lec15: **
+* **Lec15: Properties of Estimators and t-Distribution**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
 
 
 

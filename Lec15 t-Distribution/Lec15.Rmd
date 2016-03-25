@@ -1,0 +1,52 @@
+---
+title: "Lecture 15"
+author: "Albert Y. Kim"
+date: "March 25, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+## t Distribution
+
+Degrees of freedom = 1
+
+![alt text](lec16-001.pdf)
+
+
+
+## t Distribution
+
+Degrees of freedom = 3
+
+![alt text](lec16-002.pdf)
+
+
+
+## t Distribution
+
+Degrees of freedom = 7
+
+![alt text](lec16-003.pdf)
+
+
+
+## t Distribution
+
+At Degrees of freedom = $\infty$, the $t$ becomes a $Z \sim N(0,1)$
+
+![alt text](lec16-004.pdf)
+
+
