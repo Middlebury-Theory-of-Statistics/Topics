@@ -6,6 +6,14 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 7: 4/4 - 4/8
+
+* **Lec16:**
+
+
+
+
+
 ### Week 6: 3/21 - 3/25
 
 * **Lec13: Method of Moments**
@@ -13,7 +21,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec14: Properties of Estimators**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
 * **Lec15: Properties of Estimators and t-Distribution**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec15%20t-Distribution/Lec15.html" target="_blank">Slides</a>
 
 
 
