@@ -1,0 +1,131 @@
+---
+title: "Midterm II Review"
+author: "Albert Y. Kim"
+date: "April 4th, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+## Midterm Details
+
+* Wednesday April 6th 7:30-9:30pm in Warner 506.
+* Please bring a calculator; no smart phones.
+* Office hours: 
+    + Monday 3-5pm
+    + Tuesday 2-3pm
+    + Tuesday 4:30-6pm.
+
+    
+    
+
+
+## Studying Tips
+
+* Exam is not timed to take entire time period, but approx 1h15m.
+* You don't need to memorize
+    + R code, but you need to be able to write pseudocode precisely.
+    + Any statistical distributions.
+* Some questions are
+    + More straightforward. Can you regurgitate what we covered?
+    + More conceptual. Did you understand what we covered?
+
+    
+
+
+## Studying Tips
+
+> Don't just focus on the **what/how** of the material and HW questions, but the **why**?
+
+A list of examples of what I mean; this list is not exhaustive.
+
+
+
+
+## HW 1
+
+* What is a population? Statistic? Parameter?
+* What is a quantile in terms of a PDF? CDF?
+* 2.14 is ridiculously easy. Why would I even assign this?
+* How do a CDF and an ECDF differ? What does it take for the two to be equal?
+How do we interpret them?
+* We add one the numerator and denominator of the permutation test to not get a
+p-value of 0. But why is a p-value of 0 a problem?
+
+
+
+
+
+## HW 2
+
+* You suspect data comes from a certain distribution with certain parameters.
+How can you check this?
+* 3.28 What phenomenon is this problem describing? Why would this matter in real
+life?
+* When do you use the different $\chi^2$ tests?
+* What is the key difference between a $\chi^2$ test and a two-sample
+permutation test?
+* How do you study the cross-classification of two categorical variables?
+
+
+
+
+
+## HW 3
+
+* Why would you use the CLT approximation to the binomial? Why does this work?
+* Find examples (throughout the entire class, but this HW in particular) of the
+3 different ways you can construct a sampling distribution:
+    + Exactly
+    + Simulation
+    + Approximation
+* We have results for approximating the population mean. What about the
+population $\min$ and $\max$?
+
+
+
+
+
+## HW 3 Continued
+
+* We have results for approximating the population mean. What about the
+population $\min$ and $\max$?
+* Difference between "standard deviation" and "standard error"? When is the latter the former.
+* How do you simulate the sampling distribution of something other than the
+sample mean? How do you describe the results?
+
+
+
+
+
+## HW 4
+
+* Why does $s^2$ look the way it does?
+* p-value Article. What is the difference between **statistical** and
+**practical** significance?
+* Understand the components of Poisson bootstrap.
+* R: Exercise 8 on Page 130. Why is this important?
+* Contrast percentile based CI's and traditional CI's.
+
+
+
+
+
+## HW 5
+
+* Understand the link between the German Tank Problem and the topics from this
+class.
+* What are the key differences between MLE and MOM?  When would you use one vs
+the other?
+* What computer/R routines are behind maximum likelihood estimation?
