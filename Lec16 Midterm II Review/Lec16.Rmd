@@ -20,12 +20,12 @@ set.seed(76)
 
 ## Midterm Details
 
-* Wednesday April 6th 7:30-9:30pm in Warner 506.
+* Wednesday April 6th 7:30-10pm in Warner 506.
 * Please bring a calculator; no smart phones.
 * Office hours: 
     + Monday 3-5pm
     + Tuesday 2-3pm
-    + Tuesday 4:30-6pm.
+    + Wednesday 2:30-4pm.
 
     
     
@@ -33,22 +33,28 @@ set.seed(76)
 
 ## Studying Tips
 
-* Exam is not timed to take entire time period, but approx 1h15m.
+* Exam is not timed to take entire time period.
 * You don't need to memorize
     + R code, but you need to be able to write pseudocode precisely.
     + Any statistical distributions.
 * Some questions are
     + More straightforward. Can you regurgitate what we covered?
     + More conceptual. Did you understand what we covered?
-
+* Don't just focus on the **what/how** of the material and HW questions, but the **why**?
     
 
 
-## Studying Tips
 
-> Don't just focus on the **what/how** of the material and HW questions, but the **why**?
 
-A list of examples of what I mean; this list is not exhaustive.
+## HW Examples`
+
+A list of examples from the HW's of what I mean by **what/how** vs **why**. 
+
+* Were you able to do the question? vs
+* What was the point/bigger picture of each question?
+
+Note: this list is not exhaustive.
+
 
 
 
@@ -90,8 +96,6 @@ permutation test?
     + Exactly
     + Simulation
     + Approximation
-* We have results for approximating the population mean. What about the
-population $\min$ and $\max$?
 
 
 
