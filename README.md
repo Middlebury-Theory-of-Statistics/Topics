@@ -8,7 +8,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 ### Week 7: 4/4 - 4/8
 
-* **Lec16:**
+* **Lec16: Midterm II Review**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec16%20Midterm%20II%20Review/Lec16.html" target="_blank">Slides</a>
 
 
 
