@@ -1,0 +1,100 @@
+---
+title: "Lecture 17"
+author: "Albert Y. Kim"
+date: "April 6, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+## t Distribution
+
+Degrees of freedom = 1
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=0, sd=1), from=-4, to=4, n=1000, xlab="t", ylab="Density f(t)", 
+      col="white", lty=2)
+curve(dt(x, df=1), from=-4, to=4, n=1000, col="black", add=TRUE)
+legend(
+  "topright",
+  bty="n",
+  legend = c("t with df=1"),
+  col = c("black"),
+  lty = c(1)
+)
+```
+
+
+
+## t Distribution
+
+Degrees of freedom = 3
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=0, sd=1), from=-4, to=4, n=1000, xlab="t", ylab="Density f(t)", 
+      col="white", lty=2)
+curve(dt(x, df=3), from=-4, to=4, n=1000, col="red", add=TRUE)
+curve(dt(x, df=1), from=-4, to=4, n=1000, col="black", add=TRUE)
+legend(
+  "topright",
+  bty="n",
+  legend = c("t with df=1", "t with df=3"),
+  col = c("black", "red"),
+  lty = c(1, 1)
+)
+```
+
+
+
+## t Distribution
+
+Degrees of freedom = 7
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=0, sd=1), from=-4, to=4, n=1000, xlab="t", ylab="Density f(t)", 
+      col="white", lty=2)
+curve(dt(x, df=7), from=-4, to=4, n=1000, col="green", add=TRUE)
+curve(dt(x, df=3), from=-4, to=4, n=1000, col="red", add=TRUE)
+curve(dt(x, df=1), from=-4, to=4, n=1000, col="black", add=TRUE)
+legend(
+  "topright",
+  bty="n",
+  legend = c("t with df=1", "t with df=3", "t with df=7"),
+  col = c("black", "red", "green"),
+  lty = c(1, 1, 1)
+)
+```
+
+
+
+## t Distribution
+
+At Degrees of freedom = $\infty$, the $t$ becomes a $Z \sim N(0,1)$
+
+```{r, echo=FALSE}
+curve(dnorm(x, mean=0, sd=1), from=-4, to=4, n=1000, xlab="t", ylab="Density f(t)", 
+      col="blue", lty=2)
+curve(dt(x, df=7), from=-4, to=4, n=1000, col="green", add=TRUE)
+curve(dt(x, df=3), from=-4, to=4, n=1000, col="red", add=TRUE)
+curve(dt(x, df=1), from=-4, to=4, n=1000, col="black", add=TRUE)
+legend(
+  "topright",
+  bty="n",
+  legend = c("t with df=1", "t with df=3", "t with df=7", "z"),
+  col = c("black", "red", "green", "blue"),
+  lty = c(1, 1, 1, 2)
+)
+```
+

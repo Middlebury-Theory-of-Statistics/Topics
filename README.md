@@ -10,6 +10,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec16: Midterm II Review**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec16%20Midterm%20II%20Review/Lec16.html" target="_blank">Slides</a>
+* **Lec17: t-Distribution**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec15%20t-Distribution/Lec15.html" target="_blank">Slides</a>
 
 
 
@@ -21,8 +23,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + Lecture only
 * **Lec14: Properties of Estimators**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
-* **Lec15: Properties of Estimators and t-Distribution**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec15%20t-Distribution/Lec15.html" target="_blank">Slides</a>
+* **Lec15: Properties of Estimators**
+    + Lecture only
 
 
 
