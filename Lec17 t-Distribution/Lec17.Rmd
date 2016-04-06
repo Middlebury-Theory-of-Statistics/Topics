@@ -98,3 +98,58 @@ legend(
 )
 ```
 
+
+
+## Example Page 175
+
+```{r, warning=FALSE, message=FALSE, fig.width=4, fig.height=4}
+library(resampledata)
+data("NCBirths2004")
+girls <- subset(NCBirths2004$Weight, NCBirths2004$Gender == "Female")
+```
+
+
+
+## Example Page 175
+
+Looks Normal!
+
+```{r, warning=FALSE, message=FALSE, echo=FALSE, fig.width=8, fig.height=4}
+par(mfrow=c(1,2))
+hist(girls, xlab="weight (in grams)", main="NC Girls Weights")
+qqnorm(girls)
+qqline(girls)
+```
+
+
+
+## Example Page 175
+
+```{r, warning=FALSE, message=FALSE, fig.width=4, fig.height=4}
+mean(girls)
+sd(girls)
+length(girls)
+qt(0.975, df=521-1)
+```
+
+
+
+## Example Page 175
+
+```{r}
+t.test(girls, conf.level=0.95)
+```
+
+
+
+## Scenario 3
+
+Starting in the "Assumption" section at the bottom of page 175, the book frames 
+Scenario 3 as **a violation of the assumptions that the observations $X_i$ are
+Normal**.
+
+We will frame Scenario 3 as **CLT holding for observations irregardless of the
+population distribution**.
+
+
+
