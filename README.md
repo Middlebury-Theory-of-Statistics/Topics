@@ -13,7 +13,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec17: t-Distribution**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec17%20t-Distribution/Lec17.html" target="_blank">Slides</a>
 * **Lec18: More Confidence Intervals**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec17%20t-Distribution/Lec17.html" target="_blank">Slides</a>
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec18%20More%20Confidence%20Intervals/Lec18.html" target="_blank">Slides</a>
 
 
 

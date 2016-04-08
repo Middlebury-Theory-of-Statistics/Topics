@@ -37,10 +37,10 @@ $$
 
 Say you are interested in the difference of means $\mu_1 - \mu_2$
 
-n  | $\overline{x}$ | $s$
-------------- | -------------
-$n_1=32$ | $\overline{x}_1=83.0$ | $s_1=81.10082$
-$n_2=35$ | $\overline{x}_2=40.6$ | $s_2=94.47617$ 
+Group | n  | $\overline{x}$ | $s$
+------ | ------------- | -------------
+1 | $n_1=32$ | $\overline{x}_1=83.0$ | $s_1=81.10082$
+2| $n_2=35$ | $\overline{x}_2=40.6$ | $s_2=94.47617$ 
 
 
 
