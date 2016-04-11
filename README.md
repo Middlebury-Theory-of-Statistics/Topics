@@ -6,6 +6,22 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 8: 4/11 - 4/15
+
+* **Lec19: More Confidence Intervals II**
+    + Lecture only. Polling examples:
+        + <a href="http://www.npr.org/sections/itsallpolitics/2013/12/04/248793753/poll-support-for-obama-among-young-americans-eroding" target="_blank">2013 NPR article on poll</a>: Support For Obama Among Young Americans Eroding.
+        + <a href="http://www.nytimes.com/interactive/2016/04/05/us/elections/wisconsin-democratic-primary-exit-polls.html" target="_blank">NY Times disclaimer on poll results.</a>
+        + <a href="http://www.huffingtonpost.com/brian-stryker/can-we-trust-polls-withou_b_4880127.html" target="_blank">Can We Trust Polls Without Cellphones Anymore?</a>
+    
+    
+    
+    
+
+
+
+
+
 ### Week 7: 4/4 - 4/8
 
 * **Lec16: Midterm II Review**
@@ -14,7 +30,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec17%20t-Distribution/Lec17.html" target="_blank">Slides</a>
 * **Lec18: More Confidence Intervals**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec18%20More%20Confidence%20Intervals/Lec18.html" target="_blank">Slides</a>
-
+    
+    
 
 
 
