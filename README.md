@@ -14,7 +14,11 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
         + <a href="http://www.nytimes.com/interactive/2016/04/05/us/elections/wisconsin-democratic-primary-exit-polls.html" target="_blank">NY Times disclaimer on poll results.</a>
         + <a href="http://www.huffingtonpost.com/brian-stryker/can-we-trust-polls-withou_b_4880127.html" target="_blank">Can We Trust Polls Without Cellphones Anymore?</a>
 * **Lec20: Bootstrap t Confidence Intervals**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec20%20Hypothesis%20Testing/Lec20.html" target="_blank">Slides</a>    
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec20%20Hypothesis%20Testing/Lec20.html" target="_blank">Slides</a>
+    + <a href="https://www.youtube.com/watch?v=wX1x7pfH8fw" target="_blank">Only who can prevent forest fires?</a>
+    
+    
+    
     
     
     
