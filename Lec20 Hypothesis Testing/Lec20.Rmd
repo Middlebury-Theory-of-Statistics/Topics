@@ -1,0 +1,124 @@
+---
+title: "Lecture 20"
+author: "Albert Y. Kim"
+date: "April 13, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+```{r, echo=FALSE}
+# Note we are deleting 3 cases where there was no height recorded
+profiles <- read_csv("profiles.csv") %>% 
+  na.omit() 
+mu <- mean(profiles$height) %>% round(3)
+
+profiles <- profiles %>% 
+  sample_frac(0.1)
+```
+
+
+
+
+
+## Today's Population
+
+Let's take a random sample of 10% of OkCupid users' heights and compute 
+summary statistics:
+
+```{r}
+heights <- profiles$height
+n <- length(heights)
+xbar <- mean(heights)
+s <- sd(heights)
+```
+
+|n    |xbar   |s    |
+|:----|:------|:----|
+|5994 |68.244 |3.95 |
+
+
+
+
+
+## Bootstrap Resample T*
+
+```{r, cache=TRUE}
+N <- 10^4
+t_star <- rep(0, N)
+
+for(i in 1:N){
+  resample <- sample(heights, size=n, replace=TRUE)
+  t_star[i] <- (mean(resample)-xbar)/(sd(resample)/sqrt(n))
+}
+```
+
+
+
+
+
+## Bootstrap Distribution
+
+```{r, echo=FALSE}
+q1 <- quantile(t_star, 0.025)
+q2 <- quantile(t_star, 0.975)
+hist(t_star, xlab="t star", main="Bootstrap Distribution of T*")
+# abline(v=c(q1,q2), col="red", lwd=2)
+```
+
+
+
+
+
+## Bootstrap Distribution
+
+To form a 95% CI, we need the 0.025 and 0.975 quantiles of the previous distribution:
+
+```{r, echo=FALSE}
+c(q1, q2) %>% round(3)
+```
+
+
+
+
+
+## Bootstrap Distribution
+
+```{r, echo=FALSE}
+q1 <- quantile(t_star, 0.025)
+q2 <- quantile(t_star, 0.975)
+hist(t_star, xlab="t star", main="Bootstrap Distribution of T*")
+abline(v=c(q1,q2), col="red", lwd=2)
+```
+
+
+
+
+
+## A 95% Bootstrap t CI
+
+The resulting CI is the below. Note the true height was `r round(mu, 3)`:
+
+```{r}
+CI <- xbar - c(q2, q1)*s/sqrt(n)
+```
+```{r, echo=FALSE}
+CI <- round(CI, 3)
+names(CI) <- NULL
+```
+```{r, echo=FALSE}
+CI
+```
+
+
+
