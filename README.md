@@ -6,6 +6,18 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 9: 4/18 - 4/22
+
+* **Lec21: Hypothesis Testing**
+    + App demonstrating CLT condition for Binomial Data: `success_failure.Rmd`
+        + Open in RStudio
+        + Press "Run Document"
+* **Lec22: **
+
+
+
+
+
 ### Week 8: 4/11 - 4/15
 
 * **Lec19: More Confidence Intervals II**
