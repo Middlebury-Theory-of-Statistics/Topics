@@ -9,7 +9,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 ### Week 9: 4/18 - 4/22
 
 * **Lec21: Hypothesis Testing**
-    + App demonstrating CLT condition for Binomial Data: `success_failure.Rmd`
+    + App demonstrating CLT condition for Binomial Data: [`success_failure.Rmd`](https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec21%20Hypothesis%20Testing/success_failure.Rmd)
         + Open in RStudio
         + Press "Run Document"
 * **Lec22:**
