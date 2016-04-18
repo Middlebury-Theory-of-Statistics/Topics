@@ -12,7 +12,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + App demonstrating CLT condition for Binomial Data: `success_failure.Rmd`
         + Open in RStudio
         + Press "Run Document"
-* **Lec22: **
+* **Lec22:**
 
 
 
