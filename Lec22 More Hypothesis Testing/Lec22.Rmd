@@ -12,15 +12,30 @@ library(ggplot2)
 library(tidyr)
 library(knitr)
 library(readr)
+```
 
-# Set seed for random number generator
-set.seed(76)
-
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
 # Load data
 profiles <- read_csv("profiles.csv") %>% 
   tbl_df() %>% 
   mutate(sex = ifelse(is_female==1, "female", "male")) %>% 
   filter(height >=55 & height <= 80)
+```
+
+
+
+## OkCupid Data
+
+Recall the OkCupid data set of 60K users in SF in 2012. We consider:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+# Set seed for random number generator
+set.seed(81)
+profiles %>%  
+  sample_n(5) %>% 
+  select(-is_female) %>% 
+  select(sex, height, has_wine) %>% 
+  kable()
 ```
 
 
@@ -37,7 +52,9 @@ ggplot(data=profiles, aes(x=height)) +
 
 ## Wine?
 
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
+Does the user use the word "wine" in their essay responses?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4}
 sex_counts <- profiles %>% 
   group_by(sex) %>% 
   tally()
@@ -56,18 +73,44 @@ profiles %>%
 
 
 
+## Predicting Sex
+
+
+
+
+
+
+
 ## Logistic Regression
+
+Logistic regression is used your outcome variable $Y$ is binary, in our case sex. 
+
+It models $\widehat{p}_i$: the fitted probability of being female, given 
+
+* their height
+* if they used the word "wine"
+
+
+
+
+
+## Logistic Regression
+
+The model yields $\widehat{p}_i$'s, the fitted probability of being female:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 profiles$p_hat <- fitted(glm(is_female ~ has_wine + height, data=profiles, family=binomial))
 p <- ggplot(data=profiles, aes(x=p_hat)) +
-  geom_histogram(binwidth=0.1, boundary=0)
+  geom_histogram(binwidth=0.1, boundary=0) +
+  xlab("p-hat")
 p
 ```
 
 
 
 ## Decision Threshold
+
+Use 0.9 as the threshold. i.e. declare user $i$ female if $\widehat{p}_i>0.9$
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 threshold <- 0.9
@@ -77,6 +120,8 @@ p + geom_vline(xintercept = threshold, col="red", size=1)
 
 
 ## Decision Threshold
+
+Using 0.9, we obtain the following contingency table of **true sex** and **predicted sex**:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 overall_counts <- profiles %>%
@@ -103,6 +148,8 @@ kable(output)
 
 ## Decision Threshold
 
+We then normalize each row to sum to 1:
+
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 output <- overall_counts %>% 
   left_join(sex_counts, by="sex") %>% 
@@ -114,4 +161,85 @@ output <- output[2:1, ]
 output <- output[, c(1, 3, 2)]
 kable(output)
 ```
+
+
+
+## Decision Threshold
+
+Use 0.1 as the threshold. i.e. declare user $i$ female if $\widehat{p}_i>0.1$
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+threshold <- 0.1
+p + geom_vline(xintercept = threshold, col="red", size=1)
+```
+
+
+
+## Decision Threshold
+
+Using 0.1, we obtain the following contingency table of **true sex** and **predicted sex**:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+overall_counts <- profiles %>%
+  mutate(
+    predicted_sex = ifelse(p_hat > threshold, "pred_female", "pred_male"),
+    sex = ifelse(sex=="female", "true_female", "true_male")
+    ) %>% 
+  group_by(sex, predicted_sex) %>% 
+  tally() 
+
+sex_counts <- overall_counts %>% 
+  group_by(sex) %>% 
+  tally()
+
+output <- overall_counts %>% 
+  spread(predicted_sex, n) %>% 
+  rename(" " = sex)
+output <- output[2:1, ]
+output <- output[, c(1, 3, 2)]
+kable(output)
+```
+
+
+
+## Decision Threshold
+
+We then normalize each row to sum to 1:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+output <- overall_counts %>% 
+  left_join(sex_counts, by="sex") %>% 
+  mutate(prop=round(n.x/n.y,3)) %>% 
+  select(-n.x, -n.y) %>% 
+  spread(predicted_sex, prop) %>% 
+  rename(" " = sex)
+output <- output[2:1, ]
+output <- output[, c(1, 3, 2)]
+kable(output)
+```
+
+
+
+## Moral of the Story
+
+You can't have both:
+
+* Low type I error rate and
+* High power
+
+There is a tradeoff. In our case, the threshold allows us to control this
+tradeoff. In hypothesis testing, it the $\alpha$-level you set.
+
+
+
+## Simpler Example
+
+Spam filter in email:
+
+* Say you absolutely **want no spam in your inbox**. You need a strict filter,
+and will probably have non-spam go in your spam box.
+* Say you absolutely **don't want to miss any non-spam**, then be prepared to
+have spam go in your inbox.
+
+
 
