@@ -1,0 +1,117 @@
+---
+title: "Lecture 22"
+author: "Albert Y. Kim"
+date: "April 20, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+
+# Load data
+profiles <- read_csv("profiles.csv") %>% 
+  tbl_df() %>% 
+  mutate(sex = ifelse(is_female==1, "female", "male")) %>% 
+  filter(height >=55 & height <= 80)
+```
+
+
+
+## Height
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(data=profiles, aes(x=height)) +
+  geom_histogram(aes(y=..density..), binwidth=1, boundary=55) + 
+  facet_wrap(~sex, nrow=2) 
+```
+
+
+
+## Wine?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+sex_counts <- profiles %>% 
+  group_by(sex) %>% 
+  tally()
+
+profiles %>%
+  select(sex, has_wine) %>% 
+  group_by(sex, has_wine) %>% 
+  tally() %>% 
+  inner_join(sex_counts, by="sex") %>% 
+  mutate(prop=n.x/n.y) %>%
+  select(sex, has_wine, prop) %>% 
+  ggplot(data=., aes(x=sex, y=prop, fill=has_wine)) + 
+  geom_bar(stat="identity", position="dodge") +
+  labs(fill = "Wine?")
+```
+
+
+
+## Logistic Regression
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+profiles$p_hat <- fitted(glm(is_female ~ has_wine + height, data=profiles, family=binomial))
+p <- ggplot(data=profiles, aes(x=p_hat)) +
+  geom_histogram(binwidth=0.1, boundary=0)
+p
+```
+
+
+
+## Decision Threshold
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+threshold <- 0.9
+p + geom_vline(xintercept = threshold, col="red", size=1)
+```
+
+
+
+## Decision Threshold
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+overall_counts <- profiles %>%
+  mutate(
+    predicted_sex = ifelse(p_hat > threshold, "pred_female", "pred_male"),
+    sex = ifelse(sex=="female", "true_female", "true_male")
+    ) %>% 
+  group_by(sex, predicted_sex) %>% 
+  tally() 
+
+sex_counts <- overall_counts %>% 
+  group_by(sex) %>% 
+  tally()
+
+output <- overall_counts %>% 
+  spread(predicted_sex, n) %>% 
+  rename(" " = sex)
+output <- output[2:1, ]
+output <- output[, c(1, 3, 2)]
+kable(output)
+```
+
+
+
+## Decision Threshold
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+output <- overall_counts %>% 
+  left_join(sex_counts, by="sex") %>% 
+  mutate(prop=round(n.x/n.y,3)) %>% 
+  select(-n.x, -n.y) %>% 
+  spread(predicted_sex, prop) %>% 
+  rename(" " = sex)
+output <- output[2:1, ]
+output <- output[, c(1, 3, 2)]
+kable(output)
+```
+

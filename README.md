@@ -12,8 +12,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + App demonstrating CLT condition for Binomial Data: [`success_failure.Rmd`](https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec21%20Hypothesis%20Testing/success_failure.Rmd)
         + Open in RStudio
         + Press "Run Document"
-* **Lec22:**
-
+* **Lec22: More Hypothesis Testing**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec22%20More%20Hypothesis%20Testing/Lec22.html" target="_blank">Slides</a>
 
 
 
