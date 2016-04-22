@@ -1,0 +1,48 @@
+---
+title: "Lecture 22"
+author: "Albert Y. Kim"
+date: "April 20, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+set.seed(76)
+```
+
+
+
+## Example 
+
+We simulate 100 die rolls where the prob of getting 1 is $\frac{1}{6}$.
+
+```{r, message=FALSE, warning=FALSE}
+n <- 100
+sum_x <- rbinom(1, size=n, prob=1/6)
+sum_x
+```
+
+
+
+## Example 
+
+Compare what happens when you flip the values of $p_0$ and $p_A$
+
+```{r, message=FALSE, warning=FALSE}
+p0 <- 1/6
+pA <- 2/6
+T <- ((p0/pA)/((1-p0)/(1-pA)))^sum_x*((1-p0)/(1-pA))^n
+T
+```
+
+```{r, message=FALSE, warning=FALSE}
+p0 <- 2/6
+pA <- 1/6
+T <- ((p0/pA)/((1-p0)/(1-pA)))^sum_x*((1-p0)/(1-pA))^n
+T
+```
