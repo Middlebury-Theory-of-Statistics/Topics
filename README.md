@@ -6,6 +6,16 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 10: 4/25 - 4/29
+
+* **Lec24:**
+
+
+
+
+
+
+
 ### Week 9: 4/18 - 4/22
 
 * **Lec21: Hypothesis Testing**
@@ -22,6 +32,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+
+
 ### Week 8: 4/11 - 4/15
 
 * **Lec19: More Confidence Intervals II**
@@ -32,12 +44,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec20: Bootstrap t Confidence Intervals**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec20%20Hypothesis%20Testing/Lec20.html" target="_blank">Slides</a>
     + <a href="https://www.youtube.com/watch?v=wX1x7pfH8fw" target="_blank">Only who can prevent forest fires?</a>
-    
-    
-    
-    
-    
-    
+
 
 
 
@@ -64,6 +71,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec14%20Properties%20of%20Estimators/Lec14.html" target="_blank">Slides</a>
 * **Lec15: Properties of Estimators**
     + Lecture only
+
 
 
 
