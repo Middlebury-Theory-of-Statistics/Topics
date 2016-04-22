@@ -15,6 +15,9 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec22: More Hypothesis Testing**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec22%20More%20Hypothesis%20Testing/Lec22.html" target="_blank">Slides</a>
 * **Lec23: Likelihood Ratio Tests**
+    + Final exam will be an open-book take home final on Friday 5/20
+        + Distributed at 8:30am
+        + Due at 12:30pm
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec23%20Likelihood%20Ratio%20Test/Lec23.html" target="_blank">Slides</a>
 
 
