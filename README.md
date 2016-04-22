@@ -14,7 +14,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
         + Press "Run Document"
 * **Lec22: More Hypothesis Testing**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec22%20More%20Hypothesis%20Testing/Lec22.html" target="_blank">Slides</a>
-* **Lec22: Likelihood Ratio Tests**
+* **Lec23: Likelihood Ratio Tests**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec23%20Likelihood%20Ratio%20Test/Lec23.html" target="_blank">Slides</a>
 
 

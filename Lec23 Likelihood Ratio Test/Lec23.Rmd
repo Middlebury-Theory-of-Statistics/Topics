@@ -1,5 +1,5 @@
 ---
-title: "Lecture 22"
+title: "Lecture 23"
 author: "Albert Y. Kim"
 date: "April 20, 2016"
 output: ioslides_presentation
