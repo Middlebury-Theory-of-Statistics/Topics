@@ -1,0 +1,210 @@
+---
+title: "Midterm III Review"
+author: "Albert Y. Kim"
+date: "April 25th, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+## Midterm Details
+
+* Wednesday April 27th 7:30-10pm in Warner 506.
+* Please bring a calculator; no smart phones.
+* Everything up to and including Lec22 (Chapter 8.3)
+* Allowed one double-sided 8.5 x 11 page which you'll be handing in.
+
+
+
+
+## Studying Tips
+
+* Exam is not timed to take entire time period.
+* You don't need to memorize
+    + R code, but write pseudocode.
+    + Any statistical distributions.
+* Some questions are
+    + More straightforward: Can you regurgitate?
+    + More conceptual: Did you get the bigger picture?
+* Don't just focus on the **what/how** of the material and HW questions, but the **why**?
+
+
+
+
+
+## Examples
+
+A list of examples from the text and HW's of what I mean by **what/how** vs **why**. 
+
+* Were you able to do the question? vs
+* What was the point/bigger picture of each question?
+
+Note: this list is not exhaustive.
+    
+
+
+
+
+## Chapter 2: Exploratory Data Analysis
+
+* What is a population? Statistic? Parameter?
+* Why does a QQ-plot work?
+
+
+
+
+
+## Chapter 3: Hypothesis Testing
+
+* We did Chap. 3 HT before Chap. 4 Sampling Distributions. What new terminology applies?
+* Scientifically speaking:
+    + What is a null hypothesis/value?
+    + Difference between one-sided vs two-sided HT?
+* What is the effect of changing $\alpha$?
+
+
+
+
+
+## Chapter 3: Hypothesis Testing
+
+* What does "just as or more extreme" for a two-sided test mean for a non-symmetric null distribution?
+* What is the intuition behind the $\chi^2$ test statistic? Why $\sqrt{\text{exp}}$ in the denom?
+
+
+
+
+
+## Chapter 4: Sampling Distribution
+
+* Obvious: What is a SE?
+* Find examples throughout the entire class of the
+3 different ways you can construct a sampling distribution:
+    + Exactly
+    + Simulation
+    + Approximation
+* Find examples of computing the SE
+    + Exactly
+    + Approximation
+* What does the CLT and more importantly why should we care? Where can we use it?
+
+
+
+
+
+## Chapter 4: Sampling Distribution
+
+* Analogy of accuracy and precision, but also what determines the level of accuracy/precision?
+* In sampling distribution examples involving $N$ samples of size $n$, why are we taking many samples?
+* What is the difference between the
+    + distribution of the sample vs 
+    + the sampling distribution?
+
+
+
+
+
+## Chapter 5: Bootstrap
+
+* Obvious: what makes bootstrap work?
+* Why/when would we use bootstrap? What can it do and not do?
+* Difference between percentile based CI vs traditional CI's?
+* What could cause devations of bootstrap results from the truth?
+
+
+
+
+
+## Chapter 6: Estimation
+
+* In what situations do we use MLE and MOM? What information do we need?
+* What is the difference between the ML function vs a PDF?
+* Hey yo, I have an estimator? How good is it?
+
+
+
+
+## Overall
+
+* What are the two "computational engines" of statistics? What do we mean by this? How have we used them?
+* What message was I trying to convey in my in-class demos?
+    + Comparing the two types of die?
+    + Sampling 3 students' heights, taking the mean, repeating...?
+    + Graphs comparing proportion of 1's for $n=30$ vs $n=300$ die rolls?
+* When would we use permutation-based tests vs bootstraping?
+
+
+
+
+## HW 1
+
+* What is a quantile in terms of a PDF? CDF?
+* 2.14 is ridiculously easy. Why would I even assign this?
+* How do a CDF and an ECDF differ? What does it take for the two to be equal?
+How do we interpret them?
+* We add one the numerator and denominator of the permutation test to not get a
+p-value of 0. But why is a p-value of 0 a problem?
+
+
+
+
+
+## HW 2
+
+* You suspect data comes from a certain distribution with certain parameters.
+How can you check this?
+* 3.28 What phenomenon is this problem describing? Why would this matter in real
+life?
+* When do you use the different $\chi^2$ tests?
+* What is the key difference between a $\chi^2$ test and a two-sample
+permutation test?
+* How do you study the cross-classification of two categorical variables?
+
+
+
+
+
+
+
+
+## HW 3
+
+* We have results for approximating the population mean. What about the
+population $\min$ and $\max$?
+* Difference between "standard deviation" and "standard error"? When is the latter the former.
+* How do you simulate the sampling distribution of something other than the
+sample mean? How do you describe the results?
+
+
+
+
+
+## HW 4
+
+* Why does $s^2$ look the way it does?
+* p-value Article. What is the difference between **statistical** and
+**practical** significance?
+* Understand the components of Poisson bootstrap.
+* R: Exercise 8 on Page 130. Why is this important?
+
+
+
+
+
+## HW 5
+
+* Understand the link between the German Tank Problem and the topics from this
+class.
+* What are the key differences between MLE and MOM?  When would you use one vs
+the other?
+* What computer/R routines are behind maximum likelihood estimation?
