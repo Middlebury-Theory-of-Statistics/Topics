@@ -21,7 +21,8 @@ set.seed(76)
 
 * Wednesday April 27th 7:30-10pm in Warner 506.
 * Please bring a calculator; no smart phones.
-* Everything up to and including Lec22 (Chapter 8.3)
+* Everything up to and including Lec22 (Chapter 8.3).
+* Need to understand everything from previous midterms to answer Midterm III questions.
 * Allowed one double-sided 8.5 x 11 page which you'll be handing in.
 
 
@@ -42,169 +43,179 @@ set.seed(76)
 
 
 
-## Examples
+## Chapter 6: Properties of Estimators
 
-A list of examples from the text and HW's of what I mean by **what/how** vs **why**. 
+* Only got to certain HW questions in this chapter after Midterm II.
+* HW07 R Component Q2. We have two estimators of $\mathbb{P}(X \leq 1)$ for
+$X_i$ Gamma distributed:
+    + a **parametric** one $1-\exp\left(-\frac{1}{\overline{X}}\right)$ that 
+    assumes the data is Gamma.
+    + a **non-parametric** one $\frac{1}{n}\mathbb{1}(X_i \leq 1)$ that
+    does not.
 
-* Were you able to do the question? vs
-* What was the point/bigger picture of each question?
 
-Note: this list is not exhaustive.
+
+
+## Chapter 7: Confidence Intervals
+
+Recall the 3 scenarios of CI's for the mean:
+
+1. CI for Normal $\mu$, $\sigma$ known
+1. CI for Normal $\mu$, $\sigma$ unknown
+1. CI for for any $\mu$, $\sigma$ known
+
+When do use one or another?
+
+
+
+
+
+
+## Chapter 7: Confidence Intervals
+
+* In general: How do you create a confidence interval for any parameter
+$\theta$? What is the generalized method?
+* What quantile value $q$ to use for
+    + A two-sided CI
+    + Upper CI
+    + Lower CI
+* Is $q$
+    + Normally distributed?
+    + $t$ distributed?
     
 
 
 
 
-## Chapter 2: Exploratory Data Analysis
+## Chapter 7: Confidence Intervals
 
-* What is a population? Statistic? Parameter?
-* Why does a QQ-plot work?
+A $(1-\alpha)\times 100\%$ two-sided confidence interval for difference in means $\mu_x - \mu_y$:
 
+$$
+\begin{align}
+\left(\overline{X} - \overline{Y} \right) \pm q \sqrt{\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}}
+\end{align}
+$$
 
+What are
 
-
-
-## Chapter 3: Hypothesis Testing
-
-* We did Chap. 3 HT before Chap. 4 Sampling Distributions. What new terminology applies?
-* Scientifically speaking:
-    + What is a null hypothesis/value?
-    + Difference between one-sided vs two-sided HT?
-* What is the effect of changing $\alpha$?
-
-
-
-
-
-## Chapter 3: Hypothesis Testing
-
-* What does "just as or more extreme" for a two-sided test mean for a non-symmetric null distribution?
-* What is the intuition behind the $\chi^2$ test statistic? Why $\sqrt{\text{exp}}$ in the denom?
+* $q$? What distribution?
+* Margin of Error?
+* $\text{PE}$ and $\text{SE}$?
 
 
 
 
 
-## Chapter 4: Sampling Distribution
+## Chapter 7: Pivot Method
 
-* Obvious: What is a SE?
-* Find examples throughout the entire class of the
-3 different ways you can construct a sampling distribution:
-    + Exactly
-    + Simulation
-    + Approximation
-* Find examples of computing the SE
-    + Exactly
-    + Approximation
-* What does the CLT and more importantly why should we care? Where can we use it?
+* How does it work?
+* Why do we need to use it?
+* Go over examples in class.
+    
 
 
 
 
+## Chapter 7: CI for Proportions
 
-## Chapter 4: Sampling Distribution
+* Obama support example: How do all the elements of a CI tie into poll reporting?
+* In class we covered using a Normal quantile $q$ in our CI for proportions.
+Under what conditions and why?
 
-* Analogy of accuracy and precision, but also what determines the level of accuracy/precision?
-* In sampling distribution examples involving $N$ samples of size $n$, why are we taking many samples?
-* What is the difference between the
-    + distribution of the sample vs 
-    + the sampling distribution?
-
+    
 
 
 
+## Chapter 7: Types of CI's
 
-## Chapter 5: Bootstrap
+What are the chief differences between the following:
 
-* Obvious: what makes bootstrap work?
-* Why/when would we use bootstrap? What can it do and not do?
-* Difference between percentile based CI vs traditional CI's?
-* What could cause devations of bootstrap results from the truth?
+* Classical CI's where math is the computational engine
+* CI's where a computer is the computational engine
+    + Bootstrap percentile interval
+    + Bootstrap $t$ CI
+
+When would you use one vs the other?
+    
 
 
 
+## Chapter 8: Hypothesis Testing
+
+* Recall Midterm I question: a null distribution is an example of a sampling
+distribution when $H_0$ is true.
+* What is a null value?
+* What is the general and common approach to almost all hypothesis tests?
+* Recall $z$-score, but think of it in a HT context:
+
+    
 
 
-## Chapter 6: Estimation
 
-* In what situations do we use MLE and MOM? What information do we need?
-* What is the difference between the ML function vs a PDF?
-* Hey yo, I have an estimator? How good is it?
+## Chapter 8: Types of Errors
+
+* Understand the $2 \times 2$ contigency table of
+    + Truth: $H_0$ and $H_A$
+    + Decision: Fail to reject $H_0$ and Reject $H_0$
+* Both types of errors/power and the tradeoff. Understand both statistically and
+what they mean intuitively. Ex:
+    + Criminal justice system
+    + Airport security
+    + Predicting gender
+* What determines and how do we control the above? 
+
 
 
 
 
 ## Overall
 
-* What are the two "computational engines" of statistics? What do we mean by this? How have we used them?
-* What message was I trying to convey in my in-class demos?
-    + Comparing the two types of die?
-    + Sampling 3 students' heights, taking the mean, repeating...?
-    + Graphs comparing proportion of 1's for $n=30$ vs $n=300$ die rolls?
-* When would we use permutation-based tests vs bootstraping?
+We covered sampling distributions, standard errors, estimators, and other 
+sampling theory in Chapters 1-6 (using both mathematical and computational
+tools) **BEFORE** covering
+
+* Chapter 7: Confidence interavls
+* Chapter 8:  Hypothesis testing
+
+Be able to articulate how the former ties into/dictates the latter.
+
+    
+
+
+
+## HW 6
+
+* Properties of estimators. Tie them into **general sampling theory**.
+* In HW6 and Questions 1-3 in HW 7
+    + I give you summary statistics (Ex: $n$, $\overline{x}$, $s^2$), you give me a CI.
+    + They both involve a lot of nitty gritty calculations. Understand CI's **in
+genera.** in terms of $\text{PE}$, $q$, and $\text{SE}$?
 
 
 
 
-## HW 1
+## HW 7
 
-* What is a quantile in terms of a PDF? CDF?
-* 2.14 is ridiculously easy. Why would I even assign this?
-* How do a CDF and an ECDF differ? What does it take for the two to be equal?
-How do we interpret them?
-* We add one the numerator and denominator of the permutation test to not get a
-p-value of 0. But why is a p-value of 0 a problem?
-
-
-
-
-
-## HW 2
-
-* You suspect data comes from a certain distribution with certain parameters.
-How can you check this?
-* 3.28 What phenomenon is this problem describing? Why would this matter in real
-life?
-* When do you use the different $\chi^2$ tests?
-* What is the key difference between a $\chi^2$ test and a two-sample
-permutation test?
-* How do you study the cross-classification of two categorical variables?
-
-
+* Creating CI's for less common parameters like $\sigma^2$. What is the general 
+method for doing this?
+* R Homework: For both questions, we compared two estimators of the same 
+quantity. Why would we prefer one over the other **in practice**?
 
 
 
 
 
+## HW 8
 
-## HW 3
-
-* We have results for approximating the population mean. What about the
-population $\min$ and $\max$?
-* Difference between "standard deviation" and "standard error"? When is the latter the former.
-* How do you simulate the sampling distribution of something other than the
-sample mean? How do you describe the results?
-
-
-
-
-
-## HW 4
-
-* Why does $s^2$ look the way it does?
-* p-value Article. What is the difference between **statistical** and
-**practical** significance?
-* Understand the components of Poisson bootstrap.
-* R: Exercise 8 on Page 130. Why is this important?
+* Explicit Type I error, Type II error, and power questions. Don't just be able 
+to do math, but think in terms of
+    + **tradeoff** of errors 
+    + original goal of hypothesis testing: we want to make a statement about a
+    parameter $\theta$
+* When do you think a particular kind of CI will outperform others?
 
 
 
 
 
-## HW 5
-
-* Understand the link between the German Tank Problem and the topics from this
-class.
-* What are the key differences between MLE and MOM?  When would you use one vs
-the other?
-* What computer/R routines are behind maximum likelihood estimation?

@@ -97,7 +97,8 @@
 <ul>
 <li>Wednesday April 27th 7:30-10pm in Warner 506.</li>
 <li>Please bring a calculator; no smart phones.</li>
-<li>Everything up to and including Lec22 (Chapter 8.3)</li>
+<li>Everything up to and including Lec22 (Chapter 8.3).</li>
+<li>Need to understand everything from previous midterms to answer Midterm III questions.</li>
 <li>Allowed one double-sided 8.5 x 11 page which you&#39;ll be handing in.</li>
 </ul>
 
@@ -120,150 +121,166 @@
 <li>Don&#39;t just focus on the <strong>what/how</strong> of the material and HW questions, but the <strong>why</strong>?</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Examples</h2></hgroup><article  id="examples">
-
-<p>A list of examples from the text and HW&#39;s of what I mean by <strong>what/how</strong> vs <strong>why</strong>.</p>
+</article></slide><slide class=''><hgroup><h2>Chapter 6: Properties of Estimators</h2></hgroup><article  id="chapter-6-properties-of-estimators">
 
 <ul>
-<li>Were you able to do the question? vs</li>
-<li>What was the point/bigger picture of each question?</li>
-</ul>
-
-<p>Note: this list is not exhaustive.</p>
-
-</article></slide><slide class=''><hgroup><h2>Chapter 2: Exploratory Data Analysis</h2></hgroup><article  id="chapter-2-exploratory-data-analysis">
+<li>Only got to certain HW questions in this chapter after Midterm II.</li>
+<li>HW07 R Component Q2. We have two estimators of \(\mathbb{P}(X \leq 1)\) for \(X_i\) Gamma distributed:
 
 <ul>
-<li>What is a population? Statistic? Parameter?</li>
-<li>Why does a QQ-plot work?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Chapter 3: Hypothesis Testing</h2></hgroup><article  id="chapter-3-hypothesis-testing">
-
-<ul>
-<li>We did Chap. 3 HT before Chap. 4 Sampling Distributions. What new terminology applies?</li>
-<li>Scientifically speaking:
-
-<ul>
-<li>What is a null hypothesis/value?</li>
-<li>Difference between one-sided vs two-sided HT?</li>
-</ul></li>
-<li>What is the effect of changing \(\alpha\)?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Chapter 3: Hypothesis Testing</h2></hgroup><article  id="chapter-3-hypothesis-testing-1">
-
-<ul>
-<li>What does &quot;just as or more extreme&quot; for a two-sided test mean for a non-symmetric null distribution?</li>
-<li>What is the intuition behind the \(\chi^2\) test statistic? Why \(\sqrt{\text{exp}}\) in the denom?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Chapter 4: Sampling Distribution</h2></hgroup><article  id="chapter-4-sampling-distribution">
-
-<ul>
-<li>Obvious: What is a SE?</li>
-<li>Find examples throughout the entire class of the 3 different ways you can construct a sampling distribution:
-
-<ul>
-<li>Exactly</li>
-<li>Simulation</li>
-<li>Approximation</li>
-</ul></li>
-<li>Find examples of computing the SE
-
-<ul>
-<li>Exactly</li>
-<li>Approximation</li>
-</ul></li>
-<li>What does the CLT and more importantly why should we care? Where can we use it?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>Chapter 4: Sampling Distribution</h2></hgroup><article  id="chapter-4-sampling-distribution-1">
-
-<ul>
-<li>Analogy of accuracy and precision, but also what determines the level of accuracy/precision?</li>
-<li>In sampling distribution examples involving \(N\) samples of size \(n\), why are we taking many samples?</li>
-<li>What is the difference between the
-
-<ul>
-<li>distribution of the sample vs</li>
-<li>the sampling distribution?</li>
+<li>a <strong>parametric</strong> one \(1-\exp\left(-\frac{1}{\overline{X}}\right)\) that assumes the data is Gamma.</li>
+<li>a <strong>non-parametric</strong> one \(\frac{1}{n}\mathbb{1}(X_i \leq 1)\) that does not.</li>
 </ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Chapter 5: Bootstrap</h2></hgroup><article  id="chapter-5-bootstrap">
+</article></slide><slide class=''><hgroup><h2>Chapter 7: Confidence Intervals</h2></hgroup><article  id="chapter-7-confidence-intervals">
+
+<p>Recall the 3 scenarios of CI&#39;s for the mean:</p>
+
+<ol>
+<li>CI for Normal \(\mu\), \(\sigma\) known</li>
+<li>CI for Normal \(\mu\), \(\sigma\) unknown</li>
+<li>CI for for any \(\mu\), \(\sigma\) known</li>
+</ol>
+
+<p>When do use one or another?</p>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 7: Confidence Intervals</h2></hgroup><article  id="chapter-7-confidence-intervals-1">
 
 <ul>
-<li>Obvious: what makes bootstrap work?</li>
-<li>Why/when would we use bootstrap? What can it do and not do?</li>
-<li>Difference between percentile based CI vs traditional CI&#39;s?</li>
-<li>What could cause devations of bootstrap results from the truth?</li>
+<li>In general: How do you create a confidence interval for any parameter \(\theta\)? What is the generalized method?</li>
+<li>What quantile value \(q\) to use for
+
+<ul>
+<li>A two-sided CI</li>
+<li>Upper CI</li>
+<li>Lower CI</li>
+</ul></li>
+<li>Is \(q\)
+
+<ul>
+<li>Normally distributed?</li>
+<li>\(t\) distributed?</li>
+</ul></li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>Chapter 6: Estimation</h2></hgroup><article  id="chapter-6-estimation">
+</article></slide><slide class=''><hgroup><h2>Chapter 7: Confidence Intervals</h2></hgroup><article  id="chapter-7-confidence-intervals-2">
+
+<p>A \((1-\alpha)\times 100\%\) two-sided confidence interval for difference in means \(\mu_x - \mu_y\):</p>
+
+<p>\[
+\begin{align}
+\left(\overline{X} - \overline{Y} \right) \pm q \sqrt{\frac{s_x^2}{n_x} + \frac{s_y^2}{n_y}}
+\end{align}
+\]</p>
+
+<p>What are</p>
 
 <ul>
-<li>In what situations do we use MLE and MOM? What information do we need?</li>
-<li>What is the difference between the ML function vs a PDF?</li>
-<li>Hey yo, I have an estimator? How good is it?</li>
+<li>\(q\)? What distribution?</li>
+<li>Margin of Error?</li>
+<li>\(\text{PE}\) and \(\text{SE}\)?</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 7: Pivot Method</h2></hgroup><article  id="chapter-7-pivot-method">
+
+<ul>
+<li>How does it work?</li>
+<li>Why do we need to use it?</li>
+<li>Go over examples in class.</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 7: CI for Proportions</h2></hgroup><article  id="chapter-7-ci-for-proportions">
+
+<ul>
+<li>Obama support example: How do all the elements of a CI tie into poll reporting?</li>
+<li>In class we covered using a Normal quantile \(q\) in our CI for proportions. Under what conditions and why?</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 7: Types of CI&#39;s</h2></hgroup><article  id="chapter-7-types-of-cis">
+
+<p>What are the chief differences between the following:</p>
+
+<ul>
+<li>Classical CI&#39;s where math is the computational engine</li>
+<li>CI&#39;s where a computer is the computational engine
+
+<ul>
+<li>Bootstrap percentile interval</li>
+<li>Bootstrap \(t\) CI</li>
+</ul></li>
+</ul>
+
+<p>When would you use one vs the other?</p>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 8: Hypothesis Testing</h2></hgroup><article  id="chapter-8-hypothesis-testing">
+
+<ul>
+<li>Recall Midterm I question: a null distribution is an example of a sampling distribution when \(H_0\) is true.</li>
+<li>What is a null value?</li>
+<li>What is the general and common approach to almost all hypothesis tests?</li>
+<li>Recall \(z\)-score, but think of it in a HT context:</li>
+</ul>
+
+</article></slide><slide class=''><hgroup><h2>Chapter 8: Types of Errors</h2></hgroup><article  id="chapter-8-types-of-errors">
+
+<ul>
+<li>Understand the \(2 \times 2\) contigency table of
+
+<ul>
+<li>Truth: \(H_0\) and \(H_A\)</li>
+<li>Decision: Fail to reject \(H_0\) and Reject \(H_0\)</li>
+</ul></li>
+<li>Both types of errors/power and the tradeoff. Understand both statistically and what they mean intuitively. Ex:
+
+<ul>
+<li>Criminal justice system</li>
+<li>Airport security</li>
+<li>Predicting gender</li>
+</ul></li>
+<li>What determines and how do we control the above?</li>
 </ul>
 
 </article></slide><slide class=''><hgroup><h2>Overall</h2></hgroup><article  id="overall">
 
-<ul>
-<li>What are the two &quot;computational engines&quot; of statistics? What do we mean by this? How have we used them?</li>
-<li>What message was I trying to convey in my in-class demos?
+<p>We covered sampling distributions, standard errors, estimators, and other sampling theory in Chapters 1-6 (using both mathematical and computational tools) <strong>BEFORE</strong> covering</p>
 
 <ul>
-<li>Comparing the two types of die?</li>
-<li>Sampling 3 students&#39; heights, taking the mean, repeating&#8230;?</li>
-<li>Graphs comparing proportion of 1&#39;s for \(n=30\) vs \(n=300\) die rolls?</li>
+<li>Chapter 7: Confidence interavls</li>
+<li>Chapter 8: Hypothesis testing</li>
+</ul>
+
+<p>Be able to articulate how the former ties into/dictates the latter.</p>
+
+</article></slide><slide class=''><hgroup><h2>HW 6</h2></hgroup><article  id="hw-6">
+
+<ul>
+<li>Properties of estimators. Tie them into <strong>general sampling theory</strong>.</li>
+<li>In HW6 and Questions 1-3 in HW 7
+
+<ul>
+<li>I give you summary statistics (Ex: \(n\), \(\overline{x}\), \(s^2\)), you give me a CI.</li>
+<li>They both involve a lot of nitty gritty calculations. Understand CI&#39;s <strong>in genera.</strong> in terms of \(\text{PE}\), \(q\), and \(\text{SE}\)?</li>
 </ul></li>
-<li>When would we use permutation-based tests vs bootstraping?</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>HW 1</h2></hgroup><article  id="hw-1">
+</article></slide><slide class=''><hgroup><h2>HW 7</h2></hgroup><article  id="hw-7">
 
 <ul>
-<li>What is a quantile in terms of a PDF? CDF?</li>
-<li>2.14 is ridiculously easy. Why would I even assign this?</li>
-<li>How do a CDF and an ECDF differ? What does it take for the two to be equal? How do we interpret them?</li>
-<li>We add one the numerator and denominator of the permutation test to not get a p-value of 0. But why is a p-value of 0 a problem?</li>
+<li>Creating CI&#39;s for less common parameters like \(\sigma^2\). What is the general method for doing this?</li>
+<li>R Homework: For both questions, we compared two estimators of the same quantity. Why would we prefer one over the other <strong>in practice</strong>?</li>
 </ul>
 
-</article></slide><slide class=''><hgroup><h2>HW 2</h2></hgroup><article  id="hw-2">
+</article></slide><slide class=''><hgroup><h2>HW 8</h2></hgroup><article  id="hw-8">
 
 <ul>
-<li>You suspect data comes from a certain distribution with certain parameters. How can you check this?</li>
-<li>3.28 What phenomenon is this problem describing? Why would this matter in real life?</li>
-<li>When do you use the different \(\chi^2\) tests?</li>
-<li>What is the key difference between a \(\chi^2\) test and a two-sample permutation test?</li>
-<li>How do you study the cross-classification of two categorical variables?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>HW 3</h2></hgroup><article  id="hw-3">
+<li>Explicit Type I error, Type II error, and power questions. Don&#39;t just be able to do math, but think in terms of
 
 <ul>
-<li>We have results for approximating the population mean. What about the population \(\min\) and \(\max\)?</li>
-<li>Difference between &quot;standard deviation&quot; and &quot;standard error&quot;? When is the latter the former.</li>
-<li>How do you simulate the sampling distribution of something other than the sample mean? How do you describe the results?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>HW 4</h2></hgroup><article  id="hw-4">
-
-<ul>
-<li>Why does \(s^2\) look the way it does?</li>
-<li>p-value Article. What is the difference between <strong>statistical</strong> and <strong>practical</strong> significance?</li>
-<li>Understand the components of Poisson bootstrap.</li>
-<li>R: Exercise 8 on Page 130. Why is this important?</li>
-</ul>
-
-</article></slide><slide class=''><hgroup><h2>HW 5</h2></hgroup><article  id="hw-5">
-
-<ul>
-<li>Understand the link between the German Tank Problem and the topics from this class.</li>
-<li>What are the key differences between MLE and MOM? When would you use one vs the other?</li>
-<li>What computer/R routines are behind maximum likelihood estimation?</li>
+<li><strong>tradeoff</strong> of errors</li>
+<li>original goal of hypothesis testing: we want to make a statement about a parameter \(\theta\)</li>
+</ul></li>
+<li>When do you think a particular kind of CI will outperform others?</li>
 </ul></article></slide>
 
 
