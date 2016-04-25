@@ -23,7 +23,7 @@ set.seed(76)
 * Please bring a calculator; no smart phones.
 * Everything up to and including Lec22 (Chapter 8.3).
 * Need to understand everything from previous midterms to answer Midterm III questions.
-* Allowed one double-sided 8.5 x 11 page which you'll be handing in.
+* Allowed one single-sided 8.5 x 11 page which you'll be handing in.
 
 
 
@@ -62,7 +62,7 @@ Recall the 3 scenarios of CI's for the mean:
 
 1. CI for Normal $\mu$, $\sigma$ known
 1. CI for Normal $\mu$, $\sigma$ unknown
-1. CI for for any $\mu$, $\sigma$ known
+1. CI for for any $\mu$, $\sigma$ unknown
 
 When do use one or another?
 
