@@ -51,11 +51,13 @@ This scenario has limited applicability however.
 
 Neyman-Pearson Lemma says the test with rejection rule
 
-> Reject $H_0$ when $\frac{L(\theta_0|\vec{x})}{L(\theta_A`|\vec{x})} < c$
+> Reject $H_0$ when $T(\vec{x}) = \frac{L(\theta_0|\vec{x})}{L(\theta_A|\vec{x})} < c$
 
 where $c$ is chosen so that the test has significance level (AKA type I error
-rate) $\alpha$, has highest power of all tests with significance level $\leq
-\alpha$.
+rate) $\alpha$
+
+**has highest power of all tests with significance level $\leq
+\alpha$.**
 
 
 
