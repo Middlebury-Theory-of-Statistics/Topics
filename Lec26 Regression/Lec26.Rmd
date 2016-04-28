@@ -1,0 +1,92 @@
+---
+title: "Lecture 26"
+author: "Albert Y. Kim"
+date: "April 29th, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+library(mvtnorm)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+
+
+## Simple Linear Regression
+
+Example: height vs weight.
+
+![alt text](figure/lec24-002.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+What does "best fitting line" mean?
+
+![alt text](figure/lec24-003.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+Consider ANY point $(x_i, y_i)$ for $i=1,\ldots,50$. 
+
+![alt text](figure/lec24-004.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+Now consider this point's deviation from the **regression line**.
+
+![alt text](figure/lec24-005.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+Do this for another point $x_i$...
+
+![alt text](figure/lec24-006.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+Do this for another point $x_i$...
+
+![alt text](figure/lec24-007.pdf)
+
+
+
+
+
+## Simple Linear Regression
+
+Regression minimizes the sum of the **squared** arrow lengths.  
+
+![alt text](figure/lec24-008.pdf)
+
+
+

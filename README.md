@@ -10,8 +10,10 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec24: Midterm III Review**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec24%20Midterm%20III%20Review/Lec24.html" target="_blank">Slides</a>
-* **Lec25: Regression**
-    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec25%20Regression/Lec25.html" target="_blank">Slides</a>
+* **Lec25: Correlation**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec25%20Correlation/Lec25.html" target="_blank">Slides</a>
+* **Lec26: Regression**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec26%20Regression/Lec26.html" target="_blank">Slides</a>
 
 
 
