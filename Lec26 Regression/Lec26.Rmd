@@ -12,7 +12,6 @@ library(ggplot2)
 library(tidyr)
 library(knitr)
 library(readr)
-library(mvtnorm)
 
 # Set seed for random number generator
 set.seed(76)
