@@ -81,43 +81,193 @@ p4
 
 
 
-## Residuals Plot
+## Assumptions of Regression
 
-![alt text](figure/regression1.png)
-
-
-
-
-
-## Residuals Plot
-
-![alt text](figure/regression2.jpg)
-![alt text](figure/regression3.png)
+<img src="figure/regression1.png" alt="Drawing" style="width: 600px;"/>
 
 
 
 
 
-## Residuals Plot
+## Assumptions of Regression
 
-```{r}
+<img src="figure/regression3.png" alt="Drawing" style="width: 600px;"/>
+
+
+
+
+
+## Example: Figure Skating Scores
+
+```{r, echo=FALSE}
 set.seed(76)
+# Set base plot
 data(Skating2010)
-p <- ggplot(data=Skating2010, aes(x=Short, y=Free)) + 
-  geom_point(col="red")
-p + stat_smooth(method="lm", se=FALSE, col="black")
-
-bootstrap_coeff <- data_frame(intercept=rep(0, 30), slope=rep(0, 30))
+Skating2010 <- Skating2010 %>% 
+  tbl_df()
 n <- nrow(Skating2010)
+model <- lm(Free~Short, data=Skating2010)
+Skating2010$residual <- resid(model)
+```
+
+In the `Skating2010` data set, we have scores for men's figure skating (n=`r n`)
+from the Vancouver 2010 Olympics:
+
+```{r, echo=FALSE}
+slice(Skating2010, 1:6) %>% 
+  select(Name, Country, Short, Free) %>% 
+  kable()
+```
+
+
+
+
+
+
+## Example: Figure Skating Scores
+
+We study the relationship between their Short and Free program scores:
+
+```{r, echo=FALSE}
+p <- ggplot(data=Skating2010, aes(x=Short, y=Free)) +
+  xlab("Short Program Score")
+
+# Base regression
+p + 
+  stat_smooth(method="lm", se=FALSE, col="black", size=0.5) + 
+  geom_point(col="red") +
+  ylab("Free Program Score")
+```
+
+
+
+
+
+## Example: Residual Plot
+
+There seems to be slightly more variability for lower values of $x$:
+
+```{r, echo=FALSE}
+ggplot(data=Skating2010, aes(x=Short, y=residual)) + 
+  geom_point(col="red")  +
+  geom_hline(yintercept=0, col="black", size=0.5) +
+  xlab("Short Program Score") +
+  ylab("Residuals")
+```
+
+
+
+
+
+## Example: Figure Skating Scores
+
+Now let's say the population isn't these `r n` skaters, but that these `r n`
+skaters are a sample from a hypothetical population of **potential olympic men's
+figure skaters**.
+
+Why don't we
+
+* Bootstrap resample `r n` skaters
+* Compute the least-squares line 
+* Repeat 30 times
+
+
+
+
+
+## Example: Figure Skating Scores
+
+We now have 30 bootstrapped regression lines:
+
+```{r, echo=FALSE}
+# Bootstrap regression
+bootstrap_coeff <- data_frame(intercept=rep(0, 30), slope=rep(0, 30))
 for(i in 1:30){
   bootstrap <- Skating2010[sample(1:n, n, replace=TRUE), ]
   coeff <- coefficients(lm(Free~Short, data=bootstrap))
   p <- p + 
-    geom_abline(intercept = coeff[1], slope = coeff[2])
+    geom_abline(intercept = coeff[1], slope = coeff[2], size=0.5)
 }
-p + geom_point(col="red")
-  
+p + 
+  geom_point(col="red") +
+  ylab("Free Program Score")
 ```
+
+
+
+
+
+## Regression Table for Skating
+
+Regression output for all software looks something like this:
+
+```{r, echo=FALSE, message=FALSE}
+library(mosaic)
+msummary(model)
+```
+
+
+<!-- 95% Confidence Interval: -->
+<!-- ```{r,  message=FALSE} -->
+<!-- 1.735 + c(-1, 1)*qt(0.975, df=24-2)*0.2424 -->
+<!-- ``` -->
+
+<!-- P-value: -->
+<!-- ```{r, message=FALSE} -->
+<!-- 2 * pt(7.157, lower.tail = FALSE, df=24-2) -->
+<!-- ``` -->
+
+<!-- Sigma -->
+
+```{r, message=FALSE, echo=FALSE}
+Y <- Skating2010$Free
+Y_hat <- fitted(model)
+df <- nrow(Skating2010)-2
+s <- sqrt(sum((Y - Y_hat)^2)/df)
+```
+
+
+
+
+
+
+<!-- ## Example: Residual Plot -->
+
+<!-- Here is a plot of the residuals: there seems to be more variability for lower -->
+<!-- values of $x$: -->
+
+<!-- ```{r, echo=FALSE} -->
+<!-- ggplot(data=Skating2010, aes(x=Short, y=residual)) +  -->
+<!--   geom_point(col="red")  + -->
+<!--   geom_hline(yintercept=0, col="black", size=0.5) + -->
+<!--   xlab("Short Program Score") + -->
+<!--   ylab("Residuals") +  -->
+<!--   geom_hline(yintercept=c(-s, s)*qt(0.975, df=n-2), col="blue", size=0.5, linetype = 2) -->
+<!-- ``` -->
+
+
+
+
+
+
+## CI for E[Ys]
+
+For each value $x=x_s$, we plot the CI for $\mathbb{E}\left[Y_s |x=x_s\right]$
+i.e. a confidence band in grey:
+
+```{r, echo=FALSE}
+ggplot(data=Skating2010, aes(x=Short, y=Free)) + 
+  stat_smooth(method="lm", col="black", size=0.5) + 
+  geom_point(col="red") +
+  xlab("Short Program Score") +
+  ylab("Free Program Score")
+```
+
+
+
+
+
+
 
 
 
