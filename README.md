@@ -6,7 +6,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
-### Week 11: 4/25 - 4/29
+### Week 11: 5/2 - 5/6
 
 * **Lec27: Residuals and Inference for Regression**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec27%20Residuals%20and%20Inference%20for%20Regression/Lec27.html" target="_blank">Slides</a>
