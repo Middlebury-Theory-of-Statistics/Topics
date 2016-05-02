@@ -80,3 +80,47 @@ p4
 
 
 
+
+## Residuals Plot
+
+![alt text](figure/regression1.png)
+
+
+
+
+
+## Residuals Plot
+
+![alt text](figure/regression2.jpg)
+![alt text](figure/regression3.png)
+
+
+
+
+
+## Residuals Plot
+
+```{r}
+set.seed(76)
+data(Skating2010)
+p <- ggplot(data=Skating2010, aes(x=Short, y=Free)) + 
+  geom_point(col="red")
+p + stat_smooth(method="lm", se=FALSE, col="black")
+
+bootstrap_coeff <- data_frame(intercept=rep(0, 30), slope=rep(0, 30))
+n <- nrow(Skating2010)
+for(i in 1:30){
+  bootstrap <- Skating2010[sample(1:n, n, replace=TRUE), ]
+  coeff <- coefficients(lm(Free~Short, data=bootstrap))
+  p <- p + 
+    geom_abline(intercept = coeff[1], slope = coeff[2])
+}
+p + geom_point(col="red")
+  
+```
+
+
+
+
+
+
