@@ -10,7 +10,7 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 * **Lec27: Residuals and Inference for Regression**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec27%20Residuals%20and%20Inference%20for%20Regression/Lec27.html" target="_blank">Slides</a>
-* **Lec28: **
+* **Lec28:**
 
 
 

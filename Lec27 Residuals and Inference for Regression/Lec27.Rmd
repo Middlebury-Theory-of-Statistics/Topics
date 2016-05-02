@@ -76,3 +76,7 @@ p4 <- ggplot(data=Spruce, aes(x=Ht.change, y=residuals)) +
   ylab(expression(paste(y[i] - hat(y[i]), " : Residual")))
 p4
 ```
+
+
+
+
