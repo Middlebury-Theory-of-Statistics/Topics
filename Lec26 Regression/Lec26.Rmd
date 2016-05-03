@@ -25,8 +25,7 @@ set.seed(76)
 
 Example: height vs weight.
 
-![alt text](figure/lec24-002.pdf)
-
+<img src="figure/lec24-002.png" alt="Drawing" style="width: 400px;"/>
 
 
 
@@ -35,7 +34,8 @@ Example: height vs weight.
 
 What does "best fitting line" mean?
 
-![alt text](figure/lec24-003.pdf)
+<img src="figure/lec24-003.png" alt="Drawing" style="width: 400px;"/>
+
 
 
 
@@ -45,7 +45,8 @@ What does "best fitting line" mean?
 
 Consider ANY point $(x_i, y_i)$ for $i=1,\ldots,50$. 
 
-![alt text](figure/lec24-004.pdf)
+<img src="figure/lec24-004.png" alt="Drawing" style="width: 400px;"/>
+
 
 
 
@@ -55,17 +56,8 @@ Consider ANY point $(x_i, y_i)$ for $i=1,\ldots,50$.
 
 Now consider this point's deviation from the **regression line**.
 
-![alt text](figure/lec24-005.pdf)
+<img src="figure/lec24-005.png" alt="Drawing" style="width: 400px;"/>
 
-
-
-
-
-## Simple Linear Regression
-
-Do this for another point $x_i$...
-
-![alt text](figure/lec24-006.pdf)
 
 
 
@@ -75,7 +67,19 @@ Do this for another point $x_i$...
 
 Do this for another point $x_i$...
 
-![alt text](figure/lec24-007.pdf)
+<img src="figure/lec24-006.png" alt="Drawing" style="width: 400px;"/>
+
+
+
+
+
+
+## Simple Linear Regression
+
+Do this for another point $x_i$...
+
+<img src="figure/lec24-007.png" alt="Drawing" style="width: 400px;"/>
+
 
 
 
@@ -85,7 +89,8 @@ Do this for another point $x_i$...
 
 Regression minimizes the sum of the **squared** arrow lengths.  
 
-![alt text](figure/lec24-008.pdf)
+<img src="figure/lec24-008.png" alt="Drawing" style="width: 400px;"/>
+
 
 
 
