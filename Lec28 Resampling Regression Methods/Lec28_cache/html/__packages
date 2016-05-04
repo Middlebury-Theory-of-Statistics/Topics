@@ -1,0 +1,17 @@
+base
+methods
+datasets
+utils
+grDevices
+graphics
+stats
+dplyr
+ggplot2
+tidyr
+knitr
+readr
+resampledata
+lattice
+car
+mosaicData
+mosaic
