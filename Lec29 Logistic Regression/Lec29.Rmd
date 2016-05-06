@@ -1,0 +1,161 @@
+---
+title: "Lecture 29"
+author: "Albert Y. Kim"
+date: "May 6, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+# Load data
+profiles <- read_csv("../Lec22 More Hypothesis Testing/profiles.csv") %>% 
+  tbl_df() %>% 
+  mutate(sex = ifelse(is_female==1, "female", "male")) %>% 
+  filter(height >=55 & height <= 80)
+```
+
+
+
+
+
+## OkCupid Data
+
+Recall the OkCupid data set of 60K users in SF in 2012 from Lec22. We consider:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+# Set seed for random number generator
+set.seed(81)
+profiles %>%  
+  sample_n(5) %>% 
+  select(-is_female) %>% 
+  select(sex, height, has_wine) %>% 
+  kable()
+```
+
+
+
+
+
+## Wine?
+
+Does the user use the word "wine" in their essay responses?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=4}
+has_wine_counts <- profiles %>% 
+  group_by(has_wine) %>% 
+  tally()
+
+profiles %>%
+  select(sex, has_wine) %>% 
+  group_by(sex, has_wine) %>% 
+  tally() %>% 
+  inner_join(has_wine_counts, by="has_wine") %>% 
+  mutate(prop=n.x/n.y) %>%
+  select(sex, has_wine, prop) %>% 
+  ggplot(data=., aes(x=has_wine, y=prop, fill=sex)) + 
+  geom_bar(stat="identity", position="dodge") +
+  labs(fill = "Sex", x='Has word "wine" in profile?', y="Proportion")
+```
+
+
+
+
+
+## Logistic Regression
+
+```{r}
+model <- glm(is_female ~ has_wine, data=profiles, family="binomial")
+```
+
+```{r, echo=FALSE}
+kable(summary(model)$coef, digits=3)
+```
+
+
+
+
+
+## Fitted Probabilities
+
+Since `has_wine` is binary, there are only two possible fitted probabilities:
+
+```{r, echo=FALSE}
+data_frame(prob = round(fitted(model),3)) %>%
+  group_by(prob) %>%
+  tally() %>%
+  rename(
+    `Fitted Prob` = prob,
+    Number = n
+  ) %>%
+  kable()
+```
+
+
+
+
+
+## Height
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+profiles <- profiles %>% 
+  filter(!is.na(height))
+
+ggplot(data=profiles, aes(x=height)) +
+  geom_histogram(aes(y=..density..), binwidth=1, boundary=55) + 
+  facet_wrap(~sex, nrow=2) 
+```
+
+
+
+
+
+## Logistic Regression
+
+```{r}
+model <- glm(is_female ~ height, data=profiles, family="binomial")
+```
+
+```{r, echo=FALSE}
+kable(summary(model)$coef, digits=3)
+```
+
+
+
+
+
+## Logistic Regression
+
+To interpret the coefficient:
+
+```{r}
+exp(-0.662)
+```
+
+
+
+
+
+## Fitted Probabilities
+
+For each height, we have a fitted probability of being female:
+
+```{r, echo=FALSE}
+profiles_sub <- profiles %>% 
+  mutate(fitted = fitted(model)) %>% 
+  distinct()
+
+ggplot(data=profiles_sub, aes(x=height, y=fitted)) + 
+  geom_point() +
+  labs(x="Height", y="Fitted Probability of Being Female")
+```
+
+
+

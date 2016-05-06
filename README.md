@@ -12,7 +12,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec27%20Residuals%20and%20Inference%20for%20Regression/Lec27.html" target="_blank">Slides</a>
 * **Lec28: Resampling Regression Methods**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec28%20Resampling%20Regression%20Methods/Lec28.html" target="_blank">Slides</a>
-
+* **Lec29: Logistic Regression**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec29%20Logistic%20Regression/Lec29.html" target="_blank">Slides</a>
 
 
 
