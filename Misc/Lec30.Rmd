@@ -1,0 +1,201 @@
+---
+title: "Lecture 30"
+author: "Albert Y. Kim"
+date: "May 6, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(Lahman)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+# Load all batter data
+career <- Batting %>%
+  tbl_df() %>% 
+  filter(AB > 0) %>%
+  anti_join(Pitching, by = "playerID") %>%
+  group_by(playerID) %>%
+  summarize(H = sum(H), AB = sum(AB)) %>%
+  mutate(Avg = H / AB)
+
+# use names along with the player IDs
+career <- Master %>%
+  tbl_df() %>%
+  select(playerID, nameFirst, nameLast) %>%
+  unite(name, nameFirst, nameLast, sep = " ") %>%
+  inner_join(career, by = "playerID") %>%
+  select(-playerID)
+```
+
+
+
+
+
+## Baseball Statistic
+
+Most famous baseball statistic
+
+$$
+\text{Batting Avg} = \frac{\text{Hits}}{\text{At Bats}}
+$$
+
+which is a form of proportion $p$:
+
+* $\text{Hits}$: success
+* $\text{At Bats}$: Attempts at a Hit
+
+
+
+
+
+## Baseball Data
+
+Data on all 9342 batters in Major League Baseball between 1871-2014:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  slice(1:5) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  kable()
+```
+
+
+
+
+
+## Histogram of At Bats (Denominator)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=3}
+ggplot(data=career, aes(x=AB)) + 
+  geom_histogram(boundary=0) +
+  labs(x="At Bats", y="Count")
+```
+
+```{r, message=FALSE, warning=FALSE}
+quantile(career$AB, probs=c(0, 0.25, 0.5, 0.75, 1))
+```
+
+
+
+
+
+## Histogram of Batting Avgs
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=3}
+ggplot(data=career, aes(x=Avg)) + 
+  geom_histogram(boundary=0) +
+  labs(x="Avg", y="Count")
+```
+
+
+
+
+
+## Highest Avgs
+
+These are among batters with the highest averages. Are they the best?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(desc(Avg)) %>% 
+  slice(1:6) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  kable()
+```
+
+
+
+
+
+## Lowest Avgs
+
+These are among batters with the lowest averages. Are they the worst?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(Avg) %>% 
+  slice(1:6) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  kable()
+```
+
+
+```{r}
+career_filtered <- career %>%
+    filter(AB >= 500)
+
+m <- MASS::fitdistr(
+  career_filtered$Avg, dbeta, start = list(shape1 = 1, shape2 = 10))
+
+alpha0 <- m$estimate[1]
+beta0 <- m$estimate[2]
+
+overall_mean <- mean(career_filtered$Avg)
+
+ggplot(data=career_filtered, aes(x=Avg)) + 
+  geom_histogram(aes(y=..density..)) + 
+  stat_function(fun = dbeta, colour = "red",
+                args=list(shape1=alpha0, shape2=beta0), size=2) +
+  geom_vline(xintercept = overall_mean, size=2)
+  
+career <- career %>%
+    mutate(
+      Shrunk_Avg = (H + alpha0) / (AB + alpha0 + beta0),
+      AB_qtle = cut_number(AB, 4, dig.lab=10)
+      )
+
+
+career %>% 
+  select(Avg, Shrunk_Avg) %>% 
+  gather("type", "Avg", 1:2) %>% 
+  ggplot(data=., aes(x=Avg)) +
+  geom_histogram(boundary=0, aes(y=..density..), bins=100) +
+  facet_wrap(~type, nrow=1) + 
+  geom_vline(xintercept = overall_mean)
+
+
+career %>% 
+  select(Avg, Shrunk_Avg) %>% 
+  gather("type", "Avg", 1:2) %>% 
+  ggplot(data=., aes(x=Avg, group=type, fill=type)) +
+  geom_histogram(boundary=0, aes(y=..density..), bins=50) +
+  # geom_vline(xintercept = overall_mean) +
+  facet_wrap(~type, nrow=1)
+  
+
+
+base_plot <- 
+  ggplot(data=career, aes(x=Avg, y=Shrunk_Avg, group=AB_qtle, col=AB_qtle)) +
+  geom_point() +
+  geom_hline(yintercept=overall_mean, size=0.25) +
+  geom_abline(intercept=0, slope=1, linetype="dashed", size=0.25) +
+  labs(x="Before Avg", y="After Avg", color="At Bats") 
+
+
+base_plot
+
+base_plot +
+  geom_point(size=2) +
+  stat_smooth(method="lm", se=FALSE, fullrange = TRUE, size=0.5) +
+  facet_wrap(~AB_qtle, nrow=2)
+
+```
+
+
+
+## Highest Avgs
+
+These are among batters with the highest averages. Are they the best?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(desc(Shrunk_Avg)) %>% 
+  slice(1:20) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  kable()
+```
