@@ -37,26 +37,8 @@ The parameter of interest is $p$: probability of flipping heads.
 
 
 
-## Contrast
 
-* Two priors centered at $p=0.5$, but one with
-    + High prior certainty
-    + Low prior certainty
-* Two likelihood functions where $\widehat{p}=0.8$ but
-    + $n=20$ and $16$ heads
-    + $n=100$ and $80$ heads
-
-
-
-
-
-
-
-
-
-
-
-## Two Prior Distributions
+## Prior Distribution
 
 The prior distribution reflects our **degree of belief** in different values of $p$:
 
@@ -70,7 +52,58 @@ abline(v=0.5, lty=2)
 
 
 
-## Two Prior Distributions
+## Likelihood Function
+
+We flip a coin $n=`r n`$ times and observe $`r obs`$ heads. The likelihood function
+along with the MLE $\widehat{p}=0.8$ of $p$ is:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+```
+
+
+
+
+
+## Prior + Likelihood = Posterior 
+
+We can then compute the posterior on the right:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.width=8, fig.height=6}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+```
+
+
+
+
+
+## Two Comparisons
+
+* Different priors centered at $p=0.5$, but one with
+    + High prior certainty
+    + Low prior certainty
+* Different likelihood functions where $\widehat{p}=0.8$ but
+    + $n=20$ and $16$ heads
+    + $n=100$ and $80$ heads
+    
+    
+    
+    
+    
+## Comparison 1: Different Prior
 
 Here, the red prior is less certain that $p=0.5$
 
@@ -89,74 +122,9 @@ legend(
 
 
 
-## Two Likelihood Functions
-
-We flip a coin $n=`r n`$ times and observe $`r obs`$ heads. The likelihood function
-along with the MLE $\widehat{p}=0.8$ of $p$ is:
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-par(mfrow=c(1,2))
-curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
-      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
-abline(v=obs/n, lty=2)
-```
-
-
-
-
-
-## Two Likelihood Functions
-
-Now let the red curve reflect $n=`r n2`$ flips and $`r obs2`$ heads. Note that the 
-likelihood function is more tight around 0.8.
-
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-par(mfrow=c(1,2))
-curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
-      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
-abline(v=obs/n, lty=2)
-curve(dbinom(x = obs2, size = n2, prob = x), from=0, to=1, n=5000,
-      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood", col="red")
-abline(v=obs2/n2, lty=2, col="red")
-```
-
-
-
-
-
-
-
-## Prior + Likelihood = Posterior 
-
-We can then compute the posterior on the right:
-
-```{r, echo=FALSE, message=FALSE, warning=FALSE}
-par(mfrow=c(2,3))
-# First prior
-curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
-      xlab="p", ylab="density", main="Prior Distribution")
-abline(v=0.5, lty=2)
-curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
-      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
-abline(v=obs/n, lty=2)
-curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
-      xlab="p", ylab="density", main="Posterior Distribution")
-abline(v=(param1+obs)/(param1+param1+n), lty=2)
-```
-
-
-
-
-
-
-
-
-
-
 ## Comparison 1: Different Prior
 
-Now let's contrast with the wider prior in red.
+What does the posterior (with same likelihood) look like?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 par(mfrow=c(2,3))
@@ -213,9 +181,33 @@ abline(v=(param2+obs)/(param2+param2+n), lty=2, col="red")
 
 
 
+
 ## Comparison 2: Different Likelihood
 
-Now let's contrast with the tighter likelihood in red.
+Now let the red curve reflect $n=`r n2`$ flips and $`r obs2`$ heads. Note that the 
+likelihood function is more tight around 0.8.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbinom(x = obs2, size = n2, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood", col="red")
+abline(v=obs2/n2, lty=2, col="red")
+```
+    
+    
+    
+    
+
+
+
+
+## Comparison 2: Different Likelihood
+
+What does the posterior (with same prior) look like?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 par(mfrow=c(2,3))
@@ -267,8 +259,3 @@ curve(dbeta(x, shape1 = param2+obs2, shape2 = param2+n2-obs2), from=0, to=1, n=5
       xlab="p", ylab="density", main="Posterior Distribution", col="red")
 abline(v=(param2+obs2)/(param2+param2+n2), lty=2, col="red")
 ```
-
-
-
-
-
