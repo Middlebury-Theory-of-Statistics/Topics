@@ -6,6 +6,26 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 12: 5/9 - 5/13
+
+* **Lec30: Residuals and Inference for Regression**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec30%20Bayesian%20Statistics/Lec30.html" target="_blank">Slides</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Week 11: 5/2 - 5/6
 
 * **Lec27: Residuals and Inference for Regression**

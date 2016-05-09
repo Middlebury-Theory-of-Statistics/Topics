@@ -1,0 +1,274 @@
+---
+title: "Lecture 30"
+author: "Albert Y. Kim"
+date: "May 9, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+param1 <- 100
+param2 <- 4
+obs <- 16
+n <- 20
+obs2 <- 80
+n2 <- 100
+```
+
+
+
+
+
+## Today's Example
+
+The parameter of interest is $p$: probability of flipping heads.  
+
+* We believe beforehand that $p=0.5$.
+* Our data says however $\widehat{p}=0.8$, suggesting $p=0.8$.
+
+
+
+
+## Contrast
+
+* Two priors centered at $p=0.5$, but one with
+    + High prior certainty
+    + Low prior certainty
+* Two likelihood functions where $\widehat{p}=0.8$ but
+    + $n=20$ and $16$ heads
+    + $n=100$ and $80$ heads
+
+
+
+
+
+
+
+
+
+
+
+## Two Prior Distributions
+
+The prior distribution reflects our **degree of belief** in different values of $p$:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+```
+
+
+
+
+
+## Two Prior Distributions
+
+Here, the red prior is less certain that $p=0.5$
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbeta(x, shape1 = param2, shape2 = param2), add=TRUE, col="red")
+legend(
+  "topright", legend = c("More Certain", "Less Certain"), bty="n",
+  col=c("black", "red"), lty=c(1,1)
+)
+```
+
+
+
+
+
+## Two Likelihood Functions
+
+We flip a coin $n=`r n`$ times and observe $`r obs`$ heads. The likelihood function
+along with the MLE $\widehat{p}=0.8$ of $p$ is:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+```
+
+
+
+
+
+## Two Likelihood Functions
+
+Now let the red curve reflect $n=`r n2`$ flips and $`r obs2`$ heads. Note that the 
+likelihood function is more tight around 0.8.
+
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(1,2))
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbinom(x = obs2, size = n2, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood", col="red")
+abline(v=obs2/n2, lty=2, col="red")
+```
+
+
+
+
+
+
+
+## Prior + Likelihood = Posterior 
+
+We can then compute the posterior on the right:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+```
+
+
+
+
+
+
+
+
+
+
+## Comparison 1: Different Prior
+
+Now let's contrast with the wider prior in red.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+# Second prior
+curve(dbeta(x, shape1 = param2, shape2 = param2), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution", col="red")
+abline(v=0.5, lty=2, col="red")
+```
+
+
+
+
+
+## Comparison 1: Different Prior
+
+The posterior in the bottom shifted to the right more.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+# Second prior
+curve(dbeta(x, shape1 = param2, shape2 = param2), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution", col="red")
+abline(v=0.5, lty=2, col="red")
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param2+obs, shape2 = param2+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution", col="red")
+abline(v=(param2+obs)/(param2+param2+n), lty=2, col="red")
+```
+
+
+
+
+
+
+## Comparison 2: Different Likelihood
+
+Now let's contrast with the tighter likelihood in red.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+# Second prior
+frame()
+curve(dbinom(x = obs2, size = n2, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood", col="red")
+abline(v=obs/n, lty=2, col="red")
+```
+
+
+
+
+
+## Comparison 2: Different Likelihood
+
+The posterior in the bottom shifted to the right more.
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+par(mfrow=c(2,3))
+# First prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs, size = n, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood")
+abline(v=obs/n, lty=2)
+curve(dbeta(x, shape1 = param1+obs, shape2 = param1+n-obs), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution")
+abline(v=(param1+obs)/(param1+param1+n), lty=2)
+# Second prior
+curve(dbeta(x, shape1 = param1, shape2 = param1), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Prior Distribution")
+abline(v=0.5, lty=2)
+curve(dbinom(x = obs2, size = n2, prob = x), from=0, to=1, n=5000,
+      xlab="p", ylab="Likelihood L(p|x)", main="Likelihood", col="red")
+abline(v=obs/n, lty=2, col="red")
+curve(dbeta(x, shape1 = param2+obs2, shape2 = param2+n2-obs2), from=0, to=1, n=5000,
+      xlab="p", ylab="density", main="Posterior Distribution", col="red")
+abline(v=(param2+obs2)/(param2+param2+n2), lty=2, col="red")
+```
+
+
+
+
+
