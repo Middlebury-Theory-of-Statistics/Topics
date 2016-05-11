@@ -200,7 +200,7 @@ base_plot <-
   ggplot(data=career, aes(x=Avg, y=Shrunk_Avg, group=AB_qtle, col=AB_qtle)) +
   geom_hline(yintercept=overall_mean, size=0.25) +
   geom_abline(intercept=0, slope=1, linetype="dashed", size=0.25) +
-  labs(x="Before Avg", y="After Avg", color="At Bats") 
+  labs(x="Raw Batting Avg", y="Shrunk Batting Avg", color="At Bats")
 base_plot + 
   geom_point()
 ```
@@ -214,8 +214,9 @@ base_plot +
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 base_plot +
   geom_point(size=1) +
-  stat_smooth(method="lm", se=FALSE, fullrange = TRUE, size=0.5) +
-  facet_wrap(~AB_qtle, nrow=2)
+  stat_smooth(method="lm", se=FALSE, fullrange = TRUE, size=0.25) +
+  facet_wrap(~AB_qtle, nrow=2) +
+  coord_fixed()
 ```
 
 
