@@ -25,7 +25,7 @@ career <- Batting %>%
   unite(Name, nameFirst, nameLast, sep = " ") %>%
   # Sum over seasons. Note: some names are repeated
   group_by(playerID, Name) %>%
-  summarize(H = sum(H), AB=sum(AB), `Last Year`=max(yearID)) %>%
+  summarize(H = sum(H), AB=sum(AB), Year=max(yearID)) %>%
   mutate(Avg = H / AB) %>% 
   ungroup() %>% 
   select(-playerID)
@@ -58,10 +58,9 @@ Data on all `r nrow(career)` batters in Major League Baseball between 1871-2014:
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 career %>% 
-  slice(1:5) %>% 
   mutate(Avg = round(Avg, 3)) %>% 
-  select(-`Last Year`) %>% 
-  kable()
+  select(-Year) %>% 
+  datatable(options = list(pageLength=5, dom = 'tp'))
 ```
 
 
@@ -76,7 +75,7 @@ ggplot(data=career, aes(x=AB)) +
   labs(x="At Bats", y="Count")
 ```
 
-Quartiles:
+Quantiles:
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
 qtles <- quantile(career$AB, probs=c(0, 0.25, 0.5, 0.75, 1)) %>% round()
@@ -95,10 +94,10 @@ ggplot(data=career, aes(x=Avg)) +
   labs(x="Avg", y="Count")
 ```
 
-Quartiles:
+Quantiles:
 
 ```{r, message=FALSE, warning=FALSE, echo=FALSE}
-quantile(career$Avg, probs=c(0.25, 0.5, 0.75)) %>% 
+quantile(career$Avg, probs=c(0, 0.25, 0.5, 0.75, 1)) %>% 
   round(3)
 ```
 
@@ -116,8 +115,8 @@ career %>%
   filter(Avg==1) %>% 
   sample_n(5) %>% 
   mutate(Avg = round(Avg, 3)) %>% 
-  select(-`Last Year`) %>% 
-  kable()
+  select(-Year) %>% 
+  datatable(options = list(pageLength=5, dom = 'tp'))
 ```
 
 
@@ -138,7 +137,6 @@ We use only those batters with at least 500 At Bats. The prior mean batting avg 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE}
 prior_plot <- ggplot(data=career_filtered, aes(x=Avg)) + 
   geom_histogram(aes(y=..density..)) + 
-  # stat_function(fun = dbeta, colour = "red", args=list(shape1=alpha0, shape2=beta0), size=2) +
   geom_vline(xintercept = overall_mean)
 prior_plot
 ```
@@ -183,7 +181,7 @@ prior_plot +
 career %>% 
   select(Avg, Shrunk_Avg) %>% 
   gather("type", "Avg", 1:2) %>% 
-  ggplot(data=., aes(x=Avg, group=type, fill=type)) +
+  ggplot(data=., aes(x=Avg, group=type)) +
   geom_histogram(boundary=0, aes(y=..density..), bins=50) +
   facet_wrap(~type, nrow=1) + 
   labs(fill="Batting Avg")
@@ -223,9 +221,11 @@ base_plot +
 
 
 
+
+
 ## Highest Avgs
 
-These are among batters with the highest averages. Are they the best?
+These are the best **adjusted** averages.
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 career %>% 
@@ -240,9 +240,11 @@ career %>%
 
 
 
+
+
 ## Highest Avgs
 
-These are among batters with the highest averages. Are they the best?
+Note though what year 
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 career %>% 
@@ -251,6 +253,6 @@ career %>%
     Avg = round(Avg, 3),
     Shrunk_Avg = round(Shrunk_Avg, 3)
     ) %>% 
-  select(Name, `Last Year`, H, AB, Shrunk_Avg) %>% 
+  select(Name, Year, H, AB, Shrunk_Avg) %>% 
   datatable(options = list(pageLength=5, dom = 'tp'))
 ```
