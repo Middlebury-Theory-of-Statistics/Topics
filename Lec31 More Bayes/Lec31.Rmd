@@ -142,7 +142,7 @@ $$
 
 which is a form of proportion $p$ with
 
-* $\text{# of Hits}$: # of [successes](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions)
+* $\text{# of Hits}$: # of [successes](https://www.youtube.com/watch?v=ilWab_vyB4g)
 * $\text{# of At Bats}$: $n$
 
 
