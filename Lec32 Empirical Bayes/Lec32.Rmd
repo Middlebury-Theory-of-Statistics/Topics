@@ -107,13 +107,12 @@ quantile(career$Avg, probs=c(0, 0.25, 0.5, 0.75, 1)) %>%
 
 ## Raw Highest Avgs
 
-These are among batters with the best averages. Are they the best?
+These are the batters with the best averages. Are they the best?
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
 career %>% 
   arrange(desc(Avg)) %>%
   filter(Avg==1) %>% 
-  sample_n(5) %>% 
   mutate(Avg = round(Avg, 3)) %>% 
   select(-Year) %>% 
   datatable(options = list(pageLength=5, dom = 'tp'))

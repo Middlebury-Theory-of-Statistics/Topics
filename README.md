@@ -12,6 +12,8 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec30%20Bayesian%20Statistics/Lec30.html" target="_blank">Slides</a>
 * **Lec31: Residuals and Inference for Regression**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec31%20More%20Bayes/Lec31.html" target="_blank">Slides</a>
+* **Lec32: Empirical Bayes**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec32%20Empirical%20Bayes/Lec32.html" target="_blank">Slides</a>
 
 
 
