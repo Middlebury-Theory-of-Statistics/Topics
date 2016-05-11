@@ -1,0 +1,256 @@
+---
+title: "Lecture 30"
+author: "Albert Y. Kim"
+date: "May 6, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(Lahman)
+library(DT)
+```
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, cache=TRUE}
+career <- Batting %>% 
+  tbl_df() %>% 
+  # Remove pitchers and those with no AB
+  anti_join(Pitching, by="playerID") %>% 
+  filter(AB > 0) %>%
+  # Create batters
+  left_join(Master, by="playerID") %>% 
+  unite(Name, nameFirst, nameLast, sep = " ") %>%
+  # Sum over seasons. Note: some names are repeated
+  group_by(playerID, Name) %>%
+  summarize(H = sum(H), AB=sum(AB), `Last Year`=max(yearID)) %>%
+  mutate(Avg = H / AB) %>% 
+  ungroup() %>% 
+  select(-playerID)
+```
+
+
+
+
+
+## Baseball Statistic
+
+Most famous baseball statistic
+
+$$
+\text{Batting Avg} = \frac{\text{Hits}}{\text{At Bats}}
+$$
+
+which is a form of proportion $p$:
+
+* $\text{Hits}$: success
+* $\text{At Bats}$: Attempts at a Hit
+
+
+
+
+
+## Baseball Data
+
+Data on all `r nrow(career)` batters in Major League Baseball between 1871-2014:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  slice(1:5) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  select(-`Last Year`) %>% 
+  kable()
+```
+
+
+
+
+
+## Histogram of At Bats (Denominator)
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=3}
+ggplot(data=career, aes(x=AB)) + 
+  geom_histogram(aes(y=..density..), boundary=0) +
+  labs(x="At Bats", y="Count")
+```
+
+Quartiles:
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+qtles <- quantile(career$AB, probs=c(0, 0.25, 0.5, 0.75, 1)) %>% round()
+qtles
+```
+
+
+
+
+
+## Histogram of Batting Avgs
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=3}
+ggplot(data=career, aes(x=Avg)) + 
+  geom_histogram(aes(y=..density..), boundary=0) +
+  labs(x="Avg", y="Count")
+```
+
+Quartiles:
+
+```{r, message=FALSE, warning=FALSE, echo=FALSE}
+quantile(career$Avg, probs=c(0.25, 0.5, 0.75)) %>% 
+  round(3)
+```
+
+
+
+
+
+## Raw Highest Avgs
+
+These are among batters with the best averages. Are they the best?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(desc(Avg)) %>%
+  filter(Avg==1) %>% 
+  sample_n(5) %>% 
+  mutate(Avg = round(Avg, 3)) %>% 
+  select(-`Last Year`) %>% 
+  kable()
+```
+
+
+
+
+
+## Define Empirical Prior
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+career_filtered <- career %>%
+    filter(AB >= 500)
+overall_mean <- mean(career_filtered$Avg)
+```
+
+We use only those batters with at least 500 At Bats. The prior mean batting avg is
+`r round(overall_mean, 3)`
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+prior_plot <- ggplot(data=career_filtered, aes(x=Avg)) + 
+  geom_histogram(aes(y=..density..)) + 
+  # stat_function(fun = dbeta, colour = "red", args=list(shape1=alpha0, shape2=beta0), size=2) +
+  geom_vline(xintercept = overall_mean)
+prior_plot
+```
+
+
+
+
+
+## Define Empirical Prior
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Find MLE's assuming Beta distribution
+start_params <- list(shape1 = 1, shape2 = 10)
+m <- MASS::fitdistr(career_filtered$Avg, dbeta, start = start_params)
+alpha0 <- m$estimate[1]
+beta0 <- m$estimate[2]
+
+# Compute EBayes smoothed batting avgs.
+career <- career %>%
+    mutate(
+      Shrunk_Avg = (H + alpha0) / (AB + alpha0 + beta0),
+      AB_qtle = cut(career$AB, breaks=qtles, dig.lab=10, include.lowest=TRUE)
+      )
+```
+
+Let's assume the prior is Beta$(\alpha, \beta)$. We find the MLE's $(\widehat{\alpha}, \widehat{\beta}) = 
+(`r round(alpha0, 3)`, `r round(beta0, 3)`)$
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+prior_plot +
+  stat_function(fun = dbeta, colour = "red", args=list(shape1=alpha0, shape2=beta0), size=1.5)
+```
+
+
+
+
+
+## Raw vs Shrunk Batting Avg
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+# Plots
+career %>% 
+  select(Avg, Shrunk_Avg) %>% 
+  gather("type", "Avg", 1:2) %>% 
+  ggplot(data=., aes(x=Avg, group=type, fill=type)) +
+  geom_histogram(boundary=0, aes(y=..density..), bins=50) +
+  facet_wrap(~type, nrow=1) + 
+  labs(fill="Batting Avg")
+```
+
+
+
+
+
+## Raw vs Shrunk Batting Avg
+
+* Solid black horizontal line is overall batting avg
+* Dashed diagonal line is $y=x$
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+base_plot <- 
+  ggplot(data=career, aes(x=Avg, y=Shrunk_Avg, group=AB_qtle, col=AB_qtle)) +
+  geom_hline(yintercept=overall_mean, size=0.25) +
+  geom_abline(intercept=0, slope=1, linetype="dashed", size=0.25) +
+  labs(x="Before Avg", y="After Avg", color="At Bats") 
+base_plot + 
+  geom_point()
+```
+
+
+
+
+
+## Raw vs Shrunk Batting Avg
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE}
+base_plot +
+  geom_point(size=1) +
+  stat_smooth(method="lm", se=FALSE, fullrange = TRUE, size=0.5) +
+  facet_wrap(~AB_qtle, nrow=2)
+```
+
+
+
+## Highest Avgs
+
+These are among batters with the highest averages. Are they the best?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(desc(Shrunk_Avg)) %>% 
+  mutate(
+    Avg = round(Avg, 3),
+    Shrunk_Avg = round(Shrunk_Avg, 3)
+    ) %>% 
+  select(Name, H, AB, Shrunk_Avg) %>% 
+  datatable(options = list(pageLength=5, dom = 'tp'))
+```
+
+
+
+## Highest Avgs
+
+These are among batters with the highest averages. Are they the best?
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+career %>% 
+  arrange(desc(Shrunk_Avg)) %>% 
+  mutate(
+    Avg = round(Avg, 3),
+    Shrunk_Avg = round(Shrunk_Avg, 3)
+    ) %>% 
+  select(Name, `Last Year`, H, AB, Shrunk_Avg) %>% 
+  datatable(options = list(pageLength=5, dom = 'tp'))
+```
