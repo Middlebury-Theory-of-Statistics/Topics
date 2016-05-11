@@ -120,15 +120,7 @@ distribution $\pi(p)$. From page 310:
 
 ## Conjugate Priors
 
-The following [table](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions) 
-shows many known 
-
-* prior
-* likelihood (data)
-
-conjugate relationships.
-
-
+The following table shows many known conjugate relationships: [https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions)
 
 
 
