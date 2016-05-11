@@ -15,13 +15,25 @@ library(readr)
 ```
 
 ```{r, echo=FALSE, message=FALSE, warning=FALSE}
-param1 <- 100
+#param1 <- 100
 param2 <- 4
 obs <- 16
 n <- 20
-obs2 <- 80
-n2 <- 100
+#obs2 <- 80
+#n2 <- 100
 ```
+
+
+
+
+
+
+
+## Publication Bias
+
+* [Xkcd comic](https://xkcd.com/882/)
+* Publication bias c/o [HBO](https://youtu.be/0Rnq1NpHdmw?t=2m23s)
+* [Journal](http://jnrbm.biomedcentral.com/articles/10.1186/s12952-015-0038-4)
 
 
 
@@ -76,6 +88,36 @@ legend("topleft", legend=c("Prior Dist'n", "Posterior Dist'n", "MLE"),
 
 
 
+## Focus on Posterior Distribution
+
+The prob density function $\pi(\theta|\vec{x})$:
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE, fig.height=5, fig.width=5}
+curve(dbeta(x, shape1 = param2+obs, shape2 = param2+n-obs), from=0, to=1, 
+      n=5000, xlab="p", ylab="density", main="Posterior Distribution", col="red")
+abline(v=qbeta(c(0.025, 0.975), shape1 = param2+obs, shape2 = param2+n-obs), lty=2)
+legend("topleft", legend=c("2.5 & 97.5 %'iles"), lty=2, col="black", bty="n")
+```
+
+
+
+
+
+
+
+## Different Prior Choices
+
+Setting different values of $(\alpha, \beta)$ allows for different choices of prior
+distribution $\pi(p)$. From page 310:
+
+<img src="beta.png" alt="Drawing" style="width: 400px;"/>
+
+
+
+
+
+
+
 ## Conjugate Priors
 
 The following [table](https://en.wikipedia.org/wiki/Conjugate_prior#Table_of_conjugate_distributions) 
@@ -85,3 +127,25 @@ shows many known
 * likelihood (data)
 
 conjugate relationships.
+
+
+
+
+
+
+
+## Most Famous Baseball Statistic
+
+$$
+\text{Batting Avg} = \frac{\text{# of Hits}}{\text{# of At Bats}}
+$$
+
+which is a form of proportion $p$ with
+
+* $\text{# of Hits}$: # of [successes](https://www.youtube.com/watch?v=ilWab_vyB4g)
+* $\text{# of At Bats}$: $n$
+
+
+
+
+
