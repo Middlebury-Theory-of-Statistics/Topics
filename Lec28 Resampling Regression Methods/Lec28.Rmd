@@ -74,7 +74,7 @@ figure skaters**.
 
 We
 
-1. Bootstrap resample `r n` skaters without replacement
+1. Bootstrap resample `r n` skaters with replacement
 1. Compute the least-squares line 
 1. Repeat 1. and 2. 30 times
 
