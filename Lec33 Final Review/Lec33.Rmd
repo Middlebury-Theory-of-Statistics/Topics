@@ -31,6 +31,8 @@ materials for this class.
 * By 12:30pm you must
     + Submit print-out to me in my office.
     + Email me the `.Rmd` file for any code in an email with subject "MATH311 Final".
+* Office hours: Thursday 5/19 2-4pm.
+
 
 
 
