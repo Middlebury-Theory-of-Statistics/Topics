@@ -6,6 +6,26 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
+### Week 13: 5/16
+
+* **Lec33: Final Review**
+    + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec33%20Final%20Review/Lec33.html" target="_blank">Slides</a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ### Week 12: 5/9 - 5/13
 
 * **Lec30: Residuals and Inference for Regression**
@@ -14,11 +34,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec31%20More%20Bayes/Lec31.html" target="_blank">Slides</a>
 * **Lec32: Empirical Bayes**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec32%20Empirical%20Bayes/Lec32.html" target="_blank">Slides</a>
-
-
-
-
-
 
 
 

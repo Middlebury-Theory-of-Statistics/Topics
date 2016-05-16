@@ -1,0 +1,74 @@
+---
+title: "Final Review"
+author: "Albert Y. Kim"
+date: "May 16, 2016"
+output: ioslides_presentation
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+# Install these packages first
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+library(knitr)
+library(readr)
+
+# Set seed for random number generator
+set.seed(76)
+```
+
+
+
+
+## Final Details
+
+* Friday May 20th 2016 8:30-12:30.
+* Will be posted on class GitHub at 8:30am.
+* Open-book, but **only** materials from this class.
+* You must
+    + Submit print-out to me in my office by 12:40pm.
+    + Email me the `.Rmd` file for any code in an email with subject "MATH311 Final YOUR NAME"
+
+
+
+
+## Studying Tips
+
+* Final is worth 25%, whereas midterms were 20% each: don't think of this as a
+final per se, but think of it as a 4th midterm.
+* Go over all material to get concepts.
+* Go over `.Rmd` files of HW's in fine detail.
+* Exam will focus both on
+    + How to code a result
+    + What does the result mean
+
+
+
+
+
+
+
+## HW 9
+
+* How do I interpret the
+[table](https://github.com/Middlebury-Theory-of-Statistics/Non-Public/blob/master/HW09/conf_ints.pdf)
+of red/yellow/green? What do the results mean?
+
+
+
+
+
+## HW 10
+
+* More operational in terms of code. But what do the results/output mean?
+
+
+
+
+
+## HW 11
+
+* Logistic Regression
+* Bootstrap/permutation regression. Not done so much in practice, but what
+concepts are we trying to reinforce here?
+* Bayesian statistics from last week.
