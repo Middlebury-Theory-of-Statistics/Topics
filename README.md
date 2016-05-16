@@ -15,17 +15,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
-
-
-
-
-
-
-
-
-
-
-
 ### Week 12: 5/9 - 5/13
 
 * **Lec30: Residuals and Inference for Regression**
@@ -39,11 +28,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
-
-
-
-
-
 ### Week 11: 5/2 - 5/6
 
 * **Lec27: Residuals and Inference for Regression**
@@ -52,11 +36,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec28%20Resampling%20Regression%20Methods/Lec28.html" target="_blank">Slides</a>
 * **Lec29: Logistic Regression**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec29%20Logistic%20Regression/Lec29.html" target="_blank">Slides</a>
-
-
-
-
-
 
 
 
@@ -93,7 +72,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 
 
 
-
 ### Week 8: 4/11 - 4/15
 
 * **Lec19: More Confidence Intervals II**
@@ -104,7 +82,6 @@ The course syllabus can be found [here](http://rudeboybert.github.io/pages/teach
 * **Lec20: Bootstrap t Confidence Intervals**
     + <a href="http://htmlpreview.github.io/?https://raw.githubusercontent.com/Middlebury-Theory-of-Statistics/Topics/master/Lec20%20Bootstrap%20t%20Confidence%20Intervals/Lec20.html" target="_blank">Slides</a>
     + <a href="https://www.youtube.com/watch?v=wX1x7pfH8fw" target="_blank">Only who can prevent forest fires?</a>
-
 
 
 
