@@ -20,14 +20,16 @@ set.seed(76)
 
 
 
+
 ## Final Details
 
-* Friday May 20th 2016 8:30-12:30.
+* Friday May 20th 2016 8:30am-12:30pm.
 * Will be posted on class GitHub at 8:30am.
 * Open-book, but **only** materials from this class.
-* You must
-    + Submit print-out to me in my office by 12:40pm.
-    + Email me the `.Rmd` file for any code in an email with subject "MATH311 Final YOUR NAME"
+* Individual, no collaboration.
+* By 12:30pm you must
+    + Submit print-out to me in my office.
+    + Email me the `.Rmd` file for any code in an email with subject "MATH311 Final".
 
 
 
@@ -37,10 +39,52 @@ set.seed(76)
 * Final is worth 25%, whereas midterms were 20% each: don't think of this as a
 final per se, but think of it as a 4th midterm.
 * Go over all material to get concepts.
-* Go over `.Rmd` files of HW's in fine detail.
+* In particular, go over `.Rmd` files of HW's in fine detail.
 * Exam will focus both on
     + How to code a result
     + What does the result mean
+    
+    
+    
+    
+    
+## Chapter 9: Regression Basics
+
+* There are a ton of statistics we can compute based on observations $(x_i,
+y_i)$ for $i=1, \ldots, n$. What do they all mean?
+* What is my take on the philosophy of regression?
+* How do we evaluate how good a fit we have?
+    
+    
+    
+    
+    
+## Chapter 9: Inference for Regression
+
+* We are obtaining point estimates $(a, b) = (\widehat{\alpha},
+\widehat{\beta})$ for $(\alpha, \beta)$.
+    
+    
+    
+    
+    
+## Chapter 9: Logistic Regression
+
+* What are we fitting?
+* How can we interpret the difference types of outputs?
+    
+    
+    
+    
+    
+## Chapter 10: Bayesian Statistics
+
+* What is key difference between frequentist and Bayesian statistics?
+* What is a posterior distribution? 
+    + How do we evaluate it?
+    + How do we interpret it?
+    + Why would we use it?
+    + How can we use it?
 
 
 
@@ -48,27 +92,24 @@ final per se, but think of it as a 4th midterm.
 
 
 
-## HW 9
 
-* How do I interpret the
+
+## Homeworks
+
+* **HW9**: How do I interpret the 
 [table](https://github.com/Middlebury-Theory-of-Statistics/Non-Public/blob/master/HW09/conf_ints.pdf)
 of red/yellow/green? What do the results mean?
+* **HW10**: More operational in terms of code. But what do the results/output mean?
 
 
 
 
 
-## HW 10
+## Homeworks
 
-* More operational in terms of code. But what do the results/output mean?
-
-
-
-
-
-## HW 11
+**HW 11**:
 
 * Logistic Regression
-* Bootstrap/permutation regression. Not done so much in practice, but what
-concepts are we trying to reinforce here?
-* Bayesian statistics from last week.
+* Bootstrap/permutation regression. Not done so much in practice, but what 
+concepts are we trying to reinforce?
+* Bayesian statistics
