@@ -24,8 +24,9 @@ set.seed(76)
 ## Final Details
 
 * Friday May 20th 2016 8:30am-12:30pm.
-* Will be posted on class GitHub at 8:30am.
-* Open-book, but **only** materials from this class.
+* Will be posted on GitHub at 8:30am.
+* Open-book, but **only** materials from this class. No internet except accessing
+materials for this class.
 * Individual, no collaboration.
 * By 12:30pm you must
     + Submit print-out to me in my office.
@@ -48,7 +49,9 @@ final per se, but think of it as a 4th midterm.
     
     
     
-## Chapter 9: Regression Basics
+## Chapter 9: Regression 
+
+**Basics**:
 
 * There are a ton of statistics we can compute based on observations $(x_i,
 y_i)$ for $i=1, \ldots, n$. What do they all mean?
@@ -59,19 +62,14 @@ y_i)$ for $i=1, \ldots, n$. What do they all mean?
     
     
     
-## Chapter 9: Inference for Regression
+## Chapter 9: Regression
 
-* We are obtaining point estimates $(a, b) = (\widehat{\alpha},
+
+* **Inference**: We are obtaining point estimates $(a, b) = (\widehat{\alpha},
 \widehat{\beta})$ for $(\alpha, \beta)$.
-    
-    
-    
-    
-    
-## Chapter 9: Logistic Regression
-
-* What are we fitting?
-* How can we interpret the difference types of outputs?
+* **Logistic Regression**:
+    + What are we fitting?
+    + How can we interpret the difference types of outputs?
     
     
     
@@ -85,10 +83,6 @@ y_i)$ for $i=1, \ldots, n$. What do they all mean?
     + How do we interpret it?
     + Why would we use it?
     + How can we use it?
-
-
-
-
 
 
 
